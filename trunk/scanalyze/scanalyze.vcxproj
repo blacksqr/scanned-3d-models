@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="absorient.cc" />
+    <ClCompile Include="accpersp.c" />
+    <ClCompile Include="BailDetector.cc" />
+    <ClCompile Include="cameraparams.cc" />
+    <ClCompile Include="cmdassert.c" />
+    <ClCompile Include="ColorSet.cc" />
+    <ClCompile Include="ColorUtils.cc" />
+    <ClCompile Include="ConnComp.cc" />
+    <ClCompile Include="ctatoply.cc" />
+    <ClCompile Include="CyberCalib.cc" />
+    <ClCompile Include="CyberCmds.cc" />
+    <ClCompile Include="CyberScan.cc" />
+    <ClCompile Include="CyberXform.cc" />
+    <ClCompile Include="cyfile.c" />
+    <ClCompile Include="CyraResLevel.cc" />
+    <ClCompile Include="CyraScan.cc" />
+    <ClCompile Include="CyraSubsample.cc" />
+    <ClCompile Include="DisplayMesh.cc" />
+    <ClCompile Include="fitplane.cc" />
+    <ClCompile Include="GenericScan.cc" />
+    <ClCompile Include="GlobalReg.cc" />
+    <ClCompile Include="GroupScan.cc" />
+    <ClCompile Include="GroupUI.cc" />
+    <ClCompile Include="Image.cc" />
+    <ClCompile Include="jitter.c" />
+    <ClCompile Include="KDindtree.cc" />
+    <ClCompile Include="KDtritree.cc" />
+    <ClCompile Include="MCEdgeTable.cc" />
+    <ClCompile Include="Mesh.cc" />
+    <ClCompile Include="MeshTransport.cc" />
+    <ClCompile Include="MMScan.cc" />
+    <ClCompile Include="OrganizingScan.cc" />
+    <ClCompile Include="plvAnalyze.cc" />
+    <ClCompile Include="plvClipBoxCmds.cc" />
+    <ClCompile Include="plvCmds.cc" />
+    <ClCompile Include="plvCybCmds.cc" />
+    <ClCompile Include="plvDraw.cc" />
+    <ClCompile Include="plvDrawCmds.cc" />
+    <ClCompile Include="plvGlobals.cc" />
+    <ClCompile Include="plvImageCmds.cc" />
+    <ClCompile Include="plvInit.cc" />
+    <ClCompile Include="plvMain.cc" />
+    <ClCompile Include="plvMeshCmds.cc" />
+    <ClCompile Include="plvMMCmds.cc" />
+    <ClCompile Include="plvPlyCmds.cc" />
+    <ClCompile Include="plvScene.cc" />
+    <ClCompile Include="plvViewerCmds.cc" />
+    <ClCompile Include="plycrunch.cc" />
+    <ClCompile Include="plyfile.cc" />
+    <ClCompile Include="plyio.cc" />
+    <ClCompile Include="Progress.cc" />
+    <ClCompile Include="Projector.cc" />
+    <ClCompile Include="ProxyScan.cc" />
+    <ClCompile Include="RangeGrid.cc" />
+    <ClCompile Include="RefCount.cc" />
+    <ClCompile Include="ResolutionCtrl.cc" />
+    <ClCompile Include="RigidScan.cc" />
+    <ClCompile Include="ScanFactory.cc" />
+    <ClCompile Include="sczRegCmds.cc" />
+    <ClCompile Include="SDfile.cc" />
+    <ClCompile Include="strings.c" />
+    <ClCompile Include="SyntheticScan.cc" />
+    <ClCompile Include="TbObj.cc" />
+    <ClCompile Include="TclCmdUtils.cc" />
+    <ClCompile Include="TextureObj.cc" />
+    <ClCompile Include="tkConsole.c" />
+    <ClCompile Include="togl.c" />
+    <ClCompile Include="ToglCache.cc" />
+    <ClCompile Include="ToglHash.cc" />
+    <ClCompile Include="ToglText.cc" />
+    <ClCompile Include="Trackball.cc" />
+    <ClCompile Include="TriangleCube.cc" />
+    <ClCompile Include="TriMeshUtils.cc" />
+    <ClCompile Include="TriOctree.cc" />
+    <ClCompile Include="VertexFilter.cc" />
+    <ClCompile Include="VolCarve.cc" />
+    <ClCompile Include="winMain.c" />
+    <ClCompile Include="WorkingVolume.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="absorient.h" />
+    <ClInclude Include="accpersp.h" />
+    <ClInclude Include="BailDetector.h" />
+    <ClInclude Include="Bbox.h" />
+    <ClInclude Include="cameraparams.h" />
+    <ClInclude Include="cmdassert.h" />
+    <ClInclude Include="ColorSet.h" />
+    <ClInclude Include="ColorUtils.h" />
+    <ClInclude Include="ConnComp.h" />
+    <ClInclude Include="ctafile.h" />
+    <ClInclude Include="CyberCalib.h" />
+    <ClInclude Include="CyberCmds.h" />
+    <ClInclude Include="CyberScan.h" />
+    <ClInclude Include="CyberXform.h" />
+    <ClInclude Include="cyfile.h" />
+    <ClInclude Include="CyraResLevel.h" />
+    <ClInclude Include="CyraScan.h" />
+    <ClInclude Include="defines.h" />
+    <ClInclude Include="DirEntries.h" />
+    <ClInclude Include="DisplayMesh.h" />
+    <ClInclude Include="DrawObj.h" />
+    <ClInclude Include="FileNameUtils.h" />
+    <ClInclude Include="GenericScan.h" />
+    <ClInclude Include="GlobalReg.h" />
+    <ClInclude Include="GroupScan.h" />
+    <ClInclude Include="GroupUI.h" />
+    <ClInclude Include="ICP.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="jitter.h" />
+    <ClInclude Include="KDindtree.h" />
+    <ClInclude Include="KDtritree.h" />
+    <ClInclude Include="MCEdgeTable.h" />
+    <ClInclude Include="Median.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshTransport.h" />
+    <ClInclude Include="MMScan.h" />
+    <ClInclude Include="noDumbWinWarnings.h" />
+    <ClInclude Include="OrganizingScan.h" />
+    <ClInclude Include="plvAnalyze.h" />
+    <ClInclude Include="plvClipBoxCmds.h" />
+    <ClInclude Include="plvCmds.h" />
+    <ClInclude Include="plvCybCmds.h" />
+    <ClInclude Include="plvDraw.h" />
+    <ClInclude Include="plvDrawCmds.h" />
+    <ClInclude Include="plvGlobals.h" />
+    <ClInclude Include="plvImageCmds.h" />
+    <ClInclude Include="plvInit.h" />
+    <ClInclude Include="plvMeshCmds.h" />
+    <ClInclude Include="plvMMCmds.h" />
+    <ClInclude Include="plvPlyCmds.h" />
+    <ClInclude Include="plvScene.h" />
+    <ClInclude Include="plvViewerCmds.h" />
+    <ClInclude Include="ply++.h" />
+    <ClInclude Include="plyio.h" />
+    <ClInclude Include="Pnt3.h" />
+    <ClInclude Include="Progress.h" />
+    <ClInclude Include="Projector.h" />
+    <ClInclude Include="ProxyScan.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="RangeGrid.h" />
+    <ClInclude Include="RefCount.h" />
+    <ClInclude Include="RegistrationStatistics.h" />
+    <ClInclude Include="ResolutionCtrl.h" />
+    <ClInclude Include="RigidScan.h" />
+    <ClInclude Include="ScanFactory.h" />
+    <ClInclude Include="sczRegCmds.h" />
+    <ClInclude Include="SDfile.h" />
+    <ClInclude Include="strings.h" />
+    <ClInclude Include="SyntheticScan.h" />
+    <ClInclude Include="TbObj.h" />
+    <ClInclude Include="TclCmdUtils.h" />
+    <ClInclude Include="TextureObj.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="tkFont.h" />
+    <ClInclude Include="tkInt.h" />
+    <ClInclude Include="tkInt4.1.h" />
+    <ClInclude Include="tkInt8.0.4.h" />
+    <ClInclude Include="tkInt8.0.5.h" />
+    <ClInclude Include="tkInt8.0.h" />
+    <ClInclude Include="tkInt8.0p2.h" />
+    <ClInclude Include="tkInt8.3.2.h" />
+    <ClInclude Include="tkIntDecls.h" />
+    <ClInclude Include="tkPort.h" />
+    <ClInclude Include="tkWin.h" />
+    <ClInclude Include="tkWinInt.h" />
+    <ClInclude Include="tkWinPort.h" />
+    <ClInclude Include="togl.h" />
+    <ClInclude Include="ToglCache.h" />
+    <ClInclude Include="ToglHash.h" />
+    <ClInclude Include="ToglText.h" />
+    <ClInclude Include="Trackball.h" />
+    <ClInclude Include="TriMeshUtils.h" />
+    <ClInclude Include="TriOctree.h" />
+    <ClInclude Include="VertexFilter.h" />
+    <ClInclude Include="VolCarve.h" />
+    <ClInclude Include="winGLdecs.h" />
+    <ClInclude Include="WorkingVolume.h" />
+    <ClInclude Include="Xform.h" />
+    <ClInclude Include="zlib_fgets.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="alignmentbrowser.tcl" />
+    <None Include="analyze.tcl" />
+    <None Include="auto_a.tcl" />
+    <None Include="build_ui.tcl" />
+    <None Include="chooseDir.tcl" />
+    <None Include="clip.tcl" />
+    <None Include="colorvis.tcl" />
+    <None Include="file.tcl" />
+    <None Include="globalreg.tcl" />
+    <None Include="globalreg_old.tcl" />
+    <None Include="group.tcl" />
+    <None Include="help.tcl" />
+    <None Include="imagealign.tcl" />
+    <None Include="interactors.tcl" />
+    <None Include="modelmaker.tcl" />
+    <None Include="organize.tcl" />
+    <None Include="preferences.tcl" />
+    <None Include="registration.tcl" />
+    <None Include="res_ctrl.tcl" />
+    <None Include="scanalyze.tcl" />
+    <None Include="scanalyze_util.tcl" />
+    <None Include="sweeps.tcl" />
+    <None Include="tcl_util.tcl" />
+    <None Include="visgroups.tcl" />
+    <None Include="vripUI.tcl" />
+    <None Include="windows.tcl" />
+    <None Include="working_volume.tcl" />
+    <None Include="wrappers.tcl" />
+    <None Include="xform.tcl" />
+    <None Include="zoom.tcl" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7450ECDE-5F36-4B40-BB9E-C9D9FCF97636}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>scanalyzeVS2010</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
