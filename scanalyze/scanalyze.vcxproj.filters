@@ -1,0 +1,650 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Sources %28C%29">
+      <UniqueIdentifier>{2f422048-91da-454f-b0e1-a4e790078cfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tcl scripts">
+      <UniqueIdentifier>{43cde9d7-df0b-4fbe-9657-8fc8b739c56a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WorkingVolume.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="absorient.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BailDetector.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cameraparams.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorSet.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorUtils.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnComp.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ctatoply.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CyberCalib.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CyberCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CyberScan.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CyberXform.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CyraResLevel.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CyraScan.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CyraSubsample.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayMesh.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fitplane.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericScan.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalReg.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupScan.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupUI.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KDindtree.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KDtritree.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MCEdgeTable.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshTransport.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MMScan.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OrganizingScan.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvAnalyze.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvClipBoxCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvCybCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvDraw.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvDrawCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvGlobals.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvImageCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvInit.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvMain.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvMeshCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvMMCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvPlyCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvScene.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plvViewerCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plycrunch.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plyfile.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plyio.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Progress.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Projector.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProxyScan.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RangeGrid.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RefCount.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ResolutionCtrl.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidScan.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScanFactory.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sczRegCmds.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SDfile.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntheticScan.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TbObj.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TclCmdUtils.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureObj.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToglCache.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToglHash.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToglText.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Trackball.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleCube.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriMeshUtils.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriOctree.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexFilter.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VolCarve.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strings.c">
+      <Filter>Sources %28C%29</Filter>
+    </ClCompile>
+    <ClCompile Include="tkConsole.c">
+      <Filter>Sources %28C%29</Filter>
+    </ClCompile>
+    <ClCompile Include="togl.c">
+      <Filter>Sources %28C%29</Filter>
+    </ClCompile>
+    <ClCompile Include="accpersp.c">
+      <Filter>Sources %28C%29</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdassert.c">
+      <Filter>Sources %28C%29</Filter>
+    </ClCompile>
+    <ClCompile Include="cyfile.c">
+      <Filter>Sources %28C%29</Filter>
+    </ClCompile>
+    <ClCompile Include="jitter.c">
+      <Filter>Sources %28C%29</Filter>
+    </ClCompile>
+    <ClCompile Include="winMain.c">
+      <Filter>Sources %28C%29</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="zlib_fgets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="absorient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="accpersp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BailDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cameraparams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmdassert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnComp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ctafile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CyberCalib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CyberCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CyberScan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CyberXform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cyfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CyraResLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CyraScan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DirEntries.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawObj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileNameUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericScan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalReg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupScan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KDindtree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KDtritree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MCEdgeTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Median.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshTransport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MMScan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="noDumbWinWarnings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrganizingScan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvAnalyze.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvClipBoxCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvCybCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvDraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvDrawCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvGlobals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvImageCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvInit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvMeshCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvMMCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvPlyCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plvViewerCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ply++.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plyio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pnt3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Progress.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Projector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProxyScan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RangeGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RefCount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RegistrationStatistics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResolutionCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidScan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScanFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sczRegCmds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="strings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntheticScan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TbObj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TclCmdUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureObj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkFont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkInt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkInt4.1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkInt8.0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkInt8.0.4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkInt8.0.5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkInt8.0p2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkInt8.3.2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkIntDecls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkPort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkWin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkWinInt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tkWinPort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="togl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ToglCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ToglHash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ToglText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Trackball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TriMeshUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TriOctree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VolCarve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winGLdecs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkingVolume.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Xform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="zoom.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="alignmentbrowser.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="analyze.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="auto_a.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="build_ui.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="chooseDir.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="clip.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="colorvis.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="file.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="globalreg.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="globalreg_old.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="group.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="help.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="imagealign.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="interactors.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="modelmaker.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="organize.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="preferences.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="registration.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="res_ctrl.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="scanalyze.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="scanalyze_util.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="sweeps.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="tcl_util.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="visgroups.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="vripUI.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="windows.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="working_volume.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="wrappers.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+    <None Include="xform.tcl">
+      <Filter>Tcl scripts</Filter>
+    </None>
+  </ItemGroup>
+</Project>
