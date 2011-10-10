@@ -1,5 +1,0 @@
-Allow Free rotation.  (Not limited to any axis.)
-
-
-
-
