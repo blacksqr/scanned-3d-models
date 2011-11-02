@@ -84,8 +84,9 @@ class CorrespondenceList
 {
 public:
   int AddPoint (DisplayableMesh* mesh, const Pnt3& pt);
-  CorrespondencePt* FindPoint (DisplayableMesh* mesh);
-  void DeletePoint (CorrespondencePt* cp);
+// STL Update      
+  vector<CorrespondencePt>::iterator* FindPoint (DisplayableMesh* mesh);
+  void DeletePoint (vector<CorrespondencePt>::iterator cp);
   void ToString (char* text);
 
   int id;
@@ -123,10 +124,11 @@ private:
 int 
 CorrespondenceList::AddPoint (DisplayableMesh* mesh, const Pnt3& pt)
 {
-  CorrespondencePt* cp = FindPoint (mesh);
+// STL Update      
+  vector<CorrespondencePt>::iterator* cp = FindPoint (mesh);
   if (cp != NULL) {
     // already have one for this mesh -- adjust it
-    cp->pt = pt;
+    (*cp)->pt = pt;
   } else {
     // create new correspondence for this mesh
     CorrespondencePt cp;
@@ -139,20 +141,23 @@ CorrespondenceList::AddPoint (DisplayableMesh* mesh, const Pnt3& pt)
 }
 
 
-CorrespondencePt* 
+// STL Update      
+vector<CorrespondencePt>::iterator*
 CorrespondenceList::FindPoint (DisplayableMesh* mesh)
 {
-  for (CorrespondencePt* cp = points.begin(); cp < points.end(); cp++) {
+// STL Update      
+  for (vector<CorrespondencePt>::iterator cp = points.begin(); cp < points.end(); cp++) {
     if (cp->mesh == mesh)
-      return cp;
+      return &cp;
   }
 
   return NULL;
 }
 
 
+// STL Update
 void 
-CorrespondenceList::DeletePoint (CorrespondencePt* cp)
+CorrespondenceList::DeletePoint (vector<CorrespondencePt>::iterator cp)
 {
   points.erase (cp);
 }
@@ -162,13 +167,15 @@ void
 CorrespondenceList::ToString (char* text)
 {
   sprintf (text, "[%d]", id);
-  for (CorrespondencePt* cp = points.begin();
+// STL Update
+  for (vector<CorrespondencePt>::iterator cp = points.begin();
        cp < points.end();
        cp++) {
     sprintf (text + strlen(text), " %s:(%.4g,%.4g,%.4g)",
 	     cp->mesh->getName(),
 	     cp->pt[0], cp->pt[1], cp->pt[2]);
       
+// STL Update
     if (cp + 1 < points.end())
       strcat (text, " <=>");
   }
@@ -275,7 +282,8 @@ AlignmentOverviewInfo::GetCorrespondenceById (int id)
   if (id == 0)
     return NULL;
 
-  CorrespondenceList** cl;
+// STL Update
+  vector<CorrespondenceList*>::iterator cl;
   for (cl = correspondences.begin(); cl < correspondences.end(); cl++) {
     if ((*cl)->id == id)
       return *cl;
@@ -394,7 +402,8 @@ DrawAlignmentPoints (struct Togl* togl)
 
 	bool bSelected = (cl->id == iCorresp);
 
-	for (CorrespondencePt* c = cl->points.begin();
+// STL Update
+	for (vector<CorrespondencePt>::iterator c = cl->points.begin();
 	     c < cl->points.end();
 	     c++) {
 	  if (c->mesh == ati->meshDisplay) {
@@ -413,7 +422,8 @@ DrawAlignmentPoints (struct Togl* togl)
     // now draw correspondence in progress
     CorrespondenceList* cl = aoi->GetCorrespondenceInProgress();
     if (cl != NULL) {
-      for (CorrespondencePt* c = cl->points.begin();
+// STL Update
+      for (vector<CorrespondencePt>::iterator c = cl->points.begin();
 	   c < cl->points.end();
 	   c++) {
 	if (c->mesh == ati->meshDisplay)
@@ -663,10 +673,12 @@ PlvAddPartialRegCorrespondenceCmd (ClientData clientData, Tcl_Interp *interp,
     // allow removal of one point from an existing correspondence,
     // if it has more than two points
     CorrespondenceList* clSelected = aoi->GetSelectedCorrespondence();
-    CorrespondencePt* cpOld = NULL;
+// STL Update
+    vector<CorrespondencePt>::iterator* cpOld;
     if (clSelected != NULL) {
       if (clSelected->points.size() > 2)
-	cpOld = clSelected->FindPoint (ati->meshDisplay);
+// STL Update
+        cpOld = clSelected->FindPoint (ati->meshDisplay);
       else
 	printf ("Cannot delete last two points from correspondence\n");
     }
@@ -677,7 +689,8 @@ PlvAddPartialRegCorrespondenceCmd (ClientData clientData, Tcl_Interp *interp,
 		   ati->meshDisplay->getName(),
 		   " from correspondence?} {} 0 No Yes", NULL);
       if (atoi (interp->result) != 0) {
-	clSelected->DeletePoint (cpOld);
+// STL Update
+	clSelected->DeletePoint(*cpOld);
 	Tcl_Eval (interp, "rebuildSelectedCorrespondenceString");
 	DrawAlignmentMesh (togl);
       }
@@ -724,7 +737,8 @@ PlvDeleteRegCorrespondenceCmd (ClientData clientData, Tcl_Interp *interp,
 
   int iCorresp = atoi (argv[2] + 1);  // in format [nnn] asdfasd
 
-  for (CorrespondenceList** cl = aoi->correspondences.begin();
+// STL Update
+  for (vector<CorrespondenceList*>::iterator cl = aoi->correspondences.begin();
        cl < aoi->correspondences.end();
        cl++) {
     if ((*cl)->id == iCorresp) {
@@ -892,20 +906,21 @@ CorrespRegOneMesh (AlignmentOverviewInfo* aoi, DisplayableMesh* meshFrom,
   for (int i = 0; i < aoi->correspondences.size(); i++) {
     CorrespondenceList* cl = aoi->correspondences[i];
 
-    CorrespondencePt* cpThis = cl->FindPoint (meshFrom);
+// STL Update
+    vector<CorrespondencePt>::iterator* cpThis = cl->FindPoint (meshFrom);
     if (cpThis != NULL) { // references this mesh
-      for (CorrespondencePt* cpOther = cl->points.begin();
+      for (vector<CorrespondencePt>::iterator cpOther = cl->points.begin();
 	   cpOther < cl->points.end();
 	   cpOther++) {
 	// don't add us-us to list
-	if (cpThis == cpOther)
+	if (*cpThis == cpOther)
 	  continue;
 	// and if from2to mode, only add corresp. involving To mesh
 	if (meshTo != NULL && cpOther->mesh != meshTo)
 	  continue;
 
-	srcPt.push_back (cpThis->pt);
-	cpThis->mesh->getMeshData()->xformPnt (srcPt.back());
+	srcPt.push_back ((*cpThis)->pt);
+	(*cpThis)->mesh->getMeshData()->xformPnt (srcPt.back());
 	dstPt.push_back (cpOther->pt);
 	cpOther->mesh->getMeshData()->xformPnt (dstPt.back());
       }
@@ -948,13 +963,14 @@ CorrespRegAllToAll (AlignmentOverviewInfo* aoi)
 	CorrespondenceList* cl = aoi->correspondences[i];
 
 	// if correspondence mentions both meshes currently under consideration
-	CorrespondencePt* cpFrom = cl->FindPoint (mdFrom);
-	CorrespondencePt* cpTo = cl->FindPoint (mdTo);
+// STL Update
+	vector<CorrespondencePt>::iterator* cpFrom = cl->FindPoint (mdFrom);
+	vector<CorrespondencePt>::iterator* cpTo = cl->FindPoint (mdTo);
 
 	if (cpFrom != NULL && cpTo != NULL) {
 	  // then add points (in local coords) to pair data
-	  pntFrom.push_back (cpFrom->pt);
-	  pntTo.push_back (cpTo->pt);
+	  pntFrom.push_back ((*cpFrom)->pt);
+	  pntTo.push_back ((*cpTo)->pt);
 	}
       }
 
@@ -1804,9 +1820,10 @@ SczAutoRegisterCmd(ClientData clientData, Tcl_Interp *interp,
     return TCL_ERROR;
   }
 
-  DisplayableMesh** begin = scans.begin();
-  DisplayableMesh** end = scans.end();
-  DisplayableMesh** first, ** second;
+// STL Update
+  vector<DisplayableMesh*>::iterator begin = scans.begin();
+  vector<DisplayableMesh*>::iterator end = scans.end();
+  vector<DisplayableMesh*>::iterator first, second;
 
   GlobalReg *gr = theScene->globalReg;
 

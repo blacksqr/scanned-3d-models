@@ -122,7 +122,8 @@ getVertexNormals(const vector<Pnt3> &vtx,
 
   nrm_s.clear();
   nrm_s.reserve (3 * vtx.size());
-  for (Pnt3* n = nrm.begin(); n != nrm.end(); n++) {
+// STL Update    
+  for (vector<Pnt3>::iterator n = nrm.begin(); n != nrm.end(); n++) {
     n->set_norm(32767.0);
     nrm_s.push_back (short(n->operator[](0)));
     nrm_s.push_back (short(n->operator[](1)));
@@ -302,7 +303,8 @@ remove_unused_vtxs(vector<Pnt3> &vtx,
       cnt++;
     }
   }
-  vtx.erase(&vtx[cnt], vtx.end());
+// STL Update    
+  vtx.erase(vtx.begin() +cnt, vtx.end());
   // march through triangles and correct the indices
   n = tri.size();
   for (i=0; i<n; i+=3) {
@@ -1371,7 +1373,7 @@ quadric_simplify(const vector<Pnt3> &vtx_in,
 
    // Write out the original mesh data to a temporary input file
 
-   if (!tmpnam(inName))  {
+   if (!mkstemp(inName))  {
       cerr << "ERROR: Unable to get temporary filename for QSlim input" << endl;
       return;
    }
@@ -1388,7 +1390,7 @@ quadric_simplify(const vector<Pnt3> &vtx_in,
 
    // Get a filename for the temporary output file
    
-   if (!tmpnam(outName))  {
+   if (!mkstemp(outName))  {
       cerr << "ERROR: Unable to get temporary filename for QSlim output"
            << endl;
       remove(inName);
@@ -1504,7 +1506,8 @@ static PlyProperty face_props[] = {
 
 struct tstrip_info {
   int nverts;
-  const int* vertData;
+// STL Update    
+  const vector<int>::iterator vertData;
 };
 
 static PlyProperty tstrips_props[] = {
@@ -1638,6 +1641,7 @@ write_ply_file(const char *fname,
   if (strips) {
     ply.put_element_setup ("tristrips");
 
+// STL Update    
     tstrip_info ts_info = { tris.size(), tris.begin() };
     ply.put_element (&ts_info);
 
@@ -1765,7 +1769,6 @@ pushNormalAsShorts (vector<short>& nrms, Pnt3 n)
   nrms.push_back (n[2]);
 }
 
-
 void
 pushNormalAsPnt3 (vector<Pnt3>& nrms, short* n, int i)
 {
@@ -1773,3 +1776,14 @@ pushNormalAsPnt3 (vector<Pnt3>& nrms, short* n, int i)
   Pnt3 nrm (n[i]/32767.0, n[i+1]/32767.0, n[i+2]/32767.0);
   nrms.push_back (nrm);
 }
+
+// STL Update
+void
+pushNormalAsPnt3 (vector<Pnt3>& nrms, vector<short>::iterator n, int i)
+{
+  i *= 3;
+  Pnt3 nrm (n[i]/32767.0, n[i+1]/32767.0, n[i+2]/32767.0);
+  nrms.push_back (nrm);
+}
+
+

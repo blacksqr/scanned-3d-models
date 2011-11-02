@@ -52,6 +52,7 @@ CyberScan::get_current_kdtree()
     return kdtree[iTree];
 
   regLevelData* level = getCurrentRegLevel();
+// STL Update        
   kdtree[iTree] = CreateKDindtree(level->pnts->begin(), 
 				  level->nrms->begin(),
 				  level->pnts->size());
@@ -228,7 +229,8 @@ CyberScan::getRegLevelFor (int iRes)
 	  // need to apply sweep's transform to the new data
 	  for_each (rl->pnts->begin() + ps, rl->pnts->end(), sxf);
 	  sxf.removeTranslation();
-	  for (short* nb = rl->nrms->begin() + ns;
+// STL Update
+	  for (vector<short>::iterator nb = rl->nrms->begin() + ns;
 	       nb < rl->nrms->end(); nb += 3) {
 	    Pnt3 n (nb[0], nb[1], nb[2]);
 	    sxf (n);
@@ -408,7 +410,8 @@ CyberSweep::computeBBox ()
 
   // and add its points to bbox
   if (level != NULL) {
-    for (Pnt3* p = level->pnts.begin(); p < level->pnts.end(); p++) {
+// STL Update    
+    for (vector<Pnt3>::iterator p = level->pnts.begin(); p < level->pnts.end(); p++) {
       bbox.add(*p);
     }
   }
@@ -950,8 +953,9 @@ CyberSweep::mesh (bool perVertex, bool stripped,
       if (g_bNoIntensity) {
 	// BUGBUG: what to do here?
       } else {
-	uchar* end = levels[i]->intensity.end();
-	for (uchar* c = levels[i]->intensity.begin(); c < end; c++)
+// STL Update	
+        vector<uchar>::iterator end = levels[i]->intensity.end();
+	for (vector<uchar>::iterator c = levels[i]->intensity.begin(); c < end; c++)
 	  pushColor (*colors, colorSize, *c);
       }
       mt->setColor (colors, MeshTransport::steal);
@@ -963,8 +967,9 @@ CyberSweep::mesh (bool perVertex, bool stripped,
     {
       vector<uchar>* colors = new vector<uchar>;
       colors->reserve (colorSize * levels[i]->confidence.size());
-      uchar* end = levels[i]->confidence.end();
-      for (uchar* c = levels[i]->confidence.begin(); c < end; c++)
+// STL Update	
+      vector<uchar>::iterator end = levels[i]->confidence.end();
+      for (vector<uchar>::iterator c = levels[i]->confidence.begin(); c < end; c++)
 	pushConf (*colors, colorSize, *c);
       mt->setColor (colors, MeshTransport::steal);
     }
@@ -974,8 +979,9 @@ CyberSweep::mesh (bool perVertex, bool stripped,
     {
       vector<uchar>* colors = new vector<uchar>;
       colors->reserve (colorSize * levels[i]->bdry.size());
-      char* end = levels[i]->bdry.end();
-      for (char* c = levels[i]->bdry.begin(); c < end; c++)
+// STL Update	
+      vector<char>::iterator end = levels[i]->bdry.end();
+      for (vector<char>::iterator c = levels[i]->bdry.begin(); c < end; c++)
 	pushConf (*colors, colorSize, (uchar)(*c ? 0 : 255));
       mt->setColor (colors, MeshTransport::steal);
     }
@@ -1012,7 +1018,8 @@ CyberScan::get_ordered_sweeps (void)
     for (int iTrans = 0; iTrans < v.size(); iTrans++) {
       float tc = v[iTrans][0]->sd.scanner_trans;
       if (t <= tc) {
-	if (t < tc) v.insert(&v[iTrans], vector<CyberSweep*>());
+// STL Update	
+	if (t < tc) v.insert(v.begin() + iTrans, vector<CyberSweep*>());
 	break;
       }
     }
@@ -1027,7 +1034,8 @@ CyberScan::get_ordered_sweeps (void)
 	break;
     }
     // insert into shell
-    vShell.insert (&vShell[iSweep], sweep);
+// STL Update	
+    vShell.insert (vShell.begin() + iSweep, sweep);
   }
 
   return v;

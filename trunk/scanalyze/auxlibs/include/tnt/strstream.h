@@ -41,7 +41,10 @@ public: /* virtuals  */
 	virtual int	underflow() ;
 	virtual streambuf*
 			setbuf(char*  p, int l) ;
+                        
+
 	virtual streampos
+//	virtual pos_type
 #ifdef __cplusplus2
 			seekoff(streamoff,seek_dir,int) ;
 #else

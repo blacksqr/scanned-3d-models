@@ -390,7 +390,7 @@ ClipLineInfo::ClipLineInfo (int w)
 
 ClipLineInfo::~ClipLineInfo()
 {
-  for (ClipLineData** iter = data.begin(); iter < data.end(); iter++)
+  for (vector<ClipLineData*>::iterator iter = data.begin(); iter < data.end(); iter++)
     delete *iter;
 }
 
@@ -513,7 +513,7 @@ PlvExportGraphAsText(ClientData clientData, Tcl_Interp *interp,
 
   //  int k = 0;
   fprintf(ctlfile, "plot ");
-  for (ClipLineData** pcld = cli->data.begin(); 
+  for (vector<ClipLineData*>::iterator pcld = cli->data.begin(); 
        pcld < cli->data.end(); pcld++) {
     ClipLineData* cld = *pcld;
 
@@ -606,7 +606,7 @@ PlotLineDepth (struct Togl* togl)
   //printf ("Z: %g to %g\n", bottom, top);
   //fflush (stdout);
 
-  for (ClipLineData** pcld = cli->data.begin(); pcld < cli->data.end();
+  for (vector<ClipLineData*>::iterator pcld = cli->data.begin(); pcld < cli->data.end();
        pcld++) {
     ClipLineData* cld = *pcld;
 
@@ -750,7 +750,7 @@ PlvAnalyzeClipLineDepth(ClientData clientData, Tcl_Interp *interp,
   PushRenderParams();
   theRenderParams->boundSelection = false;
 
-  for (DisplayableMesh** pdm = theScene->meshSets.begin();
+  for (vector<DisplayableMesh*>::iterator pdm = theScene->meshSets.begin();
        pdm < theScene->meshSets.end();
        pdm++) {
     if (!(*pdm)->getVisible())
@@ -1129,7 +1129,7 @@ PlvAlignToMeshBoxCmd(ClientData clientData, Tcl_Interp *interp,
     SHOW (eyeNorm);
 
   float err = 0;
-  for (Pnt3* pt = pts.begin(); pt < pts.end(); pt++) {
+  for (vector<Pnt3>::iterator pt = pts.begin(); pt < pts.end(); pt++) {
     err += fabs (dot (*pt, norm) - dist);
   }
   float avgErr = err / pts.size();
@@ -1373,8 +1373,9 @@ wsh_WarpMesh(ClientData clientData, Tcl_Interp *interp,
 void
 GetPtMeshMap (int w, int h, vector<DisplayableMesh*>& ptMeshMap)
 {
+  DisplayableMesh* ins = NULL;
   ptMeshMap.clear();
-  ptMeshMap.insert (ptMeshMap.begin(), w*h, NULL);
+  ptMeshMap.insert (ptMeshMap.begin(), w*h, ins);
   if (!theScene->meshSets.size())
     return;
 
@@ -1387,7 +1388,7 @@ GetPtMeshMap (int w, int h, vector<DisplayableMesh*>& ptMeshMap)
 
   glReadBuffer (GL_BACK);
   glPixelStorei (GL_PACK_ALIGNMENT, 4);
-  glReadPixels (0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, rgb.begin());
+  glReadPixels (0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, &rgb[0]);
 
   int nErrors = 0;
   for (int y = 0; y < h; y++) {
@@ -1457,7 +1458,7 @@ GetPtMeshVector (int xstart, int ystart, int w, int h,
  
   glReadBuffer (GL_BACK);
   glPixelStorei (GL_PACK_ALIGNMENT, 4);
-  glReadPixels (0, 0, winwidth, winheight, GL_RGBA, GL_UNSIGNED_BYTE, rgb.begin());
+  glReadPixels (0, 0, winwidth, winheight, GL_RGBA, GL_UNSIGNED_BYTE, &rgb[0]);
 
   // cerr << "Check In:" << xstart << " " << ystart << " " << w << " " << h << "\n";
   int nErrors = 0;

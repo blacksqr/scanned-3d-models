@@ -237,14 +237,17 @@ RigidScan::write_resolution_mesh (int nPolys, const crope& fname,
       ntris = 0;
       ncolors = 0;
       for (i = 0; i < mt->vtx.size(); i++) {
-	Pnt3* newVtxStart = vtx.end();
+// STL Update        
+	vector<Pnt3>::iterator newVtxStart = vtx.end();
 
 	vtx.insert (vtx.end(), mt->vtx[i]->begin(), mt->vtx[i]->end());
-	int* tend = tris.end();
+// STL Update        
+	vector<int>::iterator tend = tris.end();
 	tris.insert (tend, mt->tri_inds[i]->begin(), mt->tri_inds[i]->end());
 
-	const int* newtend = tris.end();
-	for (int* t = tend; t < newtend; t++) {
+// STL Update        
+	const vector<int>::iterator newtend = tris.end();
+	for (vector<int>::iterator t = tend; t < newtend; t++) {
 	  if (*t != -1)
 	    *t += nvtx;
 	}
@@ -257,7 +260,8 @@ RigidScan::write_resolution_mesh (int nPolys, const crope& fname,
 	Xform<float> xfThis = xfBy * mt->xf[i];
 	if (!xfThis.isIdentity()) {
 	  cerr << "applying xform... " << flush;
-	  for (Pnt3* pi = newVtxStart; pi < vtx.end(); pi++) {
+// STL Update        
+	  for (vector<Pnt3>::iterator pi = newVtxStart; pi < vtx.end(); pi++) {
 	    xfThis (*pi);
 	  }
 	}

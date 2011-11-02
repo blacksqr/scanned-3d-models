@@ -19,7 +19,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <iostream.h>
-#include <strstream.h>
+// G++ Update        
+#include <strstream>
 #ifdef TNT_USE_REGIONS
 #include "region2d.h"
 #endif
@@ -184,7 +185,8 @@ class C_matrix
     C_matrix(Subscript M, Subscript N, char *s)
     {
         initialize(M,N);
-        istrstream ins(s);
+// G++ Update        
+        std::istrstream ins(s);
 
         Subscript i, j;
 

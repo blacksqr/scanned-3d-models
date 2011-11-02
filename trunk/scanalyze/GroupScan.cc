@@ -7,8 +7,9 @@
 #include "DisplayMesh.h"
 
 
+// STL Update    
 #define FOR_EACH_CHILD(it) \
-   for (DisplayableMesh** it = children.begin(); it < children.end(); it++)
+   for (vector<DisplayableMesh*>::iterator it = children.begin(); it < children.end(); it++)
 #define FOR_EACH_CONST_CHILD(it) \
    for (vector<DisplayableMesh*>::const_iterator it = children.begin(); \
         it < children.end(); it++)
@@ -377,7 +378,8 @@ GroupScan::subsample_points(float rate, vector<Pnt3> &p,
     // apply local transformations
     Xform<float> xf = rs->getXform();
     if (xf != Xform<float>()) {
-      for (Pnt3* pi = cp.begin(); pi < cp.end(); pi++) {
+// STL Update    
+      for (vector<Pnt3>::iterator pi = cp.begin(); pi < cp.end(); pi++) {
 	xf (*pi);
       }
       xf.removeTranslation();

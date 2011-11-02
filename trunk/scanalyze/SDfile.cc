@@ -1035,7 +1035,8 @@ SDfile::subsampled_tstrip(int            step,
     }
     mark_all_empty(p_inds[!j], tmp_bdry);
     // copy the boundary info
-    copy(tmp_bdry.begin(), &tmp_bdry[pnts.size()],
+// STL Update  
+    copy(tmp_bdry.begin(), tmp_bdry.begin() + pnts.size(),
 	 back_insert_iterator<vector<char> > (bdry));
   }
 }

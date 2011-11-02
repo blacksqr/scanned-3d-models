@@ -505,7 +505,8 @@ MMScan::create_resolution_absolute(int budget, Decimator dec)
   int iPos = findLevelForRes(decimatedTris);
 
   for (i = 0; i < scans.size(); i++) {
-    scans[i].meshes.insert(&(scans[i].meshes[iPos]), resolutions[i]);
+// STL Update    
+    scans[i].meshes.insert(scans[i].meshes.begin() + iPos, resolutions[i]);
   }
   delete[] resolutions;
 
@@ -1423,12 +1424,14 @@ bool
 MMScan::filter_inplace(const VertexFilter &filter)
 {
   int i,j,k;
-  mmScanFrag *scan;
+// STL Update    
+  vector<mmScanFrag>::iterator scan;
   bool changedScan = false;
   
   // #1: loop through all scans
   for (j = 0; j < scans.size(); j++) {
-    scan = &scans[0] + j;
+// STL Update    
+    scan = scans.begin() + j;
     cout << "looking at scan #" << j << endl;
     if (scan->isVisible) {
       changedScan = false;      
@@ -1438,9 +1441,11 @@ MMScan::filter_inplace(const VertexFilter &filter)
 	vert_remap[i] = -1;
 
       int count = 0, vtxIndex = 0;
-      mmStripeInfo *stripe;
+// STL Update    
+      vector<mmStripeInfo>::iterator stripe;
       for (k = 0; k < scan->stripes.size(); k++) {
-	stripe = &scan->stripes[0] + k;
+// STL Update    
+	stripe = scan->stripes.begin() + k;
 	for (i = 0; i < STRIPE_PTS; i++) {
 	  if (isValidPoint(j, k, i)) {
 	    if (filter.accept(scan->meshes[0].vtx[vtxIndex])) {
@@ -1479,7 +1484,8 @@ MMScan::filter_inplace(const VertexFilter &filter)
 	j--;
       }
       else if (changedScan) {
-	mmResLevel *res;
+// STL Update    
+	vector<mmResLevel>::iterator res;
 	for (res = scan->meshes.begin(); res != scan->meshes.end(); res++) {
 	  
 	  if (res != scan->meshes.begin()) {
@@ -1776,9 +1782,10 @@ MMScan::filtered_copy(const VertexFilter& filter)
 bool
 MMScan::filter_vertices (const VertexFilter& filter, vector<Pnt3>& p)
 {
-  mmScanFrag *endScanFrag = scans.end();
+// STL Update    
+  vector<mmScanFrag>::iterator endScanFrag = scans.end();
     //for every mmScanFrag in scans vector
-    for(mmScanFrag *curScanFrag = scans.begin();
+    for(vector<mmScanFrag>::iterator curScanFrag = scans.begin();
 	curScanFrag < endScanFrag; curScanFrag++)
     {
       
@@ -1786,8 +1793,9 @@ MMScan::filter_vertices (const VertexFilter& filter, vector<Pnt3>& p)
       vector<Pnt3> *curPtVector;
       curPtVector = &(curScanFrag->meshes[0].vtx);
       //for every point apply the function
-      Pnt3 *vtxend = curPtVector->end();
-      for(Pnt3 *pnt = curPtVector->begin(); pnt < vtxend; pnt++)
+// STL Update    
+      vector<Pnt3>::iterator vtxend = curPtVector->end();
+      for(vector<Pnt3>::iterator pnt = curPtVector->begin(); pnt < vtxend; pnt++)
 	{
 	  if(filter.accept (*pnt))
 	    p.push_back(*pnt);
@@ -1915,7 +1923,8 @@ remove_unused_vtxs(vector<Pnt3> &vtx,
       cnt++;
     }
   }
-  vtx.erase(&vtx[cnt], vtx.end());
+// STL Update    
+  vtx.erase(vtx.begin() + cnt, vtx.end());
   // march through triangles and correct the indices
   n = tri.size();
   for (i=0; i<n; i+=3) {

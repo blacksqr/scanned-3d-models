@@ -216,7 +216,8 @@ PlvWriteMMForVripCmd(ClientData clientData, Tcl_Interp *interp,
 				  true);
    
    
-   DisplayableMesh** dm = theScene->meshSets.begin();
+// STL Update      
+   vector<DisplayableMesh*>::iterator dm = theScene->meshSets.begin();
 
    bool noXform = false;
    if ((argc > 3) && (strcmp(argv[3], "-noxform") == 0)) {

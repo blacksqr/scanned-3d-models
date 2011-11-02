@@ -8,6 +8,7 @@
 #define _pnt3_h
 
 #include<math.h>
+#undef isfinite
 #include<assert.h>
 #include<iostream.h>
 #ifdef WIN32

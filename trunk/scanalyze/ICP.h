@@ -72,10 +72,11 @@ private:
 	    if (j < firstend) k++;
 	  }
 	}
-	pP.erase(&pP[i], pP.end());
-	pQ.erase(&pQ[i], pQ.end());
-	nP.erase(&nP[i], nP.end());
-	nQ.erase(&nQ[i], nQ.end());
+// STL Update
+	pP.erase(pP.begin()+i, pP.end());
+	pQ.erase(pQ.begin()+i, pQ.end());
+	nP.erase(nP.begin()+i, nP.end());
+	nQ.erase(nQ.begin()+i, nQ.end());
 	firstend -= k;
       }
       return sqrtf(thr);

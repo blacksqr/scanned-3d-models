@@ -212,7 +212,8 @@ typedef uchar vec3uc[3];
       if (scanNum < 0) return;
       if (scanNum >= num_scans()) return;
       
-      scans.erase(&scans[0] + scanNum);
+// STL Update      
+      scans.erase(scans.begin() + scanNum);
       
       isDirty_mem = isDirty_disk = true;
       computeBBox();

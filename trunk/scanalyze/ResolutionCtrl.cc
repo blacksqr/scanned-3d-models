@@ -141,7 +141,8 @@ ResolutionCtrl::insert_resolution (int abs, crope filename,
 
   int n = resolutions.size();
   resolutions.push_back (res);
-  inplace_merge (resolutions.begin(), &resolutions[n], resolutions.end());
+// STL Update        
+  inplace_merge (resolutions.begin(), resolutions.begin() + n, resolutions.end());
 }
 
 

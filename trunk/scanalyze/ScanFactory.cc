@@ -98,7 +98,8 @@ BreakScanGroup (RigidScan* scan)
   GroupScan* group = dynamic_cast<GroupScan*> (scan);
   if (group) {
     if (group->get_children_for_display (members)) {
-      for (DisplayableMesh** mem = members.begin();
+// STL Update    
+      for (vector<DisplayableMesh*>::iterator mem = members.begin();
 	   mem < members.end(); mem++) {
 	group->RemoveScan (*mem);
       }

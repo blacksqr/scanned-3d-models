@@ -272,7 +272,8 @@ DeleteHelper (DisplayableMesh *mesh) {
   if (group) {
     vector<DisplayableMesh*> children = ungroupScans(mesh);
     
-    for (DisplayableMesh** it = children.begin(); it < children.end(); it++) {
+// STL Update      
+    for (vector<DisplayableMesh*>::iterator it = children.begin(); it < children.end(); it++) {
       DeleteHelper(*it);
     }
 
@@ -798,7 +799,8 @@ int PlvRunExternalProgram(ClientData clientData, Tcl_Interp *interp,
   }
 
   // get a temporary name and convert it to a crope with extension ply
-  crope inTName = tmpnam(NULL);
+  //crope inTName = tmpnam(NULL);
+  crope inTName = mkstemp(NULL);
   inTName += ".ply";
     
   // write the highest resolution to the temporary file
@@ -819,7 +821,8 @@ int PlvRunExternalProgram(ClientData clientData, Tcl_Interp *interp,
     meshSet->write_resolution_mesh(resList[finest].abs_resolution, inTName);
 
   // get another temporary name
-  crope outTName = tmpnam(NULL);
+  //crope outTName = tmpnam(NULL);
+  crope outTName = mkstemp(NULL);
   outTName += ".ply";
   
   // execute the command

@@ -91,7 +91,8 @@ PlvWriteSDForVripCmd(ClientData clientData,
   // int overlap = MIN(64, pow(2,iRes+3)+0.5);
   int overlap = int(pow(2,iRes+2)+0.5);
 
-  DisplayableMesh** dm = theScene->meshSets.begin();
+// STL Update      
+  vector<DisplayableMesh*>::iterator dm = theScene->meshSets.begin();
   for (; dm < theScene->meshSets.end(); dm++) {
     if (!(*dm)->getVisible())
       continue;
@@ -109,7 +110,8 @@ PlvWriteSDForVripCmd(ClientData clientData,
     int sweepNum = 0;
 
     vector<CyberSweep*> sweeps = cs->get_sweep_list();
-    for (CyberSweep** pSweep = sweeps.begin();
+// STL Update      
+    for (vector<CyberSweep*>::iterator pSweep = sweeps.begin();
 	 pSweep < sweeps.end(); pSweep++, sweepNum++) {
 
       CyberSweep* sweep = *pSweep;

@@ -26,7 +26,8 @@ class Scene {
   int       slowPolyCount; // min. # of polys that deserve a status bar
                            // while rendering
 
-  DisplayableMesh** findSceneMesh (DisplayableMesh* mesh);
+// STL Update
+  vector<DisplayableMesh*>::iterator* findSceneMesh (DisplayableMesh* mesh);
 
  public:   // public data
 
