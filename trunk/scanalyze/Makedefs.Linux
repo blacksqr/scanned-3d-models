@@ -22,7 +22,7 @@ endif
 TARGET = 
 
 CC = gcc -w
-CXX = g++ -fno-for-scope -fpermissive -fwritable-strings -w
+CXX = g++ -fno-for-scope -fpermissive -w
 LINK = $(CXX) $(TARGET)
 
 
