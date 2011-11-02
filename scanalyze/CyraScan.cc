@@ -641,7 +641,8 @@ CyraScan::carve_cube  (const Pnt3 &ctr, float side)
 #if HISTORY
   } else {
     cout << oldinds.size() << ": ";
-    for (int* it = oldinds.begin(); it != oldinds.end(); it++) {
+// STL Update    
+    for (vector<int>::iterator it = oldinds.begin(); it != oldinds.end(); it++) {
       float mag = pntmag[*it];
       if (!mag) continue;
 

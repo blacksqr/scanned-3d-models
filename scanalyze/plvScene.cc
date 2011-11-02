@@ -84,8 +84,9 @@ Scene::addMeshSet(RigidScan* scan, bool bRecenterCameraOK, char* nameToUse)
 void
 Scene::addMeshInternal (DisplayableMesh* dm)
 {
-  DisplayableMesh** pos = lower_bound (meshSets.begin(), meshSets.end(),
-				       dm, dmNameSort());
+// STL Update
+  vector<DisplayableMesh*>::iterator pos = lower_bound (meshSets.begin(), meshSets.end(),
+				       dm, dmNameSort() );
   meshSets.insert (pos, dm);
   AddMeshSetToHash (dm);
 }
@@ -95,14 +96,15 @@ Scene::addMeshInternal (DisplayableMesh* dm)
 
 
 
-DisplayableMesh**
+vector<DisplayableMesh*>::iterator*
 Scene::findSceneMesh (DisplayableMesh* mesh)
 {
-  for (DisplayableMesh** dm = meshSets.begin();
+// STL Update
+  for (vector<DisplayableMesh*>::iterator dm = meshSets.begin();
        dm < meshSets.end();
        dm++) {
     if (*dm == mesh) {
-      return dm;
+      return &dm;
     }
   }
 
@@ -114,18 +116,21 @@ Scene::deleteMeshSet (DisplayableMesh* deadMesh)
 {
   MeshSetHashDelete((char*)deadMesh->getName());
   cerr << "Deleting mesh " << deadMesh->getName() << endl;
-  DisplayableMesh** dm = findSceneMesh (deadMesh);
+// STL Update
+  vector<DisplayableMesh*>::iterator* dm = findSceneMesh (deadMesh);
   assert (dm != NULL);
  
-  DisplayableMesh **mydm = find (g_hilitedScans.begin(), g_hilitedScans.end(), *dm);
+// STL Update
+  vector<DisplayableMesh*>::iterator mydm = find (g_hilitedScans.begin(), g_hilitedScans.end(), **dm);
   if (mydm != g_hilitedScans.end()) g_hilitedScans.erase(mydm);
   
-  RigidScan* rs = (*dm)->getMeshData();
+  RigidScan* rs = (**dm)->getMeshData();
   // remove the pointers from the globalreg data structure
   globalReg->deleteAllPairs(rs);
-  delete *dm;
+  delete **dm;
   delete rs;
-  meshSets.erase (dm);
+// STL Update
+  meshSets.erase (*dm);
 
   // Update the bbox
   computeBBox();
@@ -259,7 +264,8 @@ Scene::setMeshResolution (int res)
 
   default:
     {
-      DisplayableMesh** dmi;
+// STL Update      
+      vector<DisplayableMesh*>::iterator dmi;
       Progress progress (meshSets.size(), "Change resolution", true);
 
       for (dmi = meshSets.begin(); dmi != meshSets.end(); dmi++) {
@@ -454,7 +460,8 @@ FindMeshDisplayInfo(const char *name)
 DisplayableMesh *
 FindMeshDisplayInfo(RigidScan* scan)
 {
-  for (DisplayableMesh** pdm = theScene->meshSets.begin();
+// STL Update      
+  for (vector<DisplayableMesh*>::iterator pdm = theScene->meshSets.begin();
        pdm < theScene->meshSets.end();
        pdm++) {
     if ((*pdm)->getMeshData() == scan)
@@ -666,7 +673,8 @@ Scene::writeSessionFile (char* sessionName)
   if (file.fail())
     return false;
 
-  for (DisplayableMesh** pdm = meshSets.begin();
+// STL Update      
+  for (vector<DisplayableMesh*>::iterator pdm = meshSets.begin();
        pdm < meshSets.end(); pdm++) {
     RigidScan* scan = (*pdm)->getMeshData();
     Bbox bbox = scan->localBbox();

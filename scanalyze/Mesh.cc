@@ -165,7 +165,8 @@ Mesh::updateScale()
 #if 0
   if (bbox.maxDim() < 10) {
     cerr << "Warning: scaling mesh from meters to millimeters" << endl;
-    for (Pnt3* vp = vtx.begin(); vp != vtx.end(); vp++) {
+// STL Update
+    for (vector<Pnt3*>::iterator vp = vtx.begin(); vp != vtx.end(); vp++) {
       *vp *= 1000;
     }
 
@@ -186,7 +187,8 @@ Mesh::num_tris (void)
 
   // ok, have to count tstrips
   numTris = tstrips.size();
-  for (const int* ti = tstrips.begin(); ti < tstrips.end(); ti++) {
+// STL Update
+  for (vector<int>::iterator ti = tstrips.begin(); ti < tstrips.end(); ti++) {
     if ((*ti) == -1)
       numTris -= 3;
   }
@@ -1004,8 +1006,9 @@ Mesh::remove_unused_vtxs(void)
       cnt++;
     }
   }
-  vtx.erase(&vtx[cnt], vtx.end());
-  if (nrm.size()) nrm.erase(&nrm[cnt*3], nrm.end());
+// STL Update
+  vtx.erase(vtx.begin() + cnt, vtx.end());
+  if (nrm.size()) nrm.erase(nrm.begin() + (cnt*3), nrm.end());
   // march through triangles and correct the indices
   n = tris.size();
   for (i=0; i<n; i++) {

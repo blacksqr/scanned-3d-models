@@ -78,14 +78,16 @@ TbObj::save_for_undo(void)
 
   // no more redo's
   if (real_size != undo_stack.size()) {
-    undo_stack.erase(&undo_stack[real_size], undo_stack.end());
+// STL Update      
+    undo_stack.erase(undo_stack.begin() + real_size, undo_stack.end());
   }
 
   assert(real_size == undo_stack.size());
 
   if (real_size >= UNDO_SIZE) {
     // forget the 100 first xforms
-    undo_stack.erase(undo_stack.begin(), &undo_stack[100]);
+// STL Update      
+    undo_stack.erase(undo_stack.begin(), undo_stack.begin() + 100);
   }
 
   // create the entry
@@ -166,7 +168,8 @@ TbObj::clear_undo (TbObj* objToRemove)
       }
     }
     real_size = top;
-    undo_stack.erase(&undo_stack[real_size], undo_stack.end());
+// STL Update      
+    undo_stack.erase(undo_stack.begin() + real_size, undo_stack.end());
   } else {
     // clear all
     undo_stack.clear();
@@ -250,7 +253,10 @@ bool
 TbObj::readXform(const crope& baseFile)
 {
   crope name = (baseFile + ".xf");
-  ifstream istr (name.c_str(), ios::in | ios::nocreate);
+// C++ Update      
+//  ifstream istr (name.c_str(), ios::in | ios::nocreate);
+  ifstream istr (name.c_str(), ios::in );     // ios::nocreate no longer exists, and ios::in should never create files anyway.
+  
   bool success = readXform(istr);
   if (success)
     cout << "Read xform " << name << endl;

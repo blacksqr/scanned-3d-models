@@ -315,8 +315,9 @@ CyraResLevel::colorMesh(vector<uchar>   &colors,
     {
       create_kdtree();  // BUGBUG, this is a little heavyhanded approach
       colors.reserve (colorsize * cachedBoundary.size());
-      bool* end = cachedBoundary.end();
-      for (bool* c = cachedBoundary.begin(); c < end; c++)
+// STL Update      
+      vector<bool>::iterator end = cachedBoundary.end();
+      for (vector<bool>::iterator c = cachedBoundary.begin(); c < end; c++)
 	pushConf (colors, colorsize, (uchar)(*c ? 0 : 255));
     }
     break;

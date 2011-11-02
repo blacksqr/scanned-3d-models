@@ -15,8 +15,13 @@ class Selection
 
   Selection();
   void clear();
+  
   Pt& operator[] (int idx) { return pts[idx]; };
   const Pt& operator[] (int idx) const { return pts[idx]; };
+
+// STL Update        
+  vector<Pt>::iterator iterator_at_index (int idx) { return pts.begin() + idx; };
+  const vector<Pt>::iterator iterator_at_index (int idx) const { return pts.begin() + (idx); };
 
   // how to interpret the points?
   Type type;

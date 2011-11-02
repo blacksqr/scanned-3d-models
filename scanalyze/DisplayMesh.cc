@@ -526,8 +526,9 @@ DisplayableRealMesh::renderMeshArrays (void)
 	}
       }
 
-      glVertexPointer (3, GL_FLOAT, 0, cache.mesh->vtx[imesh]->begin());
-
+// STL Update        
+      glVertexPointer (3, GL_FLOAT, 0, &*(cache.mesh->vtx[imesh]->begin()));
+      
       glMatrixMode (GL_MODELVIEW);
       glPushMatrix();
       glMultMatrixf (cache.mesh->xf[imesh]);
@@ -538,8 +539,9 @@ DisplayableRealMesh::renderMeshArrays (void)
       //glMultMatrixf (cache.mesh->xf[imesh]);
       
       if (bWantNormals)
+// STL Update        
 	glNormalPointer (MeshTransport::normal_type, 0,
-			 cache.mesh->nrm[imesh]->begin());
+			 &*(cache.mesh->nrm[imesh]->begin()));
 
       // the second test below avoids using color arrays of size 1, even
       // if there is only 1 vertex -- this tends to hang GL on maglio.
@@ -553,14 +555,16 @@ DisplayableRealMesh::renderMeshArrays (void)
       if (bThisWantColor) {
 	// only enable vertex-array color if array is expected size.
 	glEnableClientState (GL_COLOR_ARRAY);
+// STL Update        
 	glColorPointer (4, GL_UNSIGNED_BYTE, 0,
-			cache.mesh->color[imesh]->begin());
+			&*(cache.mesh->color[imesh]->begin()));
       } else {
 	// don't have a full color array...
 	glDisableClientState (GL_COLOR_ARRAY);
 	// but we might have a per-fragment color for all these vertices.
 	if (bWantColor && cache.mesh->color[imesh]->size() == 4) {
-	  glColor4ubv (cache.mesh->color[imesh]->begin());
+// STL Update        
+	  glColor4ubv (&*(cache.mesh->color[imesh]->begin()));
 	}
       }
       
@@ -604,27 +608,29 @@ DisplayableRealMesh::renderMeshArrays (void)
 	glDrawArrays (GL_POINTS, 0, cache.mesh->vtx[imesh]->size());
 #endif
       } else if (cache.bStrips) {
-	const int* lenEnd = cache.StripInds[imesh].end();
-	const int* start = cache.mesh->tri_inds[imesh]->begin();
-	for (const int* len = cache.StripInds[imesh].begin();
-	     len < lenEnd; len++) {
+// STL Update
+	vector<int>::const_iterator lenEnd = cache.StripInds[imesh].end();
+	vector<int>::const_iterator start = cache.mesh->tri_inds[imesh]->begin();
+	for (vector<int>::const_iterator len = cache.StripInds[imesh].begin();
+	     len < lenEnd; len++) {             
 	  glDrawElements (GL_TRIANGLE_STRIP, *len,
-			  GL_UNSIGNED_INT, start);
-	  start += *len + 1;
+			  GL_UNSIGNED_INT, &*start);
+        start += *len + 1;
 	}
       } else {
 #if 1
 	int total = cache.mesh->tri_inds[imesh]->size();
 	int count = 600000; // must be divisible by 3
 	glDrawElements (GL_TRIANGLES, total%count,
-			GL_UNSIGNED_INT, cache.mesh->tri_inds[imesh]->begin());
+			GL_UNSIGNED_INT, &*(cache.mesh->tri_inds[imesh]->begin()));
 	for (int i = total%count; i < total; i += count)
+// STL Update        
 	  glDrawElements (GL_TRIANGLES, count,
 			  GL_UNSIGNED_INT,
-			  cache.mesh->tri_inds[imesh]->begin() + i);
+			  &*(cache.mesh->tri_inds[imesh]->begin() + i));
 #else
 	glDrawElements (GL_TRIANGLES, cache.mesh->tri_inds[imesh]->size(),
-			GL_UNSIGNED_INT, cache.mesh->tri_inds[imesh]->begin());
+			GL_UNSIGNED_INT, &*(cache.mesh->tri_inds[imesh]->begin()));
 #endif
       }
 
@@ -747,9 +753,10 @@ DisplayableRealMesh::buildStripInds (DrawData& cache)
     for (int imesh = 0; imesh < cache.mesh->tri_inds.size(); imesh++) {
       cache.StripInds.push_back (vector<int>());
       vector<int>& si = cache.StripInds.back();
-      const int* last = cache.mesh->tri_inds[imesh]->begin() - 1;
-      const int* triEnd = cache.mesh->tri_inds[imesh]->end();
-      for (const int *i = cache.mesh->tri_inds[imesh]->begin();
+// STL Update        
+      const vector<int>::iterator last = cache.mesh->tri_inds[imesh]->begin() - 1;
+      const vector<int>::iterator triEnd = cache.mesh->tri_inds[imesh]->end();
+      for (const vector<int>::iterator i = cache.mesh->tri_inds[imesh]->begin();
 	   i < triEnd; i++) {
 	if (*i == -1) { // end of strip
 	  si.push_back (i - last - 1);

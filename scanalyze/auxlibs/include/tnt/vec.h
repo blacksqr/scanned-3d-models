@@ -18,7 +18,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <iostream.h>
-#include <strstream.h>
+// G++ Update        
+#include <strstream>
 
 
 template <class T>
@@ -168,7 +169,8 @@ class Vector
     Vector(Subscript N, char *s) :  v_(0), vm1_(0), n_(0)
     {
         initialize(N);
-        istrstream ins(s);
+// G++ Update        
+        std::istrstream ins(s);
 
         Subscript i;
 

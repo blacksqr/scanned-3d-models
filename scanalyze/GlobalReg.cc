@@ -11,7 +11,8 @@
 #include <stdlib.h>
 #include <multimap.h>
 #include <deque.h>
-#include <strstream.h>
+// G++ Update        
+#include <strstream>
 #include <sys/stat.h>
 #include "GlobalReg.h"
 #include "absorient.h"
@@ -1792,7 +1793,8 @@ GlobalReg::dump_connected_groups (void)
   while (cc.get_next_group(g)) {
     if (g.size()) {
       cout << "group (" << g.size() << "): ";
-      for (int* p = g.begin(); p != g.end(); p++)
+// STL Update        
+      for (vector<int>::iterator p = g.begin(); p != g.end(); p++)
 	cout << nameFromTbObj (scan[*p]) << " ";
       cout << endl;
       ++nGroups;
@@ -2098,7 +2100,8 @@ GlobalReg::dump_meshpairs (int   choice,
   vector<crope> names;
   vector<TbObj*> objs;
 
-  for (DisplayableMesh** dm = theScene->meshSets.begin();
+// STL Update        
+  for (vector<DisplayableMesh*>::iterator dm = theScene->meshSets.begin();
        dm < theScene->meshSets.end(); dm++) {
     if ((*dm)->getVisible()) {
       names.push_back ((*dm)->getName());

@@ -12,7 +12,8 @@
 DisplayableMesh*
 groupScans (vector<DisplayableMesh*>& scans, char* nameToUse, bool bDirty)
 {
-  for (DisplayableMesh** pdm = scans.begin(); pdm != scans.end(); pdm++) {
+// STL Update  
+  for (vector<DisplayableMesh*>::iterator pdm = scans.begin(); pdm != scans.end(); pdm++) {
     (*pdm)->invalidateCachedData();    // memory won't be used for a while
     (*pdm)->setVisible (false);
   }
@@ -33,7 +34,8 @@ groupScans (vector<DisplayableMesh*>& scans, char* nameToUse, bool bDirty)
   if (group) {
     if (g->get_children_for_display (children)) {
       for (int i = 0; i < children.size(); i++) {
-	for (DisplayableMesh** scan = theScene->meshSets.begin(); 
+// STL Update  
+	for (vector<DisplayableMesh*>::iterator scan = theScene->meshSets.begin(); 
 	     scan != theScene->meshSets.end(); scan++) {
 	  if (!strcmp((*scan)->getName(), children[i]->getName())) {
 	    names += crope (" ") + (*scan)->getName();
@@ -58,7 +60,8 @@ ungroupScans (DisplayableMesh* group)
   vector<DisplayableMesh*> scans = BreakScanGroup (scanGroup);
 
   if (scans.size()) {
-    for (DisplayableMesh** scan = scans.begin(); scan != scans.end(); scan++) {
+// STL Update  
+    for (vector<DisplayableMesh*>::iterator scan = scans.begin(); scan != scans.end(); scan++) {
       (*scan)->setVisible (wasVis);
       // add children back
       theScene->meshSets.push_back(*scan);

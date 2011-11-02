@@ -855,7 +855,8 @@ drawSceneThicknessColored (void)
   glLoadIdentity();
   glDisable (GL_DEPTH_TEST);
   glRasterPos2f (-1, -1);
-  glDrawPixels (theWidth, theHeight, GL_RGBA, GL_UNSIGNED_BYTE, depth.begin());
+// STL Update
+  glDrawPixels (theWidth, theHeight, GL_RGBA, GL_UNSIGNED_BYTE, &*depth.begin());
   while (int err = glGetError()) {
     cerr << "Error: " << err << endl;
   }

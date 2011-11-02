@@ -83,7 +83,8 @@ setval( double (&d)[N], vector<double> &vd )
     if( vd.size() != N )
         return 0;
 
-    memcpy( d, (double *) vd.begin(), sizeof(d) );
+// STL Update      
+    memcpy( d, (double *) &*(vd.begin()), sizeof(d) );
     return 1;
 }
 #endif

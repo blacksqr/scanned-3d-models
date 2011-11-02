@@ -35,15 +35,35 @@ private:
 
   void _search(const Pnt3 *pts, const int *inds, 
 	       const Pnt3 &p, Pnt3 &cp, float &d2) const;
+// STL Update	
+  void _search(const vector<Pnt3>::iterator pts, const vector<int>::iterator inds, 
+	       const Pnt3 &p, Pnt3 &cp, float &d2) const;
   
 public:
 
   KDtritree(const Pnt3 *pts, const int *triinds, 
 	    KDsphere *spheres, int n, int first = 1);
+// STL Update	
+  KDtritree(const vector<Pnt3>::iterator pts, const vector<int>::iterator triinds,
+	    KDsphere *spheres, int n, int first = 1);
+  
   ~KDtritree();
 
   // just find the closest point
   bool search(const Pnt3 *pts, const int *inds, const Pnt3 &p,
+	      Pnt3 &cp, float &d) const
+    {
+      float d2 = d*d;
+      _search(pts, inds, p, cp, d2);
+      if (d*d!=d2) {
+	d = sqrtf(d2);
+	return true;
+      } else {
+	return false;
+      }
+    }
+// STL Update	
+  bool search(const vector<Pnt3>::iterator pts, const vector<int>::iterator inds, const Pnt3 &p,
 	      Pnt3 &cp, float &d) const
     {
       float d2 = d*d;
@@ -60,5 +80,8 @@ public:
 
 KDtritree *
 create_KDtritree(const Pnt3 *pts, const int *inds, int n);
+// STL Update	
+KDtritree *
+create_KDtritree(const vector<Pnt3>::iterator pts, const vector<int>::iterator inds, int n);
 
 #endif

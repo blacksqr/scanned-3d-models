@@ -306,6 +306,9 @@ RangeGrid::readRangeGrid(const char *name)
 	matDiff = new vec3uc[numSamples];
 
       for (j = 0; j < num_elems; j++) {
+// STL Update      
+#define __STL_TRY try
+#define __STL_CATCH_ALL catch(...)
         __STL_TRY {
 	  ply.get_element ((void *) &vert);
 	}

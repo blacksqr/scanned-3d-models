@@ -33,6 +33,11 @@ pushNormalAsShorts (vector<short>& nrms, Pnt3 n);
 void
 pushNormalAsPnt3 (vector<Pnt3>& nrms, short* n, int i);
 
+// STL Update
+void
+pushNormalAsPnt3 (vector<Pnt3>& nrms, vector<short>::iterator n, int i);
+
+
 // find the median (or percentile) edge length
 float
 median_edge_length(vector<Pnt3> &vtx,

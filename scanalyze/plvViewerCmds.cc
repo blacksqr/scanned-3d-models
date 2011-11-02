@@ -152,7 +152,8 @@ PlvListScansCmd(ClientData clientData, Tcl_Interp *interp,
   }
   
   if (bRoot) {
-    for (DisplayableMesh** pdm = theScene->meshSets.begin();
+// STL Update      
+    for (vector<DisplayableMesh*>::iterator pdm = theScene->meshSets.begin();
 	 pdm < theScene->meshSets.end(); pdm++) {
       
       // Thus, since theScene->meshSets only stores the roots,
@@ -167,7 +168,8 @@ PlvListScansCmd(ClientData clientData, Tcl_Interp *interp,
 static void
 PlvListScansHelper (Tcl_Interp *interp, vector<DisplayableMesh*> meshes, bool bLeaf) 
 {
-  for (DisplayableMesh** pdm = meshes.begin(); pdm < meshes.end(); pdm++) {
+// STL Update      
+  for (vector<DisplayableMesh*>::iterator pdm = meshes.begin(); pdm < meshes.end(); pdm++) {
     vector<DisplayableMesh*>children;
     
     GroupScan *gp = dynamic_cast<GroupScan*>((*pdm)->getMeshData());

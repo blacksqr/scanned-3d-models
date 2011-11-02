@@ -141,8 +141,9 @@ GenericScan::setMTColor (Mesh* mesh, MeshTransport* mt,
     }
   } else if (source == colorBoundary) {
       colors->reserve (colorsize * mesh->bdry.size());
-      char* end = mesh->bdry.end();
-      for (char* c = mesh->bdry.begin(); c < end; c++)
+// STL Update        
+      vector<char>::iterator end = mesh->bdry.end();
+      for (vector<char>::iterator c = mesh->bdry.begin(); c < end; c++)
 	pushConf (*colors, colorsize, (uchar)(*c ? 0 : 255));
   } else { // real diffuse color, not confidence
     if (perVertex) {
@@ -511,8 +512,9 @@ GenericScan::delete_resolution (int nPolys)
   }
 
   delete meshes[iRes];
-  meshes.erase (&meshes[iRes]);
-  resolutions.erase (&resolutions[iRes]);
+// STL Update        
+  meshes.erase (meshes.begin() + iRes);
+  resolutions.erase (resolutions.begin() + iRes);
 
   select_coarser();
   return true;
@@ -540,8 +542,9 @@ GenericScan::insertMesh(Mesh *m, const crope& filename,
 
   // now add to mesh vector, sorted parallel to resolution vector
   int iPos = findLevelForRes (nRes);
-  meshes.insert (&meshes[iPos], m);
-  kdtree.insert (&kdtree[iPos], NULL);
+// STL Update        
+  meshes.insert (meshes.begin() + iPos, m);
+  kdtree.insert (kdtree.begin() + iPos, NULL);
 }
 
 
@@ -638,6 +641,7 @@ GenericScan::get_current_kdtree()
     return kdtree[iTree];
 
   Mesh* mesh = currentMesh();
+// STL Update        
   kdtree[iTree] = CreateKDindtree(mesh->vtx.begin(), 
 				  mesh->nrm.begin(),
 				  mesh->vtx.size());
@@ -657,7 +661,8 @@ GenericScan::closest_point(const Pnt3 &p, const Pnt3 &n,
 
   int ind, ans;
   Mesh* mesh = currentMesh();
-  ans = tree->search(mesh->vtx.begin(), mesh->nrm.begin(), p, n, ind, thr);
+// STL Update        
+  ans = tree->search(&*(mesh->vtx.begin()), &*(mesh->nrm.begin()), p, n, ind, thr);
   if (ans) {
     if (bdry_ok == 0) {
       // disallow closest points that are on the mesh boundary
@@ -974,8 +979,9 @@ GenericScan::filter_vertices (const VertexFilter& filter, vector<Pnt3>& p)
 {
   Mesh* mesh = currentMesh();
 
-  Pnt3* vtxend = mesh->vtx.end();
-  for (Pnt3* pnt = mesh->vtx.begin(); pnt < vtxend; pnt++) {
+// STL Update        
+  vector<Pnt3>::iterator vtxend = mesh->vtx.end();
+  for (vector<Pnt3>::iterator pnt = mesh->vtx.begin(); pnt < vtxend; pnt++) {
     if (filter.accept (*pnt))
       p.push_back (*pnt);
   }
@@ -1145,7 +1151,8 @@ PlvWritePlyForVripCmd(ClientData clientData,
   sprintf (confFN, "%s/vrip.conf", dir);
   ofstream conffile (confFN, ios::app);
 
-  DisplayableMesh** dm = theScene->meshSets.begin();
+// STL Update        
+  vector<DisplayableMesh*>::iterator dm = theScene->meshSets.begin();
   for (; dm < theScene->meshSets.end(); dm++) {
     if (!(*dm)->getVisible())
       continue;

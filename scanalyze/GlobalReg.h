@@ -85,8 +85,9 @@ private:
 	  }
 	  if (max_pairs) {
 	    // clean the vectors
-	    ptsa.erase(&ptsa[max_pairs], ptsa.end());
-	    ptsb.erase(&ptsb[max_pairs], ptsb.end());
+// STL Update
+	    ptsa.erase(ptsa.begin() + (max_pairs), ptsa.end());
+	    ptsb.erase(ptsb.begin() + (max_pairs), ptsb.end());
 	  }
 	}
 	//cout << "constructing " << int(this) << endl;

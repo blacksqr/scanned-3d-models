@@ -319,7 +319,7 @@ PlvFillPhotoCmd(ClientData clientData, Tcl_Interp *interp,
   block.width = theWidth;
   block.height = theHeight;
 
-  Tk_PhotoPutBlock(handle, &block, 0, 0, theWidth, theHeight);
+  Tk_PhotoPutBlock(handle, &block, 0, 0, theWidth, theHeight, TK_PHOTO_COMPOSITE_SET);
 
   free(cbuf);
 

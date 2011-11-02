@@ -106,7 +106,8 @@ PlvClipToSelectionCmd(ClientData clientData, Tcl_Interp *interp,
   vector<DisplayableMesh*> clippees;
   if (bClipMulti) {
     // push all meshes with sufficient visibility
-    for (DisplayableMesh** pdm = theScene->meshSets.begin();
+// STL Update      
+    for (vector<DisplayableMesh*>::iterator pdm = theScene->meshSets.begin();
 	 pdm != theScene->meshSets.end();
 	 pdm++) {
       if (bClipInvisible || (*pdm)->getVisible())
@@ -122,7 +123,8 @@ PlvClipToSelectionCmd(ClientData clientData, Tcl_Interp *interp,
   char* error = NULL;
   Progress* progress = new Progress (clippees.size(), "Clipping scans", true);
   cout << "Clipping " << clippees.size() << " scans..." << endl;
-  for (DisplayableMesh** clippee = clippees.begin();
+// STL Update      
+  for (vector<DisplayableMesh*>::iterator clippee = clippees.begin();
        clippee != clippees.end();
        clippee++) {
 
@@ -320,7 +322,8 @@ Renamer (DisplayableMesh *mesh) {
   if (g) {
     if (g->get_children_for_display(children)) {
       ungroupScans(mesh);    
-      for (DisplayableMesh** it = children.begin(); it < children.end(); it++)
+// STL Update      
+      for (vector<DisplayableMesh*>::iterator it = children.begin(); it < children.end(); it++)
 	vec.push_back(Renamer (*it)); // rename the descendants of the group first
       mesh = groupScans(vec, newbuf, true);
       return mesh;
@@ -626,13 +629,15 @@ PlvDrawShapeSelectionCmd(ClientData clientData, Tcl_Interp *interp,
 	// insert new point between iLine and iLine+1
 	iChangeExisting = iLine + 1;
 	bChangeExisting = true;
-	theSel.pts.insert (&theSel[iChangeExisting], pt);
+// STL Update      
+	theSel.pts.insert (theSel.iterator_at_index(iChangeExisting), pt);
       }
     }
   } else if (!strcmp (argv[3], "remove")) {
     // if this was a click and not a drag, remove selected pt
     if (iDelete >= 0 && ptOnHandle (pt, theSel[iDelete])) {
-      theSel.pts.erase (&theSel[iDelete]);
+// STL Update      
+      theSel.pts.erase (theSel.iterator_at_index(iDelete));
     }    
   }
  
