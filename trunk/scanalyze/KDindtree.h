@@ -17,8 +17,8 @@ class KDindtree* CreateKDindtree (const Pnt3* pts,
 				  int nPts);
 
 // STL Update
-class KDindtree* CreateKDindtree (const vector<Pnt3>::iterator pts,
-				  const vector<short>::iterator nrms,
+class KDindtree* CreateKDindtree (const vector<Pnt3>::const_iterator pts,
+				  const vector<short>::const_iterator nrms,
 				  int nPts);
 
 
@@ -45,10 +45,10 @@ private:
 		   int &ind, float &d) const;
   
 // STL Update          
-  int _search(const vector<Pnt3>::iterator pts, const vector<short>::iterator nrms,
+  int _search(const vector<Pnt3>::const_iterator pts, const vector<short>::const_iterator nrms,
 	      const Pnt3 &p, const Pnt3 &n,
 		   int &ind, float &d) const;
-  int _search(const vector<Pnt3>::iterator pts, const Pnt3 &p, 
+  int _search(const vector<Pnt3>::const_iterator pts, const Pnt3 &p, 
 		   int &ind, float &d) const;
   
 public:
@@ -60,7 +60,7 @@ public:
   KDindtree(const Pnt3 *pts, const short *nrms,
 	    int *ind, int n, int first = 1);
 // STL Update        
-  KDindtree(const vector<Pnt3>::iterator pts, const vector<short>::iterator nrms,
+  KDindtree(const vector<Pnt3>::const_iterator pts, const vector<short>::const_iterator nrms,
 	    int *ind, int n, int first = 1);
   ~KDindtree();
 
@@ -85,7 +85,7 @@ public:
 
 // STL Update
   // use normals
-  int search(const vector<Pnt3>::iterator pts, const vector<short>::iterator nrms,
+  int search(const vector<Pnt3>::const_iterator pts, const vector<short>::const_iterator nrms,
 	     const Pnt3 &p, const Pnt3 &n,
 	     int &ind, float &d) const
     {
@@ -95,7 +95,7 @@ public:
     }
 
   // just find the closest point
-  int search(const vector<Pnt3>::iterator pts, const Pnt3 &p,
+  int search(const vector<Pnt3>::const_iterator pts, const Pnt3 &p,
 	     int &ind, float &d) const
     {
       float _d = d;

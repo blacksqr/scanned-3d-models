@@ -44,7 +44,7 @@ CreateKDindtree (const Pnt3* pts, const short* nrms, int nPts)
 
 // STL Update
 KDindtree*
-CreateKDindtree (const vector<Pnt3>::iterator pts, const vector<short>::iterator nrms, int nPts)
+CreateKDindtree (const vector<Pnt3>::const_iterator pts, const vector<short>::const_iterator nrms, int nPts)
 {
   cout << "Creating kdtree (" << nPts << " points)..." << flush;
 
@@ -103,7 +103,7 @@ divisionsort(const Pnt3 *data, int *p, int n,
 
 // STL Update
 static int
-divisionsort(const vector<Pnt3>::iterator data, int *p, int n,
+divisionsort(const vector<Pnt3>::const_iterator data, int *p, int n,
 	     int dim, float med)
 {
   // move values <= med to left, the rest to right
@@ -242,7 +242,7 @@ KDindtree::KDindtree(const Pnt3 *pts, const short *nrms,
 }
 
 // STL Update
-KDindtree::KDindtree(const vector<Pnt3>::iterator pts, const vector<short>::iterator nrms,
+KDindtree::KDindtree(const vector<Pnt3>::const_iterator pts, const vector<short>::const_iterator nrms,
 		     int *ind, int n, int first)
 : Nhere(0), element(NULL)
 {
@@ -437,7 +437,7 @@ KDindtree::_search(const Pnt3 *pts, const Pnt3 &p,
 
 // STL Update        
 int
-KDindtree::_search(const vector<Pnt3>::iterator pts, const vector<short>::iterator nrms,
+KDindtree::_search(const vector<Pnt3>::const_iterator pts, const vector<short>::const_iterator nrms,
 		   const Pnt3 &p, const Pnt3 &n,
 		   int &ind, float &d) const
 {
@@ -488,7 +488,7 @@ KDindtree::_search(const vector<Pnt3>::iterator pts, const vector<short>::iterat
 
 
 int
-KDindtree::_search(const vector<Pnt3>::iterator pts, const Pnt3 &p,
+KDindtree::_search(const vector<Pnt3>::const_iterator pts, const Pnt3 &p,
 		   int &ind, float &d) const
 {
   assert(this);
