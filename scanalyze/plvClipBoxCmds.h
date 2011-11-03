@@ -21,7 +21,7 @@ class Selection
 
 // STL Update        
   vector<Pt>::iterator iterator_at_index (int idx) { return pts.begin() + idx; };
-  const vector<Pt>::iterator iterator_at_index (int idx) const { return pts.begin() + (idx); };
+  const vector<Pt>::const_iterator iterator_at_index (int idx) const { return pts.begin() + (idx); };
 
   // how to interpret the points?
   Type type;

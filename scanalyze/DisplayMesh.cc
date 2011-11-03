@@ -754,9 +754,9 @@ DisplayableRealMesh::buildStripInds (DrawData& cache)
       cache.StripInds.push_back (vector<int>());
       vector<int>& si = cache.StripInds.back();
 // STL Update        
-      const vector<int>::iterator last = cache.mesh->tri_inds[imesh]->begin() - 1;
-      const vector<int>::iterator triEnd = cache.mesh->tri_inds[imesh]->end();
-      for (const vector<int>::iterator i = cache.mesh->tri_inds[imesh]->begin();
+      const vector<int>::const_iterator last = cache.mesh->tri_inds[imesh]->begin() - 1;
+      const vector<int>::const_iterator triEnd = cache.mesh->tri_inds[imesh]->end();
+      for (const vector<int>::const_iterator i = cache.mesh->tri_inds[imesh]->begin();
 	   i < triEnd; i++) {
 	if (*i == -1) { // end of strip
 	  si.push_back (i - last - 1);

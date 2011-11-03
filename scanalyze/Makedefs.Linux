@@ -22,6 +22,7 @@ endif
 TARGET = 
 
 CC = gcc -w
+#CXX = ../../stl-filter/gfilt -fno-for-scope -fpermissive -w
 CXX = g++ -fno-for-scope -fpermissive -w
 LINK = $(CXX) $(TARGET)
 
