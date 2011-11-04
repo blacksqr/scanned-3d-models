@@ -25,10 +25,9 @@ ifdef windir
 
 include Makedefs.Win32
 
-#default all: $(CVSFILES) scanalyze.exe
+all: qt
 default: $(CVSFILES) $(DEFAULTVERSION)
-
-all: $(CVSFILES) $(ALLVERSIONS)
+scz: $(CVSFILES) $(ALLVERSIONS)
 
 OBJS $(addprefix OBJS/,$(ALLVERSIONS)) :
 	mkdir $@
@@ -48,9 +47,9 @@ UNAME = $(subst IRIX64,IRIX,$(shell uname))
 
 include Makedefs.$(UNAME)
 
+all: qt
 default: $(CVSFILES) $(DEFAULTVERSION)
-
-all: $(CVSFILES) $(ALLVERSIONS)
+scz: $(CVSFILES) $(ALLVERSIONS)
 
 OBJS $(addprefix OBJS/,$(ALLVERSIONS)) :
 	mkdir $@
@@ -168,9 +167,11 @@ scanalyze.$(BUILD): $(OBJS) $(AUXLIBS)
 	rm -f ../../$@
 	$(LINK) -o ../../$@ $(OBJS) $(AUXLIBS) $(LIBPATHS) $(LIBS)
 
-qt: default
+qt: scz
 	echo "Building QT (${qt_dir})..."
 	cd ${qt_dir}; qmake
+	# remove plvMain.o
+	cd ${qt_dir}; perl -ni -e 'print unless /plvMain/' ${qt_dir}/Makefile 
 	cd ${qt_dir}; make
 
 endif
@@ -216,7 +217,9 @@ OBJS/$(BUILD)/%.obj: %.cc
 else  # UNIX
 
 clean:
-	-rm -rf OBJS/*/*
+	-rm -rf OBJS
+	-rm -f scanalyze.debug
+	cd ${qt_dir} ; test ! -e Makefile || make clean
 
 cleanold:
 	-rm *.o
