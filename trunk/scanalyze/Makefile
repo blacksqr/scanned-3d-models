@@ -1,4 +1,6 @@
 #!gmake
+root_dir  := $(shell pwd | sed -e 's=^/tmp_mnt/=/=')
+qt_dir = ${root_dir}/qt
 
 # these aren't needed and cause lots of uncessary file opens
 # that are slow across the net
@@ -162,9 +164,14 @@ scanalyze.$(BUILD).exe: $(OBJS)
 
 
 else # unix
-scanalyze.$(BUILD): $(OBJS) $(AUXLIBS)
+scanalyze.$(BUILD): $(OBJS) $(AUXLIBS) 
 	rm -f ../../$@
 	$(LINK) -o ../../$@ $(OBJS) $(AUXLIBS) $(LIBPATHS) $(LIBS)
+
+qt:: 
+	echo "Building QT (${qt_dir})..."
+	cd ${qt_dir}; qmake
+	cd ${qt_dir}; make
 
 endif
 
