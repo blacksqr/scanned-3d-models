@@ -164,11 +164,11 @@ scanalyze.$(BUILD).exe: $(OBJS)
 
 
 else # unix
-scanalyze.$(BUILD): $(OBJS) $(AUXLIBS) 
+scanalyze.$(BUILD): $(OBJS) $(AUXLIBS)
 	rm -f ../../$@
 	$(LINK) -o ../../$@ $(OBJS) $(AUXLIBS) $(LIBPATHS) $(LIBS)
 
-qt:: 
+qt: default
 	echo "Building QT (${qt_dir})..."
 	cd ${qt_dir}; qmake
 	cd ${qt_dir}; make
