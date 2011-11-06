@@ -27,7 +27,7 @@ include Makedefs.Win32
 
 all: qt
 default: $(CVSFILES) $(DEFAULTVERSION)
-scz: $(CVSFILES) $(ALLVERSIONS)
+scz: $(CVSFILES) $(DEFAULTVERSION)
 
 OBJS $(addprefix OBJS/,$(ALLVERSIONS)) :
 	mkdir $@
@@ -49,7 +49,7 @@ include Makedefs.$(UNAME)
 
 all: qt
 default: $(CVSFILES) $(DEFAULTVERSION)
-scz: $(CVSFILES) $(ALLVERSIONS)
+scz: $(CVSFILES) $(DEFAULTVERSION)
 
 OBJS $(addprefix OBJS/,$(ALLVERSIONS)) :
 	mkdir $@
