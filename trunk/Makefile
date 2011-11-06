@@ -21,6 +21,7 @@ volfill::
 	cd ${volfill_dir}; make 
 clean_scan::
 	cd ${scanalyze_dir}; make clean
+	cd ${scanalyze_dir}/qt; rm -rf .obj .ui .moc scanned Makefile
 clean_vrip::
 	cd ${vrip_dir}; make clean
 clean_volfill::
