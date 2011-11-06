@@ -16,7 +16,7 @@ clean: clean_scan clean_vrip clean_volfill
 scan::
 	cd ${scanalyze_dir}; make all
 vrip::
-	cd ${vrip_dir}; make all
+	cd ${vrip_dir}; make 
 volfill::
 	cd ${volfill_dir}; make 
 clean_scan::
