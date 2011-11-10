@@ -18,19 +18,19 @@ typedef struct{
 typedef struct{
     float x,y,z;
 	vector normal;
-}vertex;
+}Vertex;
 
 // The polygon (triangle), 3 numbers that aim 3 vertices
 typedef struct{
     int a,b,c;
 	vector normal;
-}polygon;
+}Polygon;
 
 
 // The mapcoord type, 2 texture coordinates for each vertex
 typedef struct{
     float u,v;
-}mapcoord;
+}Mapcoord;
 
 // The object type
 typedef struct {
@@ -39,9 +39,9 @@ typedef struct {
 	int vertices_qty;
     int polygons_qty;
 
-    vertex vertex[MAX_VERTICES]; 
-    polygon polygon[MAX_POLYGONS];
-    mapcoord mapcoord[MAX_VERTICES];
+    Vertex vertex[MAX_VERTICES]; 
+    Polygon polygon[MAX_POLYGONS];
+    Mapcoord mapcoord[MAX_VERTICES];
     int id_texture;
 } object, *object_ptr;
 
@@ -51,3 +51,4 @@ void modifyObjectToFitScreen(object*, int);
 void calculateVertexNormals(object_ptr);
 
 #endif
+

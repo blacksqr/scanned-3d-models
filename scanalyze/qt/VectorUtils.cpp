@@ -1,6 +1,6 @@
 #include "VectorUtils.h"
 
-vector subtract(vertex u, vertex v)
+vector subtract(Vertex u, Vertex v)
 {
 	vector result;
 	result.x = u.x - v.x;
@@ -47,7 +47,7 @@ vector normalize(vector vec)
 }
 
 
-vector averageNormals(polygon* polygons, int count)
+vector averageNormals(Polygon* polygons, int count)
 {
 	float sumx = 0.0, sumy = 0.0, sumz = 0.0;
 	for(int i = 0; i < count; i++)
@@ -65,7 +65,7 @@ vector averageNormals(polygon* polygons, int count)
 	return average;
 }
 
-vector sumNormals(polygon* polygons, int count)
+vector sumNormals(Polygon* polygons, int count)
 {
 	float sumx = 0.0, sumy = 0.0, sumz = 0.0;
 	for(int i = 0; i < count; i++)

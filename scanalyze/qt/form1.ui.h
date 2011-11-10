@@ -1,3 +1,7 @@
+
+
+
+
 /****************************************************************************
 ** ui.h extension file, included from the uic-generated form implementation.
 **
@@ -98,4 +102,10 @@ void Form1::helpContents()
 void Form1::helpAbout()
 {
 
+}
+
+
+void Form1::Add_Scan_Button_clicked()
+{
+    fileOpen();
 }
