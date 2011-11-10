@@ -4,12 +4,13 @@
 #include <math.h>
 
 
-vector subtract(vertex, vertex);
+vector subtract(Vertex, Vertex);
 vector crossProduct(vector, vector);
 float dotProduct(vector, vector);
 vector normalize(vector);
-vector averageNormals(polygon*, int);
-vector sumNormals(polygon*, int);
+vector averageNormals(Polygon*, int);
+vector sumNormals(Polygon*, int);
 
 
 #endif
+

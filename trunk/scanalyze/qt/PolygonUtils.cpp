@@ -86,7 +86,7 @@ void scaleObject(object* object, float scaleAmount)
 void calculateVertexNormals(object_ptr object)
 {
 	int i;
-	vertex vert1,vert2,vert3;
+	Vertex vert1,vert2,vert3;
 	vector vect1,vect2,normal; 
 	int connections_qty[MAX_VERTICES];
 

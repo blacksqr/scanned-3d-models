@@ -3,6 +3,7 @@
 #include <limits.h>
 #include "form1.h"
 
+/*
 #include "togl.h"
 #include "plvInit.h"
 #include "plvGlobals.h"
@@ -23,14 +24,15 @@
 #include "Trackball.h"
 #include "BailDetector.h"
 #include "Progress.h"
+*/
 
 // Prototypes
-float getGLVersionA (void);
-int appInit(Tcl_Interp *interp);
+//float getGLVersionA (void);
+//int appInit(Tcl_Interp *interp);
 
 int main( int argc, char ** argv )
 {
-   Tcl_Interp* interp = Tcl_CreateInterp();
+//   Tcl_Interp* interp = Tcl_CreateInterp();
 
 /*
   Tk_Window main;
@@ -38,18 +40,18 @@ int main( int argc, char ** argv )
 
   g_tclInterp = interp;
 */
-   tbView  = new Trackball;
-   theScene = new Scene (interp);
+ //  tbView  = new Trackball;
+  // theScene = new Scene (interp);
  
 
     // initialize interactors
-    Togl_DisplayFunc (drawInTogl);
-    Togl_CreateFunc (catchToglCreate);
-    Togl_OverlayDisplayFunc (drawOverlay);
+    //Togl_DisplayFunc (drawInTogl);
+    //Togl_CreateFunc (catchToglCreate);
+    //Togl_OverlayDisplayFunc (drawOverlay);
  
     printf("initDr\n");
 
-    initDrawing();
+    //initDrawing();
     printf("initDrDone\n");
 
 //   char *plvDir = getenv("SCANALYZE_DIR");
@@ -75,14 +77,15 @@ int main( int argc, char ** argv )
  //   strcat(rcPath, "/.scanalyzerc");
  // }
 
-    appInit(interp);
+    //appInit(interp);
     
     QApplication a( argc, argv );
     Form1 w;
     w.show();
-    a.connect( &a, SIGNAL( lastWindowClosed() ), &a, SLOT( quit() ) );
-    return a.exec();
 
+    //a.connect( &a, SIGNAL( lastWindowClosed() ), &a, SLOT( quit() ) );
+	//return a.exec();
+    return 1;
 }
 
 
@@ -107,6 +110,7 @@ PlvDeinitCmd(ClientData clientData, Tcl_Interp *interp,
 }
 */
 
+/*
 float
 getGLVersionA (void)
 {
@@ -119,6 +123,7 @@ getGLVersionA (void)
 
   return ver;
 }
+*/
 
 /*
 int PlvGetRendererStringCmd(ClientData clientData, Tcl_Interp *interp, 
@@ -141,6 +146,7 @@ int PlvGetWordSizeCmd(ClientData clientData, Tcl_Interp *interp,
 
 */
 
+/*
 int
 appInit(Tcl_Interp *interp)
 {
@@ -168,4 +174,5 @@ puts ("about to plvinit");
     TbObj::clear_undo();
  return 0;
 }
+*/
 

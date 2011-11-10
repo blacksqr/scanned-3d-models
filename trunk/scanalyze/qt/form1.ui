@@ -8,28 +8,63 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>600</width>
-            <height>480</height>
+            <width>919</width>
+            <height>709</height>
         </rect>
     </property>
     <property name="caption">
         <string>Scanned 3D</string>
     </property>
-    <widget class="QLabel">
+    <widget class="QPushButton">
         <property name="name">
-            <cstring>textLabel1</cstring>
+            <cstring>Add_Scan_Button</cstring>
         </property>
         <property name="geometry">
             <rect>
-                <x>200</x>
-                <y>0</y>
-                <width>181</width>
-                <height>31</height>
+                <x>20</x>
+                <y>15</y>
+                <width>150</width>
+                <height>40</height>
             </rect>
         </property>
         <property name="text">
-            <string>&lt;p align="center"&gt;&lt;b&gt;Welcome to Scanned 3D&lt;/b&gt;&lt;/p&gt;</string>
+            <string>Add Scan</string>
         </property>
+        <property name="toolTip" stdset="0">
+            <string>Click to Add a Range Scan</string>
+        </property>
+    </widget>
+    <widget class="QFrame">
+        <property name="name">
+            <cstring>frame3</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>190</x>
+                <y>0</y>
+                <width>700</width>
+                <height>630</height>
+            </rect>
+        </property>
+        <property name="frameShape">
+            <enum>StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+            <enum>Raised</enum>
+        </property>
+        <widget class="MyGLWidget">
+            <property name="name">
+                <cstring>myGLWidget3</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>10</y>
+                    <width>680</width>
+                    <height>610</height>
+                </rect>
+            </property>
+        </widget>
     </widget>
 </widget>
 <menubar>
@@ -78,6 +113,24 @@
         <action name="fileExitAction"/>
     </toolbar>
 </toolbars>
+<customwidgets>
+    <customwidget>
+        <class>MyGLWidget</class>
+        <header location="local">myglwidget.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+    </customwidget>
+</customwidgets>
 <actions>
     <action>
         <property name="name">
@@ -320,6 +373,11 @@
         </property>
     </action>
 </actions>
+<images>
+    <image name="image0">
+        <data format="XBM.GZ" length="79">789c534e494dcbcc4b554829cdcdad8c2fcf4c29c95030e0524611cd48cd4ccf28010a1797249664262b2467241641a592324b8aa363156c15aab914146aadb90067111b1f</data>
+    </image>
+</images>
 <connections>
     <connection>
         <sender>fileNewAction</sender>
@@ -411,6 +469,12 @@
         <receiver>Form1</receiver>
         <slot>helpAbout()</slot>
     </connection>
+    <connection>
+        <sender>Add_Scan_Button</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>fileOpen()</slot>
+    </connection>
 </connections>
 <includes>
     <include location="local" impldecl="in implementation">form1.ui.h</include>
@@ -431,7 +495,11 @@
     <slot>helpIndex()</slot>
     <slot>helpContents()</slot>
     <slot>helpAbout()</slot>
+    <slot>Add_Scan_Button_clicked()</slot>
 </slots>
 <pixmapinproject/>
 <layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>myglwidget.h</includehint>
+</includehints>
 </UI>

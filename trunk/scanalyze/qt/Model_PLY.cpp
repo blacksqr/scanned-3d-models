@@ -8,7 +8,6 @@
  * 
  */ 
  
-#include <windows.h>
 #include <stdio.h>
 #include <string.h>
 #include <GL/gl.h>
@@ -20,9 +19,9 @@
 class Model_PLY 
 {
 public:
-	int Model_PLY::Load(char *filename);
-	void Model_PLY::Draw();
-	float* Model_PLY::calculateNormal( float *coord1, float *coord2, float *coord3 );
+	int Load(char *filename);
+	void Draw();
+	float* calculateNormal( float *coord1, float *coord2, float *coord3 );
 	Model_PLY();
  
     float* Faces_Triangles;
