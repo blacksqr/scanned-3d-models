@@ -154,7 +154,8 @@ int Model_PLY::Load(char* filename)
  
 			// read verteces
 			i =0;
-			for (int iterator = 0; iterator < this->TotalConnectedPoints; iterator++)
+			int iterator;
+			for (iterator = 0; iterator < this->TotalConnectedPoints; iterator++)
 			{
 				fgets(buffer,300,file);
  
@@ -169,7 +170,7 @@ int Model_PLY::Load(char* filename)
  
 			// read faces
 			i =0;
-			for (int iterator = 0; iterator < this->TotalFaces; iterator++)
+			for (iterator = 0; iterator < this->TotalFaces; iterator++)
 			{
 				fgets(buffer,300,file);
  

@@ -5,9 +5,15 @@ CONFIG	+= qt warn_on release
 
 LIBS	+= -lGLU -lGL -ltk8.4 -ltcl8.4 -lXext -lXmu -lz -lm
 
-INCLUDEPATH	+= ../
+INCLUDEPATH	+= ..
+INCLUDEPATH	+= .
+INCLUDEPATH	+= /usr/include
 
-SOURCES	+= mainApplication.cpp
+QT += openGL
+
+HEADERS += myglwidget.h Model_PLY.h PolygonUtils.h VectorUtils.h
+
+SOURCES	+= mainApplication.cpp myglwidget.cpp Model_PLY.cpp PolygonUtils.cpp VectorUtils.cpp
 
 FORMS	= form1.ui
 
