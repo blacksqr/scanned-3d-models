@@ -27,6 +27,10 @@ MyGLWidget::MyGLWidget( QFrame*&, const char* ) : QGLWidget ()
 }
 */
 
+void MyGLWidget::timeOut()
+{
+	updateGL();
+}
 
 void MyGLWidget::initializeGL()
 {
@@ -36,15 +40,27 @@ void MyGLWidget::initializeGL()
 
 void MyGLWidget::resizeGL( int width, int height )
 {
+//	glViewport( 0, 0, (GLint) width, (GLint) height );
+	//glMatrixMode( GL_PROJECTION );
+	//glLoadIdentity();
+//	glFrustum( -1.0, 1.0, -1.0, 1.0, 5.0, 15.0);
+	//glMatrixMode( GL_MODELVIEW );
+	//paintGL();
 }
 
-void MyGLWidget::setGeometry(const QRect&)
+/*
+void MyGLWidget::setGeometry(const QRect & rect )
 {
+	printf("Setting Geometry");
+	this->geometry() = rect;
+    this->resize(rect.width(), rect.height());
+	this->show();
 }
+*/
 
 void MyGLWidget::paintGL()
 {
-	printf("MyGLWidget::paintGL() called");
+	printf("PAINTING");
 	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -69,6 +85,7 @@ void MyGLWidget::keyPressEvent( QKeyEvent *e )
 
 void MyGLWidget::mousePressEvent( QMouseEvent *event )
 {
+	printf("Mouse PRessed");
 	buttonPressed = true;
 	if(event->button() == Qt::MidButton)
 		zooming = true;		
@@ -77,10 +94,13 @@ void MyGLWidget::mousePressEvent( QMouseEvent *event )
 	lastY = event->y();
 	beginx = event->x();
 	beginy = event->y();
+
+	updateGL();
 }
 
 void MyGLWidget::mouseReleaseEvent( QMouseEvent *event )
 {
+	printf("Mouse Released");
 	buttonPressed = false;
 	zooming = false;
 
@@ -88,10 +108,13 @@ void MyGLWidget::mouseReleaseEvent( QMouseEvent *event )
 	lastY = event->y();
 	beginx = event->x();
 	beginy = event->y();
+
+	updateGL();
 }
 
 void MyGLWidget::moveEvent( QMoveEvent *event )
 {
+	printf("Mouse Moved");
 	if(!zooming)
 	{
 		// The current elevation and swing of the camera.  We simply
@@ -121,6 +144,8 @@ void MyGLWidget::moveEvent( QMoveEvent *event )
 
 		return;
 	}
+
+	updateGL();
 }
   
 
@@ -324,7 +349,7 @@ void setupCallbacks(void)
 void MyGLWidget::init(void)
 {
 	printf("MyGLWidget::init() called");
-	glViewport(0, 0, 890, 890);
+	glViewport(0, 0, 680, 610);
 
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_DEPTH_TEST);
@@ -333,6 +358,7 @@ void MyGLWidget::init(void)
 	glMatrixMode(GL_PROJECTION);
 
 	glOrtho(-10,10,-10,10,-900,10000);
+	//glOrtho(-10,680,-10,610,-900,10000);
 
 	// setup the camera position
 	glMatrixMode(GL_MODELVIEW);
