@@ -83,9 +83,9 @@ int main( int argc, char ** argv )
     Form1 w;
     w.show();
 
-    //a.connect( &a, SIGNAL( lastWindowClosed() ), &a, SLOT( quit() ) );
-	//return a.exec();
-    return 1;
+    a.connect( &a, SIGNAL( lastWindowClosed() ), &a, SLOT( quit() ) );
+	return a.exec();
+    //return 1;
 }
 
 

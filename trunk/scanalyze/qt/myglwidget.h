@@ -4,21 +4,27 @@
 #include "qgl.h"
 #include "qframe.h"
 
-class MyGLWidget : QGLWidget
+class MyGLWidget : public QGLWidget
 {
 	Q_OBJECT
 
 	public:
-		MyGLWidget( QFrame* , const char[20] ) : QGLWidget( ) {}
+		MyGLWidget( QWidget* parent, const char title[20]) : QGLWidget( parent, title) 
+		//MyGLWidget( QFrame* frame, const char title[20]) : QGLWidget( 30, NULL, title) 
+		{
+			printf("In MyGLWidget ctor()");
+		//	initializeGL();
+		}
 		//MyGLWidget( QFrame*&, char const* );
 		void initializeGL();
-		void setGeometry(const QRect&);
+		//void setGeometry(const QRect&);
 		void resizeGL( int width, int height );
 		void paintGL();
 		void keyPressEvent( QKeyEvent *e );
 		void mousePressEvent( QMouseEvent *event );
 		void mouseReleaseEvent( QMouseEvent *event );
 		void moveEvent( QMoveEvent *event );
+		void timeOut( void );
 
 		void recalcModelView(void);
 		void display3DSObject(void);
