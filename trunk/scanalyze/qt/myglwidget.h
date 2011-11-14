@@ -23,7 +23,7 @@ class MyGLWidget : public QGLWidget
 		void keyPressEvent( QKeyEvent *e );
 		void mousePressEvent( QMouseEvent *event );
 		void mouseReleaseEvent( QMouseEvent *event );
-		void moveEvent( QMoveEvent *event );
+		void mouseMoveEvent( QMouseEvent *event );
 		void timeOut( void );
 
 		void recalcModelView(void);
