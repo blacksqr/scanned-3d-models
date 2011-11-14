@@ -60,7 +60,6 @@ void MyGLWidget::setGeometry(const QRect & rect )
 
 void MyGLWidget::paintGL()
 {
-	printf("PAINTING");
 	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -80,8 +79,10 @@ void MyGLWidget::paintGL()
   
 void MyGLWidget::keyPressEvent( QKeyEvent *e )
 {
+	printf("Key Pressed");
 	// do nothing...yet
 }
+
 
 void MyGLWidget::mousePressEvent( QMouseEvent *event )
 {
@@ -98,6 +99,11 @@ void MyGLWidget::mousePressEvent( QMouseEvent *event )
 	updateGL();
 }
 
+void QWidget::mouseReleaseEvent( QMouseEvent *event )
+{
+	printf("BaseClass::Mouse Released");
+
+}
 void MyGLWidget::mouseReleaseEvent( QMouseEvent *event )
 {
 	printf("Mouse Released");
@@ -112,40 +118,44 @@ void MyGLWidget::mouseReleaseEvent( QMouseEvent *event )
 	updateGL();
 }
 
-void MyGLWidget::moveEvent( QMoveEvent *event )
+void MyGLWidget::mouseMoveEvent( QMouseEvent *event )
 {
-	printf("Mouse Moved");
-	if(!zooming)
+	printf("MOuse MOved");
+	if(buttonPressed)
 	{
-		// The current elevation and swing of the camera.  We simply
-		// append the amount of mouse movement in the x and y direction to
-		// the currently running elevation and swing.
-		elevation += (event->pos().y() - lastY);
-		swing += (event->pos().x() - lastX);
-
-
-		// tell openGL to redraw the screen.  The whole screen has to redraw so
-		// we might as well do it this way.
-		//glutPostRedisplay();
-
-		// keep track of the current mouse movement so that we can use it
-		// for the next mouse movement.
-		lastX = event->pos().x();
-		lastY = event->pos().y();
-
-		return;
+		if(!zooming)
+		{
+			// The current elevation and swing of the camera.  We simply
+			// append the amount of mouse movement in the x and y direction to
+			// the currently running elevation and swing.
+			elevation += (event->y() - lastY);
+			swing += (event->x() - lastX);
+	
+	
+			// tell openGL to redraw the screen.  The whole screen has to redraw so
+			// we might as well do it this way.
+			//glutPostRedisplay();
+	
+			// keep track of the current mouse movement so that we can use it
+			// for the next mouse movement.
+			lastX = event->x();
+			lastY = event->y();
+			updateGL();
+	
+			return;
+		}
+		else
+		{
+			zoomfactor = zoomfactor * (1.0 + (((float) (beginy - event->pos().y())) / 640));
+			beginx = event->x();
+			beginy = event->y();
+			//glutPostRedisplay();
+	
+			updateGL();
+			return;
+		}
 	}
-	else
-	{
-		zoomfactor = zoomfactor * (1.0 + (((float) (beginy - event->pos().y())) / 640));
-		beginx = event->pos().x();
-		beginy = event->pos().y();
-		//glutPostRedisplay();
 
-		return;
-	}
-
-	updateGL();
 }
   
 
@@ -349,6 +359,7 @@ void setupCallbacks(void)
 void MyGLWidget::init(void)
 {
 	printf("MyGLWidget::init() called");
+	setMouseTracking( true );
 	glViewport(0, 0, 680, 610);
 
 	glShadeModel(GL_SMOOTH);
