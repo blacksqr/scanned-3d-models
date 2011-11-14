@@ -1,4 +1,8 @@
 
+#include <qfiledialog.h>
+#include <qstring.h>
+#include <stdio.h>
+#include <iostream.h>
 
 
 
@@ -23,7 +27,15 @@ void Form1::fileNew()
 
 void Form1::fileOpen()
 {
+	QString *qstring;
+	printf("Opening File Dialog");
+    QString filename = QFileDialog::getOpenFileName(tr("*.ply"), tr("Ply Files (*.ply)"), NULL, "Add PLY", tr(""), qstring, true);
+	printf("Open File Dialog finished");
+    printf("Chosen file is %s", filename.latin1());
 
+	std::cout << filename.latin1();
+
+	myGLWidget1->loadPlyFile(filename.latin1());
 }
 
 
@@ -107,5 +119,9 @@ void Form1::helpAbout()
 
 void Form1::Add_Scan_Button_clicked()
 {
-    fileOpen();
+	QString *qstring;
+    QString filename = QFileDialog::getOpenFileName(tr("."), tr("Ply Files (*.ply)"), NULL, "Add PLY", tr(""), qstring, true);
+    printf("Chosen file is %s", filename);
+	//static QString QFileDialog::getOpenFileName(const QString&, const QString&, QWidget*, const char*, const QString&, QString*, bool)
+
 }
