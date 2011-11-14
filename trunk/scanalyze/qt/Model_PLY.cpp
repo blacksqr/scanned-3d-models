@@ -124,7 +124,7 @@ int Model_PLY::Load(char* filename)
 			// Find number of vertexes
 			while (  strncmp( "element vertex", buffer,strlen("element vertex")) != 0  )
 			{
-				printf("Finding element vertex");
+				//printf("Finding element vertex");
 				fgets(buffer,300,file);			// format
 			}
 			strcpy(buffer, buffer+strlen("element vertex"));
@@ -135,7 +135,7 @@ int Model_PLY::Load(char* filename)
 			fseek(file,0,SEEK_SET);
 			while (  strncmp( "element face", buffer,strlen("element face")) != 0  )
 			{
-				printf("Finding element face");
+				//printf("Finding element face");
 				fgets(buffer,300,file);			// format
 			}
 			strcpy(buffer, buffer+strlen("element face"));
@@ -145,7 +145,7 @@ int Model_PLY::Load(char* filename)
 			// go to end_header
 			while (  strncmp( "end_header", buffer,strlen("end_header")) != 0  )
 			{
-				printf("Finding end header");
+				//printf("Finding end header");
 				fgets(buffer,300,file);			// format
 			}
  
@@ -164,7 +164,7 @@ int Model_PLY::Load(char* filename)
 
 				if(iterator % 100 == 0)
 				{
-					printf("Find %d vertices", iterator);
+					//printf("Find %d vertices", iterator);
 				}
 			}
  
@@ -187,7 +187,7 @@ int Model_PLY::Load(char* filename)
 */
 						//  vertex == punt van vertex lijst
 						// vertex_buffer -> xyz xyz xyz xyz
-						printf("%f %f %f ", Vertex_Buffer[3*vertex1], Vertex_Buffer[3*vertex1+1], Vertex_Buffer[3*vertex1+2]);
+						//printf("%f %f %f ", Vertex_Buffer[3*vertex1], Vertex_Buffer[3*vertex1+1], Vertex_Buffer[3*vertex1+2]);
  
 						Faces_Triangles[triangle_index] = Vertex_Buffer[3*vertex1];
 						Faces_Triangles[triangle_index+1] = Vertex_Buffer[3*vertex1+1];

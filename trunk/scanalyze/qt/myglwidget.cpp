@@ -265,12 +265,12 @@ void MyGLWidget::init(void)
 	elevation = 0;
 	swing = 0;
 
-	loadPlyFile("plyfiles/pickup_big.ply");
+//	loadPlyFile("plyfiles/pickup_big.ply");
 }
 
 void MyGLWidget::loadPlyFile(char *filename)
 {
-	printf("\n\nLoading PLY File\n\n\n");
-	plyLoader.Load("plyfiles/pickup_big.ply");
-	printf("\n\nLoaded PLY File\n\n\n");
+	printf("\n\nLoading PLY File:  %s\n\n\n", filename);
+	plyLoader.Load(filename);
+	printf("\n\nLoaded PLY File:  %s\n\n\n", filename);
 }
