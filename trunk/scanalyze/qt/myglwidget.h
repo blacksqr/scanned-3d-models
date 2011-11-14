@@ -31,6 +31,7 @@ class MyGLWidget : public QGLWidget
 		void setupLighting(void);
 		void setupCallbacks(void);
 		void init(void);
+		void loadPlyFile(char *filename);
 };
 
 #endif
