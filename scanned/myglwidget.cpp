@@ -1,14 +1,16 @@
 //#include <gl/gl.h>
 #include <stdio.h>
+#include <rope.h>
 
 
-#include "PolygonUtils.h"
-#include "VectorUtils.h"
-#include "Model_PLY.h"
+#include "../scanalyze/ScanFactory.h"
+//#include "PolygonUtils.h"
+//#include "VectorUtils.h"
+//#include "Model_PLY.h"
 #include "myglwidget.h"
 
-object obj;
-char objectFile[150];
+//object obj;
+//char objectFile[150];
 int zooming;
 float zoomfactor;
 int beginx, beginy, lastX, lastY;
@@ -17,7 +19,8 @@ float elevation;
 float swing;
 bool buttonPressed;
 
-Model_PLY plyLoader;
+//Model_PLY plyLoader;
+//RigidScan* CreateScanFromFile (const crope& filename);
 
 void MyGLWidget::timeOut()
 {
@@ -46,7 +49,7 @@ void MyGLWidget::paintGL()
 	recalcModelView();
 	
 	//display3DSObject();
-	plyLoader.Draw();
+	//plyLoader.Draw();
 	glPopMatrix();
 
 	glFlush();
@@ -139,6 +142,7 @@ void MyGLWidget::mouseMoveEvent( QMouseEvent *event )
 **/
 void MyGLWidget::display3DSObject(void)
 {
+/*
 	int l_index;
 	
     glBegin(GL_TRIANGLES);
@@ -181,6 +185,7 @@ void MyGLWidget::display3DSObject(void)
     }
 	
     glEnd();
+*/
 }
 
 /**
@@ -271,6 +276,9 @@ void MyGLWidget::init(void)
 void MyGLWidget::loadPlyFile(char *filename)
 {
 	printf("\n\nLoading PLY File:  %s\n\n\n", filename);
-	plyLoader.Load(filename);
+	//plyLoader.Load(filename);
+	crope cropeFilename = new crope(filename);
+	RigidScan *scan = CreateScanFromFile (cropeFilename);
+
 	printf("\n\nLoaded PLY File:  %s\n\n\n", filename);
 }
