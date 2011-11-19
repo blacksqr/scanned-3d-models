@@ -36,17 +36,9 @@ INCLUDEPATH	+= /usr/include
 
 QT += openGL
 
-
-
-
-
 QMAKE_CXXFLAGS=-fno-for-scope -fpermissive -w
 
-
-
-OBJECTS += ../OBJS/debug/*.o
-
-
+OBJECTS += ../scanalyze/OBJS/debug/*.o
 
 unix {
   UI_DIR = .ui
