@@ -1,6 +1,5 @@
 #!gmake
 root_dir  := $(shell pwd | sed -e 's=^/tmp_mnt/=/=')
-qt_dir = ${root_dir}/qt
 
 # these aren't needed and cause lots of uncessary file opens
 # that are slow across the net
@@ -25,7 +24,7 @@ ifdef windir
 
 include Makedefs.Win32
 
-all: qt
+all: scz
 default: $(CVSFILES) $(DEFAULTVERSION)
 scz: $(CVSFILES) $(DEFAULTVERSION)
 
@@ -47,7 +46,7 @@ UNAME = $(subst IRIX64,IRIX,$(shell uname))
 
 include Makedefs.$(UNAME)
 
-all: qt
+all: scz
 default: $(CVSFILES) $(DEFAULTVERSION)
 scz: $(CVSFILES) $(DEFAULTVERSION)
 
@@ -167,13 +166,6 @@ scanalyze.$(BUILD): $(OBJS) $(AUXLIBS)
 	rm -f ../../$@
 	$(LINK) -o ../../$@ $(OBJS) $(AUXLIBS) $(LIBPATHS) $(LIBS)
 
-qt: scz
-	echo "Building QT (${qt_dir})..."
-	cd ${qt_dir}; qmake
-	# remove plvMain.o
-	cd ${qt_dir}; perl -ni -e 'print unless /plvMain/' ${qt_dir}/Makefile 
-	cd ${qt_dir}; make
-
 endif
 
 
@@ -219,7 +211,6 @@ else  # UNIX
 clean:
 	-rm -rf OBJS
 	-rm -f scanalyze.debug
-	cd ${qt_dir} ; test ! -e Makefile || make clean
 
 cleanold:
 	-rm *.o
