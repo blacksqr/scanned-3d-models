@@ -182,14 +182,14 @@ Vrip_Init(Tcl_Interp *interp)
       return TCL_ERROR;
     }
 
-    homeDir = getenv("HOME");
+    homeDir = getenv("VRIP_DIR");
     if (homeDir == NULL) {
-       fprintf(stderr, "Environment variable HOME not set - will not execute $HOME/.vriprc\n");
+       fprintf(stderr, "VRIP_DIR should be set to read vrip.properties\n");
        return TCL_OK;
     }
 
     strcpy(rcPath, homeDir);
-    strcat(rcPath, "/.vriprc");
+    strcat(rcPath, "/vrip.properties");
     Tcl_VarEval(interp, "file exists ", rcPath, (char *)NULL);
     rcFileExists = atoi(interp->result);
 

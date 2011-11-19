@@ -661,6 +661,8 @@ proc newfromconf {confFile res} {
 	 set cmd "$cmd -q [lindex $curline 5] [lindex $curline 6] [lindex $curline 7] $q3"
 	 set cmd "$cmd < [lindex $curline 1] | plybbox"
 	 catch {eval $cmd} msg
+	 puts "TG wtf is going on" 
+	 puts "TG $msg" 
 
 	 scan $msg "%f %f %f %f %f %f" newMinx newMiny newMinz \
 	       newMaxx newMaxy newMaxz	 

@@ -133,7 +133,7 @@ if {$fillHoles} {
     puts "Creating $tempFileName..."
     flush stdout
     writegrid $tempFileName
-    exec chmod +w $tempFileName
+    exec /bin/chmod +w $tempFileName
 
     puts "Generating polygons with marching cubes..."
     flush stdout
@@ -175,7 +175,7 @@ if {$fillHoles} {
       puts "Creating $tempFileName..."
       flush stdout
       writegrid $tempFileName
-      exec chmod +w $tempFileName
+      exec /bin/chmod +w $tempFileName
       
       puts "Generating polygons with marching cubes..."
       flush stdout
