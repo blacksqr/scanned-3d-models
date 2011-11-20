@@ -9,7 +9,7 @@ PlyObjectManager::PlyObjectManager()
 	initRenderParams();
 }
 
-void PlyObjectManager::addObject(char * filename)
+RigidScan* PlyObjectManager::addObject(char * filename)
 {
 	printf("\n\nLoading PLY File:  %s\n\n\n", filename);
 	crope cropeString (filename);
@@ -25,6 +25,8 @@ void PlyObjectManager::addObject(char * filename)
 	
 
 	printf("\n\nLoaded PLY File:  %s\n\n\n", filename);
+
+	return scan;
 }
 
 void PlyObjectManager::removeAllObjects( void )

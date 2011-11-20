@@ -13,7 +13,6 @@ public:
 	PlyFileManager();
 
     void initFileManager(PlyObjectManager *objectManager, char *dir);
-	void loadFiles(void);
 
 private:
 	string *inOrderFilenames;
