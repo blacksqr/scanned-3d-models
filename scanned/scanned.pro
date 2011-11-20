@@ -12,7 +12,7 @@ HEADERS	+= myglwidget.h \
 	Model_PLY.h \
 	PolygonUtils.h \
 	VectorUtils.h \
-	ScanalyzeUtils.h
+	CommonUtils.h
 
 SOURCES	+= mainApplication.cpp \
 	myglwidget.cpp \
@@ -20,7 +20,7 @@ SOURCES	+= mainApplication.cpp \
 	Model_PLY.cpp \
 	PolygonUtils.cpp \
 	VectorUtils.cpp \
-	ScanalyzeUtils.cpp
+	CommonUtils.cpp
 
 FORMS	= form1.ui
 

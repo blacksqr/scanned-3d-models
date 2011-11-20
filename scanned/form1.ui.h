@@ -3,7 +3,7 @@
 #include <qstring.h>
 #include <stdio.h>
 #include <iostream.h>
-#include "ScanalyzeUtils.h"
+#include "CommonUtils.h"
 
 
 
