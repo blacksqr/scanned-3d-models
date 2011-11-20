@@ -59,3 +59,9 @@ void createVripSurf(){
     sprintf(cmd, " cd ../vrip; ./vrip.sh src/vrip/vripsurf.tcl %s/filled-bun.vri %s/filled-bun.ply", dir, dir );
     system(cmd);
 }
+
+void launchScanalyze(void){
+    char cmd[1000];
+    sprintf(cmd, " cd ../scanalyze; ./scanalyze.debug %s/filled-bun.ply", dir );
+    system(cmd);
+}

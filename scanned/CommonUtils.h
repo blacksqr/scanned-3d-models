@@ -5,6 +5,7 @@ void prepareVrip(void);
 void createNewVripVri(void);
 void createVripSurf(void);
 void runVolfill(void);
+void launchScanalyze(void);
 
 #endif
 
