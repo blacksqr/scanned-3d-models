@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <rope.h>
 #include <vector.h>
 
@@ -23,7 +24,11 @@ void MyGLWidget::timeOut()
 void MyGLWidget::initializeGL()
 {
 	printf("MyGLWidget::initializeGL() called");
+	cout << "MyGLWidget::initializeGL() called";
 	init();
+	printf("INitializing filemanager");
+	fileManager.initFileManager(&objectManager, "../samples/range-scan/bunny/data2");
+	fileManager.loadFiles();
 }
 
 void MyGLWidget::resizeGL( int width, int height )
@@ -263,6 +268,7 @@ void MyGLWidget::init(void)
 	buttonPressed = false;
 	elevation = 0;
 	swing = 0;
+
 
 }
 

@@ -4,6 +4,7 @@
 #include "qgl.h"
 #include "qframe.h"
 #include "plyObjectManager.h"
+#include "plyFileManager.h"
 
 class MyGLWidget : public QGLWidget
 {
@@ -36,6 +37,7 @@ class MyGLWidget : public QGLWidget
 
 	private:
 		PlyObjectManager objectManager;
+		PlyFileManager fileManager;
 
 };
 
