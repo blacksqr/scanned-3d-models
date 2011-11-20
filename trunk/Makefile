@@ -23,7 +23,7 @@ volfill::
 scan::
 	cd ${scanned_dir}; qmake
 	# remove plvMain.o
-	cd ${scanned_dir}; perl -ni -e 'print unless /plvMain/' ${scanned_dir}/Makefile
+	cd ${scanned_dir}; perl -ni -e 'print unless /Main/' ${scanned_dir}/Makefile
 	cd ${scanned_dir}; make
 	cd ${root_dir}; cp ${scanned_dir}/scanned ./scanner
 clean_scz::
