@@ -22,8 +22,7 @@
 
 void Form1::fileNew()
 {
-	cout << "\r\nRunning vripsurf..." << endl;
-	createVripSurf();
+
 }
 
 
@@ -44,28 +43,25 @@ void Form1::fileOpen()
 
 void Form1::fileSave()
 {
-	cout << "\r\nRunning prepare vrip..." << endl;
-	prepareVrip();
+
 }
 
 
 void Form1::fileSaveAs()
 {
-	cout << "\r\nRunning vripnew ..." << endl;
-	createNewVripVri();
+
 }
 
 
 void Form1::filePrint()
 {
-	cout << "\r\nRunning volfill ..." << endl;
-        runVolfill();
+
 }
 
 
 void Form1::fileExit()
 {
-
+	exit(0);
 }
 
 
@@ -130,4 +126,31 @@ void Form1::Add_Scan_Button_clicked()
     printf("Chosen file is %s", filename);
 	//static QString QFileDialog::getOpenFileName(const QString&, const QString&, QWidget*, const char*, const QString&, QString*, bool)
 
+}
+
+void Form1::Volfill_clicked()
+{
+	cout << "\r\nRunning volfill ..." << endl;
+        runVolfill();
+}
+
+
+void Form1::Vrip_Prepare_clicked()
+{
+        cout << "\r\nRunning prepare vrip..." << endl;
+        prepareVrip();
+}
+
+
+void Form1::Vrip_Merge_clicked()
+{
+        cout << "\r\nRunning vripnew ..." << endl;
+        createNewVripVri();
+}
+
+
+void Form1::Vrip_Surf_clicked()
+{
+        cout << "\r\nRunning vripsurf..." << endl;
+        createVripSurf();
 }
