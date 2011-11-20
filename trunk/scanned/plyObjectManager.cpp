@@ -5,9 +5,11 @@
 static void initRenderParams(void);
 static void drawMesh(RigidScan *);
 
+
 PlyObjectManager::PlyObjectManager()
 {
 	initRenderParams();
+	Mesh::progress_update = 0xffffffff;
 }
 
 RigidScan* PlyObjectManager::addObject(char * filename)
