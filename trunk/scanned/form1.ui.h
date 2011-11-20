@@ -154,3 +154,10 @@ void Form1::Vrip_Surf_clicked()
         cout << "\r\nRunning vripsurf..." << endl;
         createVripSurf();
 }
+
+
+void Form1::View_Mesh_clicked()
+{
+        cout << "\r\n Launch scanalyze ..." << endl;
+        launchScanalyze();
+}
