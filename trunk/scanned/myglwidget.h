@@ -3,8 +3,7 @@
 
 #include "qgl.h"
 #include "qframe.h"
-#include "MeshTransport.h"
-#include "DisplayMesh.h"
+#include "plyObjectManager.h"
 
 class MyGLWidget : public QGLWidget
 {
@@ -22,7 +21,6 @@ class MyGLWidget : public QGLWidget
 		//void setGeometry(const QRect&);
 		void resizeGL( int width, int height );
 		void paintGL();
-		void drawMesh(MeshTransport *m);
 		void keyPressEvent( QKeyEvent *e );
 		void mousePressEvent( QMouseEvent *event );
 		void mouseReleaseEvent( QMouseEvent *event );
@@ -36,8 +34,9 @@ class MyGLWidget : public QGLWidget
 		void init(void);
 		void loadPlyFile(char *filename);
 
-private:
-		vector<DisplayableMesh*> displayableMeshes;
+	private:
+		PlyObjectManager objectManager;
+
 };
 
 #endif
