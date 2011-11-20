@@ -9,6 +9,7 @@ INCLUDEPATH	+= ..
 
 HEADERS	+= myglwidget.h \
 	plyObjectManager.h \
+	plyFileManager.h \
 	Model_PLY.h \
 	PolygonUtils.h \
 	VectorUtils.h \
@@ -17,6 +18,7 @@ HEADERS	+= myglwidget.h \
 SOURCES	+= mainApplication.cpp \
 	myglwidget.cpp \
 	plyObjectManager.cpp \
+	plyFileManager.cpp \
 	Model_PLY.cpp \
 	PolygonUtils.cpp \
 	VectorUtils.cpp \
