@@ -3,7 +3,7 @@ LANGUAGE	= C++
 
 CONFIG	+= qt warn_on release
 
-LIBS	+= -lGLU -lGL -ltk8.4 -ltcl8.4 -lXext -lXmu -lz -lm
+LIBS	+= -lglut -lGLU -lGL -ltk8.4 -ltcl8.4 -lXext -lXmu -lz -lm
 
 INCLUDEPATH	+= ..
 
@@ -40,12 +40,14 @@ IMAGES	= images/filenew \
 INCLUDEPATH	+= .
 INCLUDEPATH	+= /usr/include
 INCLUDEPATH	+= ../scanalyze/
+INCLUDEPATH	+= ../volfill/
 
 QT += openGL
 
 QMAKE_CXXFLAGS=-fno-for-scope -fpermissive -w
 
 OBJECTS += ../scanalyze/OBJS/debug/*.o
+OBJECTS += ../volfill/*.o
 
 unix {
   UI_DIR = .ui

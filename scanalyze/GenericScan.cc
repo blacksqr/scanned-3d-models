@@ -1208,9 +1208,12 @@ PlvWritePlyForVripCmd(ClientData clientData,
 	  Xform<float> xf = sd->getXform();
 	  xf.toQuaternion (q);
 	  xf.getTranslation (t);
+	  // TG: VRIP needs full file path why was this being striped???
+	  //sprintf (bmesh, "bmesh %s %g %g %g %g %g %g %g", 
+	  //	   1+strrchr(name,'/'),
+	  //	   t[0], t[1], t[2], -q[1], -q[2], -q[3], q[0]);
 	  sprintf (bmesh, "bmesh %s %g %g %g %g %g %g %g", 
-		   1+strrchr(name,'/'),
-		   t[0], t[1], t[2], -q[1], -q[2], -q[3], q[0]);
+		   name, t[0], t[1], t[2], -q[1], -q[2], -q[3], q[0]);
 	  
 	  // write xf
 	  strcpy (name + strlen(name) - 3, "xf");
