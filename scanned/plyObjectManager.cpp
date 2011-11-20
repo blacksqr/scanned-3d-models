@@ -30,7 +30,7 @@ void PlyObjectManager::addObject(char * filename)
 void PlyObjectManager::removeAllObjects( void )
 {
 	displayableMeshes.clear();
-	theScene->MeshSets.clear();
+	theScene->meshSets.clear();
 }
 
 void PlyObjectManager::drawAllObjects( void )
