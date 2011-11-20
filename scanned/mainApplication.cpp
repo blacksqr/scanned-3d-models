@@ -3,7 +3,6 @@
 #include <limits.h>
 #include "form1.h"
 
-/*
 #include "togl.h"
 #include "plvInit.h"
 #include "plvGlobals.h"
@@ -24,68 +23,40 @@
 #include "Trackball.h"
 #include "BailDetector.h"
 #include "Progress.h"
-*/
 
 // Prototypes
 //float getGLVersionA (void);
 //int appInit(Tcl_Interp *interp);
+void prepareVrip(void);
+Tcl_Interp* interp = Tcl_CreateInterp();
+
 
 int main( int argc, char ** argv )
 {
-//   Tcl_Interp* interp = Tcl_CreateInterp();
+   cout << "Creating scene..." << endl;
+   theScene = new Scene (interp);
+//   cout << "Running prepare vrip..." << endl;
+ //  prepareVrip();
 
-/*
-  Tk_Window main;
-  main = Tk_MainWindow(interp);
-
-  g_tclInterp = interp;
-*/
- //  tbView  = new Trackball;
-  // theScene = new Scene (interp);
- 
-
-    // initialize interactors
-    //Togl_DisplayFunc (drawInTogl);
-    //Togl_CreateFunc (catchToglCreate);
-    //Togl_OverlayDisplayFunc (drawOverlay);
- 
-    printf("initDr\n");
-
-    //initDrawing();
-    printf("initDrDone\n");
-
-//   char *plvDir = getenv("SCANALYZE_DIR");
- //  if (plvDir == NULL) {
-  //   printf("Need to set SCANALYZE_DIR environment variable.");
-   //  return 1;
-  // }
-
-  // and, once togl widget exists (after scanalyze.tcl is sourced):
-  // since these things need a GL context
-//    initDrawingPostCreation();
-    //getGLVersionA();
- //   Tk_CreateTimerHandler (30, SpinTrackballs, (ClientData)main);
- 
-  // finally, source the user customizations -- ~/.scanalyzerc
-//  char* homeDir = getenv("HOME");
- // if (homeDir == NULL) {
- //   fprintf(stderr, "Environment variable HOME not set - "
-//	    "will not execute $HOME/.scanalyzerc\n");
- // } else {
-  //  char rcPath[PATH_MAX];
-   // strcpy(rcPath, homeDir);
- //   strcat(rcPath, "/.scanalyzerc");
- // }
-
-    //appInit(interp);
-    
     QApplication a( argc, argv );
     Form1 w;
     w.show();
 
     a.connect( &a, SIGNAL( lastWindowClosed() ), &a, SLOT( quit() ) );
 	return a.exec();
-    //return 1;
+
+    return 0;
+}
+
+
+void prepareVrip(){
+
+    int nArgs = 3;
+    // resolution, save directory
+    char* vArgs[] = {"0", "/tmp/tony", ""};
+    // Write translation and xf files
+    PlvWritePlyForVripCmd(NULL, interp, nArgs, vArgs);
+
 }
 
 
