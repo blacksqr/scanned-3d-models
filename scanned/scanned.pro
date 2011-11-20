@@ -8,12 +8,14 @@ LIBS	+= -lGLU -lGL -ltk8.4 -ltcl8.4 -lXext -lXmu -lz -lm
 INCLUDEPATH	+= ..
 
 HEADERS	+= myglwidget.h \
+	plyObjectManager.h \
 	Model_PLY.h \
 	PolygonUtils.h \
 	VectorUtils.h
 
 SOURCES	+= mainApplication.cpp \
 	myglwidget.cpp \
+	plyObjectManager.cpp \
 	Model_PLY.cpp \
 	PolygonUtils.cpp \
 	VectorUtils.cpp
