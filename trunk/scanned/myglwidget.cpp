@@ -201,10 +201,11 @@ void MyGLWidget::setupLighting(void)
 	// set up light 0
 	//GLfloat lightZeroPosition[] = {1.0, 1.0, -1.0, 0.0};
 	GLfloat lightZeroPosition[] = {0.1, 0.1, -0.1, 0.0};
-	GLfloat lightZeroColor[] = {0.0, 0.4, 1.0, 1.0}; //0x0066FF -- blue-ish
+	GLfloat lightZeroColor[] = {1.0, 1.0, 1.0, 1.0}; //0x0066FF -- blue-ish
   
 	glLightfv(GL_LIGHT0, GL_POSITION, lightZeroPosition);
 
+	glLightfv(GL_LIGHT0, GL_AMBIENT, lightZeroColor);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightZeroColor);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, lightZeroColor);
 
@@ -212,10 +213,11 @@ void MyGLWidget::setupLighting(void)
 
 	// set up light 1
 	GLfloat lightOnePosition[] = {-1.0, 0.0, 1.0, 0.0};
-	GLfloat lightOneColor[] = {0.65, 1.0, 0.52, 1.0}; //0x00FF33 -- green-ish  A6D785
+	GLfloat lightOneColor[] = {1.0, 1.0, 1.0, 1.0}; //0x00FF33 -- green-ish  A6D785
   
 	glLightfv(GL_LIGHT1, GL_POSITION, lightOnePosition);
 
+	glLightfv(GL_LIGHT1, GL_AMBIENT, lightZeroColor);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightOneColor);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, lightOneColor);
 

@@ -1,5 +1,6 @@
 #include "plyObjectManager.h"
 #include "plvScene.h"
+#include "Mesh.h"
 
 static void initRenderParams(void);
 static void drawMesh(RigidScan *);
@@ -11,6 +12,7 @@ PlyObjectManager::PlyObjectManager()
 
 RigidScan* PlyObjectManager::addObject(char * filename)
 {
+
 	printf("\n\nLoading PLY File:  %s\n\n\n", filename);
 	crope cropeString (filename);
 	printf("\nNewString[%s]", cropeString.c_str());
@@ -177,7 +179,6 @@ static void drawMesh(RigidScan *scan)
     glPointSize (2.0);
   }
 
-  glPointSize (5.0);
   int frags = mesh->vtx.size();
   const vector<Pnt3>* vtx = NULL;
   const vector<int>* tri = NULL;
@@ -220,6 +221,9 @@ static void drawMesh(RigidScan *scan)
 		glColor4ubv (&(*color)[4*it]);
       if (nrm)
 		glNormal3sv (&(*nrm)[it3]);
+
+
+	  glColor3f(1.0, 1.0, 1.0);
 
       glVertex3fv (&((*vtx)[(*tri)[it3]])[0]);
       glVertex3fv (&((*vtx)[(*tri)[it3+1]])[0]);
