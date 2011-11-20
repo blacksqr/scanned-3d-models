@@ -3,6 +3,7 @@
 #include <qstring.h>
 #include <stdio.h>
 #include <iostream.h>
+#include "ScanalyzeUtils.h"
 
 
 
@@ -42,7 +43,8 @@ void Form1::fileOpen()
 
 void Form1::fileSave()
 {
-
+	cout << "\r\nRunning prepare vrip..." << endl;
+	prepareVrip();
 }
 
 

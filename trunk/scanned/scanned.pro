@@ -11,14 +11,16 @@ HEADERS	+= myglwidget.h \
 	plyObjectManager.h \
 	Model_PLY.h \
 	PolygonUtils.h \
-	VectorUtils.h
+	VectorUtils.h \
+	ScanalyzeUtils.h
 
 SOURCES	+= mainApplication.cpp \
 	myglwidget.cpp \
 	plyObjectManager.cpp \
 	Model_PLY.cpp \
 	PolygonUtils.cpp \
-	VectorUtils.cpp
+	VectorUtils.cpp \
+	ScanalyzeUtils.cpp
 
 FORMS	= form1.ui
 
