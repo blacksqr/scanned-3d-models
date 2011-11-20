@@ -10,6 +10,7 @@
 
 #include "fb.h" // the drawing frame buffer
 #include "util.h"
+#include "volfill.h"
 
 FrameBuffer fb;
 ActVoxelGrid actGrid;
@@ -182,7 +183,7 @@ void ProcessArguments(int argc, char *argv[])
 	}
 }
 
-int execMain(int argc, char *argv[]) {
+int volfill(int argc, char *argv[]) {
 	PrintResourceUsage("At Beginning of program");
 	// load the input
 	if (argc < 3) Usage();

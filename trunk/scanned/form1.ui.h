@@ -22,7 +22,8 @@
 
 void Form1::fileNew()
 {
-
+	cout << "\r\nRunning vripsurf..." << endl;
+	createVripSurf();
 }
 
 
@@ -50,13 +51,15 @@ void Form1::fileSave()
 
 void Form1::fileSaveAs()
 {
-
+	cout << "\r\nRunning vripnew ..." << endl;
+	createNewVripVri();
 }
 
 
 void Form1::filePrint()
 {
-
+	cout << "\r\nRunning volfill ..." << endl;
+        runVolfill();
 }
 
 
