@@ -182,7 +182,7 @@ void ProcessArguments(int argc, char *argv[])
 	}
 }
 
-int main(int argc, char *argv[]) {
+int execMain(int argc, char *argv[]) {
 	PrintResourceUsage("At Beginning of program");
 	// load the input
 	if (argc < 3) Usage();
