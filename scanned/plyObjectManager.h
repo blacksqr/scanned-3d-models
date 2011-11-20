@@ -12,7 +12,7 @@ class PlyObjectManager
 
 public:
 	PlyObjectManager();
-	void addObject(char * filename);
+	RigidScan* addObject(char * filename);
 	void removeAllObjects( void );
 	void drawAllObjects( void );
 

@@ -28,7 +28,6 @@ void MyGLWidget::initializeGL()
 	init();
 	printf("INitializing filemanager");
 	fileManager.initFileManager(&objectManager, "../samples/range-scan/bunny/data2");
-	fileManager.loadFiles();
 }
 
 void MyGLWidget::resizeGL( int width, int height )
