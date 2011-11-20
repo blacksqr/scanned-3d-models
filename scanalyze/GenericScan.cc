@@ -394,6 +394,7 @@ GenericScan::readSingleFile (const crope& fn)
   const char* filename = fn.c_str();
 
   if (is_range_grid_file(filename)) {
+	printf("%s is a range scan file", fn.c_str());
 
     RangeGrid* rangeGrid = new RangeGrid();
     if (rangeGrid->readRangeGrid(filename) == 0) {
