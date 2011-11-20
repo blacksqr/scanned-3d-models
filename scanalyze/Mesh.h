@@ -61,9 +61,11 @@ public:
   Mesh();
   Mesh (const vector<Pnt3>& _vtx, const vector<int>& _tris);
   ~Mesh();
-  
+
   void flipNormals();
   void initNormals(int useArea = FALSE);
+
+  static int progress_update;
   
   vector<int>& getTris();
   vector<int>& getTstrips();

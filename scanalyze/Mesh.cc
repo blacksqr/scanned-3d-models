@@ -29,6 +29,8 @@ Mesh::Mesh()
   init();
 }
 
+int Mesh::progress_update = 0xfff;
+
 Mesh::Mesh (const vector<Pnt3>& _vtx, const vector<int>& _tris)
 {
   init();
@@ -37,6 +39,7 @@ Mesh::Mesh (const vector<Pnt3>& _vtx, const vector<int>& _tris)
   
   initNormals(UseAreaWeightedNormals);
   computeBBox();
+
 }
 
 
@@ -477,7 +480,7 @@ set_offsets(void)
   }
 }
 
-static const int progress_update = 0xfff;
+//static const int progress_update = 0xfff;
 
 int  
 Mesh::readPlyFile(const char *filename)
