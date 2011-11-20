@@ -33,6 +33,7 @@ IMAGES	= images/filenew \
 
 INCLUDEPATH	+= .
 INCLUDEPATH	+= /usr/include
+INCLUDEPATH	+= ../scanalyze/
 
 QT += openGL
 
