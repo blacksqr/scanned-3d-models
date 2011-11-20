@@ -3,6 +3,7 @@
 #include <errno.h>
 #include "plyFileManager.h"
 
+
 PlyFileManager::PlyFileManager()
 {
 
@@ -69,13 +70,37 @@ void PlyFileManager::initFileManager(PlyObjectManager *objectManager, char *dire
 	numberOfFiles = files.size();
 
 	// load each ply file
+	float degreesBetweenScan = 360.0/(float)files.size();
 	for(int m = 0; m < numberOfFiles; m++)
 	{
 		string filenameString = inOrderFilenames[m];
-		objectManager->addObject(filenameString.c_str());
+		RigidScan *scan = objectManager->addObject(filenameString.c_str());
+
+		rotateObjectAroundYAxis(scan, (float)m*degreesBetweenScan);
 	}
 
 	this->filesAreValid = true;
+}
+
+void PlyFileManager::rotateObjectAroundYAxis(RigidScan* scan, float degrees)
+{
+	printf("Rotating this object %f degrees", degrees);
+  	Pnt3 axis;
+  	axis[0] = 0; axis[1] = 1; axis[2] = 0;
+	float angle_rads = (degrees/360.0) * (2.0*PI);
+	printf("Rotating this object %f radians", angle_rads);
+
+	float q[4];
+ 	Pnt3 a = axis;   // mungeable copy
+	// convert axis to quaternion
+	a.normalize();
+	a *= sin(angle_rads/2.0);
+	q[1]=a[0]; q[2]=a[1]; q[3]=a[2];
+	q[0] = cos(angle_rads/2.0);
+
+	// rotate the scan by calculated quaternion
+	scan->rotate(q[0], q[1], q[2], q[3], false);
+
 }
 
 
@@ -104,6 +129,4 @@ void PlyFileManager::getFiles(string dir, vector<string> &finalFiles)
 	}
     return 0;
 }
-
-
 

@@ -2,7 +2,7 @@
 #include "plvScene.h"
 
 static void initRenderParams(void);
-static void drawMesh(MeshTransport *);
+static void drawMesh(RigidScan *);
 
 PlyObjectManager::PlyObjectManager()
 {
@@ -40,7 +40,7 @@ void PlyObjectManager::drawAllObjects( void )
 	glColor3f(1.0, 1.0, 1.0);
     for(int i = 0; i < displayableMeshes.size(); i++)
 	{
-		drawMesh(displayableMeshes[i]->getMeshData()->mesh());
+		drawMesh(displayableMeshes[i]->getMeshData());
 	}
 }
 
@@ -155,8 +155,17 @@ static void initRenderParams()
 #endif
 }
 
-static void drawMesh(MeshTransport *mesh)
+static void drawMesh(RigidScan *scan)
 {
+  MeshTransport *mesh = scan->mesh();
+
+  glMatrixMode (GL_MODELVIEW);
+  glPushMatrix();
+  scan->gl_xform();
+  glMatrixMode (GL_TEXTURE);
+  glPushMatrix();
+  scan->gl_xform();
+
   bool bPointsOnly = (theRenderParams->polyMode == GL_POINT);
   bPointsOnly = true;
   if (theRenderParams->bRenderManipsTinyPoints) 
@@ -219,5 +228,10 @@ static void drawMesh(MeshTransport *mesh)
     glEnd();
     glDisable (GL_COLOR_MATERIAL);
   }
+  glMatrixMode (GL_TEXTURE);
+  glPopMatrix();
+  glMatrixMode (GL_MODELVIEW);
+  glPopMatrix();
+
 }
 
