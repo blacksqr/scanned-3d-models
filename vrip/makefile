@@ -33,6 +33,8 @@ default:
 
 clean:
 	@for d in $(SUBDIRS); do (cd $$d; $(MAKE) clean); done
+	rm -f src/vrip/vriphead src/vrip/vrip src/pvrip/plycullmaxx src/pvrip/plymerge src/plytools/plydice src/plytools/ply2verts src/plytools/plybbox src/plytools/plybound src/plytools/plynormals src/plytools/plycrunch src/plytools/plyplanecrop src/plytools/plysubtract src/plytools/plyremove src/plytools/plystrip src/plytools/plyhead src/plytools/plyconfthresh src/plytools/plyvolume src/plytools/plyconfcrop src/plytools/xyz2ply src/plytools/plyflip src/plytools/plyxform src/plytools/plysubdiv src/plytools/plyaddinfo src/plytools/plyshared src/plytools/plyarea src/plytools/plyunshared src/plytools/plymirror src/plytools/plycomps src/plyclean/pch/vripmarch src/plyclean/plyclean src/march/vripmarch
+
 
 clobber:
 	@for d in $(SUBDIRS); do (cd $$d; $(MAKE) clobber); done
