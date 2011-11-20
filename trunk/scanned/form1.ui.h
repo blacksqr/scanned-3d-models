@@ -29,7 +29,8 @@ void Form1::fileOpen()
 {
 	QString *qstring;
 	printf("Opening File Dialog");
-    QString filename = QFileDialog::getOpenFileName(tr("*.ply"), tr("Ply Files (*.ply)"), NULL, "Add PLY", tr(""), qstring, true);
+    //QString filename = QFileDialog::getOpenFileName(tr("*.ply"), tr("Ply Files (*.ply)"), NULL, "Add PLY", tr(""), qstring, true);
+    QString filename = QFileDialog::getOpenFileName(tr("*.ply"), tr("/"), NULL, "Add PLY", tr("../samples/range-scan/bunny/data/"), qstring, true);
 	printf("Open File Dialog finished");
     printf("Chosen file is %s", filename.latin1());
 

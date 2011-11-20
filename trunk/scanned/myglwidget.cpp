@@ -1,9 +1,14 @@
 //#include <gl/gl.h>
 #include <stdio.h>
 #include <rope.h>
+#include <vector.h>
 
-
-#include "../scanalyze/ScanFactory.h"
+#include "ScanFactory.h"
+#include "MeshTransport.h"
+#include "DisplayMesh.h"
+#include "plvDraw.h"
+#include "plvGlobals.h"
+#include "plvScene.h"
 //#include "PolygonUtils.h"
 //#include "VectorUtils.h"
 //#include "Model_PLY.h"
@@ -19,8 +24,9 @@ float elevation;
 float swing;
 bool buttonPressed;
 
-//Model_PLY plyLoader;
-//RigidScan* CreateScanFromFile (const crope& filename);
+RigidScan *scan;
+
+static void initRenderParams ( void );
 
 void MyGLWidget::timeOut()
 {
@@ -48,12 +54,83 @@ void MyGLWidget::paintGL()
 	glTranslatef(0.0, 0.0, -RADIUS);
 	recalcModelView();
 	
-	//display3DSObject();
-	//plyLoader.Draw();
+	if(scan)
+	{
+        for(int i = 0; i < displayableMeshes.size(); i++)
+		{
+			drawMesh(displayableMeshes[i]->getMeshData()->mesh());
+		}
+	}
+
 	glPopMatrix();
 
 	glFlush();
-	//glutSwapBuffers();
+}
+
+void MyGLWidget::drawMesh(MeshTransport *mesh)
+{
+  bool bPointsOnly = (theRenderParams->polyMode == GL_POINT);
+  bPointsOnly = true;
+  if (theRenderParams->bRenderManipsTinyPoints) 
+  {
+    glPointSize (1.0);
+  } 
+  else 
+  {
+    glPointSize (2.0);
+  }
+
+  glPointSize (5.0);
+  int frags = mesh->vtx.size();
+  const vector<Pnt3>* vtx = NULL;
+  const vector<int>* tri = NULL;
+  const vector<short>* nrm = NULL;
+  const vector<uchar>* color = NULL;
+
+
+  for (int ifrag = 0; ifrag < frags; ifrag++) {
+    vtx = mesh->vtx[ifrag];
+    tri = mesh->tri_inds[ifrag];
+    int nTris = tri->size() / 3;
+#ifndef SCZ_NORMAL_FORCEFLOAT
+    if (ifrag < mesh->nrm.size())
+      nrm = mesh->nrm[ifrag];
+    else
+#else
+	cerr << "Flat normals not supported in hack-normals-back-to-floats mode" << endl;
+#endif
+      nrm = NULL;
+    if (nrm && nrm->size() != nTris * 3)
+      nrm = NULL;
+    if (ifrag < mesh->color.size())
+      color = mesh->color[ifrag];
+    else
+      color = NULL;
+    if (color && color->size() != nTris * 4)
+      color = NULL;
+
+    if (color)
+      glEnable (GL_COLOR_MATERIAL);
+
+    if (bPointsOnly) 
+      glBegin (GL_POINTS);
+    else 
+      glBegin(GL_TRIANGLES);
+    
+    for (int it = 0; it < nTris; it++) {
+      int it3 = 3*it;
+      if (color)
+		glColor4ubv (&(*color)[4*it]);
+      if (nrm)
+		glNormal3sv (&(*nrm)[it3]);
+
+      glVertex3fv (&((*vtx)[(*tri)[it3]])[0]);
+      glVertex3fv (&((*vtx)[(*tri)[it3+1]])[0]);
+      glVertex3fv (&((*vtx)[(*tri)[it3+2]])[0]);
+    }
+    glEnd();
+    glDisable (GL_COLOR_MATERIAL);
+  }
 }
   
 void MyGLWidget::keyPressEvent( QKeyEvent *e )
@@ -203,7 +280,8 @@ void MyGLWidget::recalcModelView(void)
 void MyGLWidget::setupLighting(void)
 {
 	// set up light 0
-	GLfloat lightZeroPosition[] = {10.0, 4.0, -2.0, 0.0};
+	//GLfloat lightZeroPosition[] = {1.0, 1.0, -1.0, 0.0};
+	GLfloat lightZeroPosition[] = {0.1, 0.1, -0.1, 0.0};
 	GLfloat lightZeroColor[] = {0.0, 0.4, 1.0, 1.0}; //0x0066FF -- blue-ish
   
 	glLightfv(GL_LIGHT0, GL_POSITION, lightZeroPosition);
@@ -214,7 +292,7 @@ void MyGLWidget::setupLighting(void)
 
 
 	// set up light 1
-	GLfloat lightOnePosition[] = {-5.0, 0.0, 2.0, 0.0};
+	GLfloat lightOnePosition[] = {-1.0, 0.0, 1.0, 0.0};
 	GLfloat lightOneColor[] = {0.65, 1.0, 0.52, 1.0}; //0x00FF33 -- green-ish  A6D785
   
 	glLightfv(GL_LIGHT1, GL_POSITION, lightOnePosition);
@@ -262,7 +340,8 @@ void MyGLWidget::init(void)
   	setupLighting();
 
 		  
-  	zoomfactor = 1.0;
+  	//zoomfactor = 1.0;
+  	zoomfactor = 51.0;
 	zooming = false;
 	lastX = -1;
 	lastY = -1;
@@ -270,15 +349,139 @@ void MyGLWidget::init(void)
 	elevation = 0;
 	swing = 0;
 
+    initRenderParams();
+
 //	loadPlyFile("plyfiles/pickup_big.ply");
 }
 
 void MyGLWidget::loadPlyFile(char *filename)
 {
+	//filename = "/home/swilber/school/scanned-3d-models/scanned-3d-models/samples/range-scan/bunny/data/bun000.ply";
 	printf("\n\nLoading PLY File:  %s\n\n\n", filename);
-	//plyLoader.Load(filename);
-	crope cropeFilename = new crope(filename);
-	RigidScan *scan = CreateScanFromFile (cropeFilename);
+	crope cropeString (filename);
+	printf("\nNewString[%s]", cropeString.c_str());
+	scan = CreateScanFromFile (cropeString);
+	initRenderParams();
+	DisplayableRealMesh *displayableMesh = new DisplayableRealMesh(scan, "SCAN");
+
+	displayableMeshes.push_back(displayableMesh);
+
+	theScene->meshSets.push_back(displayableMesh);
+
+	updateGL();
+	
 
 	printf("\n\nLoaded PLY File:  %s\n\n\n", filename);
+}
+
+static void
+initRenderParams()
+{
+    theRenderParams = new RenderParams;
+    theRenderParams->polyMode = GL_FILL;
+    theRenderParams->hiddenLine = false;
+    theRenderParams->shadeModel = perVertex;
+    theRenderParams->cull = false;
+    theRenderParams->useTstrips = false;
+    theRenderParams->boundSelection = true;
+
+    theRenderParams->light = true;
+    theRenderParams->colorMode = grayColor;
+    theRenderParams->useEmissive = false;
+    theRenderParams->twoSidedLighting = false;
+    
+    // taken care of by two sided lighting
+    // kberg - 6/5/01
+    //theRenderParams->backFaceEmissive = false;
+
+    theRenderParams->backfaceMode = lit;
+
+    theRenderParams->confScale = 1;
+
+    theRenderParams->pointSize = 1.0;
+    theRenderParams->lineWidth = 1.0;
+
+    theRenderParams->blend = 0;
+    
+    theRenderParams->shininess = 20;
+
+    theRenderParams->specular[0] = 128;
+    theRenderParams->specular[1] = 128;
+    theRenderParams->specular[2] = 128;
+    theRenderParams->specular[3] = 255;
+
+    theRenderParams->diffuse[0] = 178; // .7 * 255
+    theRenderParams->diffuse[1] = 178;
+    theRenderParams->diffuse[2] = 178;
+    theRenderParams->diffuse[3] = 255;
+
+    /* added by kberg 6/5/01
+       paramters used when two sided lighting is turne don
+    */
+    theRenderParams->backDiffuse[0] = 25;
+    theRenderParams->backDiffuse[1] = 25;
+    theRenderParams->backDiffuse[2] = 25;
+    theRenderParams->backDiffuse[3] = 255;
+    
+    theRenderParams->backSpecular[0] = 18;
+    theRenderParams->backSpecular[1] = 18;
+    theRenderParams->backSpecular[2] = 18;
+    theRenderParams->backSpecular[3] = 255;
+    
+    theRenderParams->backShininess = 20;
+
+    theRenderParams->background[0] = 0;
+    theRenderParams->background[1] = 0;
+    theRenderParams->background[2] = 0;
+    theRenderParams->background[3] = 255;
+
+    theRenderParams->lightPosition[0] = 0.0;
+    theRenderParams->lightPosition[1] = 0.0;
+    theRenderParams->lightPosition[2] = 1.0;
+
+    theRenderParams->lightAmbient[0] = 0.0;
+    theRenderParams->lightAmbient[1] = 0.0;
+    theRenderParams->lightAmbient[2] = 0.0;
+    theRenderParams->lightAmbient[3] = 1.0;
+
+    theRenderParams->lightDiffuse[0] = 1.0;
+    theRenderParams->lightDiffuse[1] = 1.0;
+    theRenderParams->lightDiffuse[2] = 1.0;
+    theRenderParams->lightDiffuse[3] = 1.0;
+
+    theRenderParams->lightSpecular[0] = 1.0;
+    theRenderParams->lightSpecular[1] = 1.0;
+    theRenderParams->lightSpecular[2] = 1.0;
+    theRenderParams->lightSpecular[3] = 1.0;
+
+    theRenderParams->shadows = false;
+    theRenderParams->antiAlias = false;
+    theRenderParams->numAntiAliasSamps = 8;
+    theRenderParams->jitterX = 0;
+    theRenderParams->jitterY = 0;
+    theRenderParams->jitterArray = (jitter_point *)j8;
+    theRenderParams->dofJitterX = 0;
+    theRenderParams->dofJitterY = 0;
+    theRenderParams->dofCenter = 0.5; // ratio between near and far
+    theRenderParams->shadowLength = 0.05;
+    theRenderParams->fromLightPOV = false;
+
+    theRenderParams->flipnorm = false;
+    theRenderParams->clearBeforeRender = true;
+    theRenderParams->accelerateWithBbox = true;
+
+    theRenderParams->bRenderManipsPoints = true;
+    theRenderParams->bRenderManipsTinyPoints = false;
+    theRenderParams->bRenderManipsUnlit = false;
+    theRenderParams->bRenderManipsLores = false;
+    theRenderParams->bRenderManipsSkipDlist = true;
+    theRenderParams->iFastManipsThreshold = 0;
+    
+#ifdef no_overlay_support
+    // RGBA being read back in
+    theRenderParams->savedImage = new char[4 * theWidth * theHeight];
+    
+    theRenderParams->savedImageWidth = theWidth;
+    theRenderParams->savedImageHeight = theHeight;
+#endif
 }

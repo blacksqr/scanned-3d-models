@@ -205,6 +205,8 @@ ResolutionCtrl::switchToResLevel (int iRes)
 int
 ResolutionCtrl::current_resolution_index (void)
 {
+  if (true)
+	return resolutions.size() -1;
   int globalRes = theScene->getMeshResolution();
 
   switch (globalRes) {

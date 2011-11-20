@@ -132,7 +132,10 @@ DisplayableRealMesh::DisplayableRealMesh (RigidScan* _meshData, char* nameBase)
   else
     setName (nameBase);
 
-  theScene->meshColors.chooseNewColor(colorFalse);
+  if(theScene)
+  {
+  	theScene->meshColors.chooseNewColor(colorFalse);
+  }
   myTexture = NULL;
   bBlend = false;
   alpha = 1.0;
