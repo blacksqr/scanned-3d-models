@@ -20,13 +20,11 @@ RigidScan* PlyObjectManager::addObject(char * filename)
 	printf("\nNewString[%s]", cropeString.c_str());
 	RigidScan *scan = CreateScanFromFile (cropeString);
 	initRenderParams();
+
 	DisplayableRealMesh *displayableMesh = new DisplayableRealMesh(scan, "SCAN");
-
 	displayableMeshes.push_back(displayableMesh);
-
-	theScene->meshSets.push_back(displayableMesh);
-
-	
+        theScene->addMeshSet(scan, false, scan->get_name().c_str());
+	//theScene->meshSets.push_back(displayableMesh);
 
 	printf("\n\nLoaded PLY File:  %s\n\n\n", filename);
 
