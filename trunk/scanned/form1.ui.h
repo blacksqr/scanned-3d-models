@@ -169,7 +169,8 @@ void Form1::View_Mesh_clicked()
 void Form1::alignWithICP_Button_clicked()
 {
         cout << "\r\n Running ICP ..." << endl;
-        runICP();
+        runICP(myGLWidget1->fileManager.getScanNames(),myGLWidget1->fileManager.getNumberFiles() );
+	myGLWidget1->updateGL();
 }
 
 

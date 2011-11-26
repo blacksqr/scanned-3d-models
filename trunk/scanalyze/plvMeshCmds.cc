@@ -416,11 +416,12 @@ PlvGroupScansCmd(ClientData clientData, Tcl_Interp *interp,
     }
     bool dirty = (bool) atoi(argv[argc-1]);
     DisplayableMesh* group = groupScans (members, argv[2], dirty);
-    
+ 
     if (!group) {
       interp->result = "The group could not be created.";
       return TCL_ERROR;
     }
+    //printf("TG: created group %s", group->getName() );
     interp->result = (char*)group->getName();
 
   } else if (!strcmp (argv[1], "list")) {
