@@ -382,7 +382,6 @@ static void drawMesh(RigidScan *scan)
       
       if (bWantNormals)
 		{
-		printf("Normal size= %d", mesh->nrm.size());
 		// STL Update        
 		glNormalPointer (MeshTransport::normal_type, 0, &*(mesh->nrm[imesh]->begin()));
 		}

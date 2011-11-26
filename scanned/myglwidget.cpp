@@ -171,7 +171,6 @@ void MyGLWidget::paintGL()
 	glLoadIdentity();
 	//glTranslatef(0.0, 0.0, -40);
 	glScalef(float(zoomfactor),float(zoomfactor),float(zoomfactor));
-	glTranslatef(0.0, 0.0, -RADIUS);
 	recalcModelView();
 	
 	//QPainter painter(this);
@@ -323,6 +322,7 @@ void MyGLWidget::recalcModelView(void)
 	glTranslatef(0, 0, -RADIUS);
 	glRotatef(elevation, 1, 0, 0);
 	glRotatef(swing, 0, 1, 0);
+	glTranslatef(0, -0.1, 0);
 }
 
 void MyGLWidget::setupLighting(void)
