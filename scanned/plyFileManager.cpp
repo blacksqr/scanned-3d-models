@@ -25,9 +25,10 @@ void PlyFileManager::initFileManager()
 	{
 		fileNumbersExist[j] = false;
 	}
-	string orderedFileNames[files.size()];
+	string orderedFileNames[files.size()]; // include full path of file
+	inOrderScanNames = new string[files.size()]; // just the file name no directory
 
-    string filePrefixCheck;
+        string filePrefixCheck;
 
 	// fileformat is scan_<i>.ply
     for(int i = 0; i < files.size(); i++)
@@ -56,6 +57,7 @@ void PlyFileManager::initFileManager()
 
 		fileNumbersExist[number] = true;
 		orderedFileNames[number] = dirString + "/" + file;
+		inOrderScanNames[number] = file;
 
 	}
 
@@ -65,7 +67,7 @@ void PlyFileManager::initFileManager()
 			printf("\nMissing scan number [%d]", k);
 	}
 
-	inOrderFilenames = orderedFileNames;
+        inOrderFilenames = orderedFileNames;
 	numberOfFiles = files.size();
 
 	for(int m = 0; m < numberOfFiles; m++)
@@ -77,7 +79,6 @@ void PlyFileManager::initFileManager()
 
 	this->filesAreValid = true;
 }
-
 
 void PlyFileManager::getFiles(string dir, vector<string> &finalFiles)
 {

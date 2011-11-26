@@ -17,22 +17,22 @@ class PlyFileManager
 public:
 	PlyFileManager();
 
-    void initFileManager();
+        void initFileManager();
 	void scanGroupDirectoryChanged(char *newDirectory);
 	void setObjectManager( PlyObjectManager *objectManager);
+	string *getScanNames(void){return inOrderScanNames;}
+	int getNumberFiles(void){return numberOfFiles;}
 
 private:
 	string *inOrderFilenames;
+	string *inOrderScanNames;
 	int numberOfFiles;
 	char *directory;
-	bool filesAreValid;
-	void getFiles(string dir, vector<string> &files);
-	void reinitializeFileManager( void );
-
-	PlyObjectManager *objectManager;
-
-	char *scanGroupDirectory;
-
+        bool filesAreValid;
+        void getFiles(string dir, vector<string> &files);
+        void reinitializeFileManager( void );
+        PlyObjectManager *objectManager;
+        char *scanGroupDirectory;
 };
 
 #endif

@@ -446,7 +446,7 @@ AddMeshSetToHash(DisplayableMesh* mesh)
 DisplayableMesh *
 FindMeshDisplayInfo(const char *name)
 {
-  printf("TG: FindMeshDisplayInfo(%s)", name);
+  //printf("TG: FindMeshDisplayInfo(%s)", name);
   if(!mesh_set_hash_initted)
     return NULL;
 
@@ -461,7 +461,7 @@ FindMeshDisplayInfo(const char *name)
 DisplayableMesh *
 FindMeshDisplayInfo(RigidScan* scan)
 {
-  printf("TG: FindMeshDisplayInfo RS= %s", scan);
+  //printf("TG: FindMeshDisplayInfo RS= %s", scan);
 // STL Update      
   for (vector<DisplayableMesh*>::iterator pdm = theScene->meshSets.begin();
        pdm < theScene->meshSets.end();

@@ -950,6 +950,11 @@ proc doICP { samp normsamp n culling_percentage no_bdry opt_method \
 	set thr_val [expr $thr_val / 100.0]
     }
 
+
+    #tk_messageBox -message "tg - plv_icpregister $samp $normsamp $n $culling_percentage $no_bdry \
+    #             $opt_method $mfrom $mto $thr_kind $thr_val $save_global \
+    #             $gr_max_pairs $qual" -parent .regICP 
+    
     set err [plv_icpregister $samp $normsamp $n $culling_percentage $no_bdry \
 		 $opt_method $mfrom $mto $thr_kind $thr_val $save_global \
 		 $gr_max_pairs $qual]
