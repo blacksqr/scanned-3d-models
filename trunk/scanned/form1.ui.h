@@ -32,13 +32,16 @@ void Form1::fileOpen()
 	QString *qstring;
 	printf("Opening File Dialog");
     //QString filename = QFileDialog::getOpenFileName(tr("*.ply"), tr("Ply Files (*.ply)"), NULL, "Add PLY", tr(""), qstring, true);
-    QString filename = QFileDialog::getOpenFileName(tr("*.ply"), tr("/"), NULL, "Add PLY", tr("../samples/range-scan/bunny/data/"), qstring, true);
+    //QString filename = QFileDialog::getOpenFileName(tr("*.ply"), tr("/"), NULL, "Add PLY", tr("../samples/range-scan/bunny/data/"), qstring, true);
+//QFileDialog::getExistingDirectory(const QString&, QWidget*, const char*, const QString&, bool, bool)
+    QString directory = QFileDialog::getExistingDirectory(tr("../samples/range-scan/bunny"), NULL, "Add RangScan Grouping", tr(""));
 	printf("Open File Dialog finished");
-    printf("Chosen file is %s", filename.latin1());
+    printf("Chosen file is %s", directory.latin1());
 
-	std::cout << filename.latin1();
+	std::cout << directory.latin1();
 
-	myGLWidget1->loadPlyFile(filename.latin1());
+	//myGLWidget1->loadPlyFile(filename.latin1());
+	myGLWidget1->loadPlyDirectory(directory.latin1());
 }
 
 

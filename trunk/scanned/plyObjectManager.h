@@ -15,9 +15,14 @@ public:
 	RigidScan* addObject(char * filename);
 	void removeAllObjects( void );
 	void drawAllObjects( void );
+	void scanGroupAngleChanged(int newValue);
+	void rotateAllObjectsAroundYAxis( void );
 
 private:
-		vector<DisplayableMesh*> displayableMeshes;
+	vector<DisplayableMesh*> displayableMeshes;
+    int scanGroupTotalAngle;
+	void rotateObjectAroundYAxis(RigidScan* scan, float degrees);
+	void resetAllObjectXForm( void );
 };
 
 #endif

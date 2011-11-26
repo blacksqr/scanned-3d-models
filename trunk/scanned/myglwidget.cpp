@@ -24,7 +24,7 @@ void MyGLWidget::timeOut()
 void MyGLWidget::initializeGL()
 {
 	init();
-	fileManager.initFileManager(&objectManager, "../samples/range-scan/bunny/data2");
+	fileManager.setObjectManager(&objectManager);
 }
 
 void MyGLWidget::resizeGL( int width, int height )
@@ -265,14 +265,14 @@ void MyGLWidget::init(void)
 
 }
 
-void MyGLWidget::loadPlyFile(char *filename)
+void MyGLWidget::loadPlyDirectory(char *directory)
 {
-	objectManager.addObject(filename);
+	fileManager.scanGroupDirectoryChanged(directory);
 	updateGL();
 }
 
 void MyGLWidget::scanGroupAngleChanged(int value)
 {
-	fileManager.scanGroupAngleChanged(value);
+	objectManager.scanGroupAngleChanged(value);
 	updateGL();
 }
