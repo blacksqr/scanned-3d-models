@@ -23,10 +23,7 @@ void MyGLWidget::timeOut()
 
 void MyGLWidget::initializeGL()
 {
-	printf("MyGLWidget::initializeGL() called");
-	cout << "MyGLWidget::initializeGL() called";
 	init();
-	printf("INitializing filemanager");
 	fileManager.initFileManager(&objectManager, "../samples/range-scan/bunny/data2");
 }
 
@@ -54,14 +51,12 @@ void MyGLWidget::paintGL()
 
 void MyGLWidget::keyPressEvent( QKeyEvent *e )
 {
-	printf("Key Pressed");
 	// do nothing...yet
 }
 
 
 void MyGLWidget::mousePressEvent( QMouseEvent *event )
 {
-	printf("Mouse PRessed");
 	buttonPressed = true;
 	if(event->button() == Qt::MidButton)
 		zooming = true;		
@@ -76,12 +71,10 @@ void MyGLWidget::mousePressEvent( QMouseEvent *event )
 
 void QWidget::mouseReleaseEvent( QMouseEvent *event )
 {
-	printf("BaseClass::Mouse Released");
 
 }
 void MyGLWidget::mouseReleaseEvent( QMouseEvent *event )
 {
-	printf("Mouse Released");
 	buttonPressed = false;
 	zooming = false;
 
@@ -235,7 +228,6 @@ void MyGLWidget::setupLighting(void)
 
 void MyGLWidget::init(void)
 {
-	printf("MyGLWidget::init() called");
 	setMouseTracking( true );
 	glViewport(0, 0, 680, 610);
 
@@ -276,5 +268,11 @@ void MyGLWidget::init(void)
 void MyGLWidget::loadPlyFile(char *filename)
 {
 	objectManager.addObject(filename);
+	updateGL();
+}
+
+void MyGLWidget::scanGroupAngleChanged(int value)
+{
+	fileManager.scanGroupAngleChanged(value);
 	updateGL();
 }
