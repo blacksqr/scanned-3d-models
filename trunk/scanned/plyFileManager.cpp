@@ -5,8 +5,8 @@
 
 
 PlyFileManager::PlyFileManager()
-{
-
+{ 
+	scanGroupTotalAngle = 360;
 }
 
 void PlyFileManager::initFileManager(PlyObjectManager *objectManager, char *directory)
@@ -70,7 +70,7 @@ void PlyFileManager::initFileManager(PlyObjectManager *objectManager, char *dire
 	numberOfFiles = files.size();
 
 	// load each ply file
-	float degreesBetweenScan = 360.0/(float)files.size();
+	float degreesBetweenScan = (float)scanGroupTotalAngle/(float)files.size();
 	for(int m = 0; m < numberOfFiles; m++)
 	{
 		string filenameString = inOrderFilenames[m];
@@ -130,3 +130,15 @@ void PlyFileManager::getFiles(string dir, vector<string> &finalFiles)
     return 0;
 }
 
+void PlyFileManager::scanGroupAngleChanged(int newValue)
+{
+	assert( newValue > 0 && newValue <= 360);
+	scanGroupTotalAngle = newValue;
+	reinitializeFileManager();
+}
+
+void PlyFileManager::reinitializeFileManager(void)
+{
+	objectManager->removeAllObjects();
+	initFileManager(this->objectManager, this->directory);
+}

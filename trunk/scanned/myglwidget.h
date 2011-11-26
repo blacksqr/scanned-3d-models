@@ -34,6 +34,8 @@ class MyGLWidget : public QGLWidget
 		void setupCallbacks(void);
 		void init(void);
 		void loadPlyFile(char *filename);
+		void scanGroupAngleChanged(int value);
+
 
 	private:
 		PlyObjectManager objectManager;

@@ -2,6 +2,7 @@
 #include <qfiledialog.h>
 #include <qstring.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <iostream.h>
 #include "CommonUtils.h"
 
@@ -160,4 +161,17 @@ void Form1::View_Mesh_clicked()
 {
         cout << "\r\n Launch scanalyze ..." << endl;
         launchScanalyze();
+}
+
+
+void Form1::scanAngle_valueChanged( int newAngle)
+{
+    scanGroupAngleLabel->setText(QString::number(newAngle));
+    myGLWidget1->scanGroupAngleChanged(newAngle);
+}
+
+
+void Form1::myGLWidget1_destroyed( QObject * )
+{
+
 }
