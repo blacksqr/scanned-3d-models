@@ -17,8 +17,9 @@ class PlyFileManager
 public:
 	PlyFileManager();
 
-    void initFileManager(PlyObjectManager *objectManager, char *dir);
-	void scanGroupAngleChanged(int newValue);
+    void initFileManager();
+	void scanGroupDirectoryChanged(char *newDirectory);
+	void setObjectManager( PlyObjectManager *objectManager);
 
 private:
 	string *inOrderFilenames;
@@ -26,13 +27,11 @@ private:
 	char *directory;
 	bool filesAreValid;
 	void getFiles(string dir, vector<string> &files);
-	void rotateObjectAroundYAxis(RigidScan* scan, float degrees);
-	void reinitializeFileManager(void);
+	void reinitializeFileManager( void );
 
 	PlyObjectManager *objectManager;
 
 	char *scanGroupDirectory;
-    int scanGroupTotalAngle;
 
 };
 

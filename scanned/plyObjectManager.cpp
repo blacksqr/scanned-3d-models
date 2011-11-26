@@ -10,6 +10,7 @@ PlyObjectManager::PlyObjectManager()
 {
 	initRenderParams();
 	Mesh::progress_update = 0xffffffff;
+	scanGroupTotalAngle = 360;
 }
 
 RigidScan* PlyObjectManager::addObject(char * filename)
@@ -237,5 +238,50 @@ static void drawMesh(RigidScan *scan)
   glMatrixMode (GL_MODELVIEW);
   glPopMatrix();
 
+}
+
+void PlyObjectManager::rotateAllObjectsAroundYAxis()
+{
+	// load each ply file
+	float degreesBetweenScan = (float)scanGroupTotalAngle/(float)displayableMeshes.size();
+    for(int i = 0; i < displayableMeshes.size(); i++)
+	{
+		RigidScan *scan = displayableMeshes[i]->getMeshData();
+		rotateObjectAroundYAxis(scan, (float)i*degreesBetweenScan);
+	}
+}
+
+void PlyObjectManager::rotateObjectAroundYAxis(RigidScan* scan, float degrees)
+{
+  	Pnt3 axis;
+  	axis[0] = 0; axis[1] = 1; axis[2] = 0;
+	float angle_rads = (degrees/360.0) * (2.0*PI);
+
+	float q[4];
+ 	Pnt3 a = axis;   // mungeable copy
+	// convert axis to quaternion
+	a.normalize();
+	a *= sin(angle_rads/2.0);
+	q[1]=a[0]; q[2]=a[1]; q[3]=a[2];
+	q[0] = cos(angle_rads/2.0);
+
+	// rotate the scan by calculated quaternion
+	scan->rotate(q[0], q[1], q[2], q[3], false);
+}
+
+void PlyObjectManager::scanGroupAngleChanged(int newValue)
+{
+	assert( newValue >= 0 && newValue <= 360);
+	this->scanGroupTotalAngle = newValue;
+	resetAllObjectXForm();
+	rotateAllObjectsAroundYAxis();
+}
+
+void PlyObjectManager::resetAllObjectXForm( void )
+{
+    for(int i = 0; i < displayableMeshes.size(); i++)
+	{
+		displayableMeshes[i]->getMeshData()->resetXform();
+	}
 }
 
