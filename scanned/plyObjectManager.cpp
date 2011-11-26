@@ -418,10 +418,10 @@ static void drawMesh(RigidScan *scan)
 //	glMaterialfv(GL_FRONT, GL_SPECULAR, colorWhite);
 //	glColor4fv(colorWhite);
 
-	float diffuseColor[4] = { 1.0, 1.0, 1.0, 1.0 };
+	float diffuseColor[4] = { 0.7, 0.7, 0.7, 1.0 };
 	float ambientColor[4] = { 0.2, 0.2, 0.2, 1.0 };
 	float backSpecular[4] = {1.0, 1.0, 1.0, 1.0};
-	float backShininess = 100.0;
+	float backShininess = 25.0;
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuseColor);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, ambientColor);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, backSpecular);

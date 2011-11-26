@@ -167,16 +167,14 @@ void MyGLWidget::paintGL()
 	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glMatrixMode(GL_MODELVIEW);
+
 	glPushMatrix();
 	glLoadIdentity();
-	//glTranslatef(0.0, 0.0, -40);
 	glScalef(float(zoomfactor),float(zoomfactor),float(zoomfactor));
 	recalcModelView();
 	
-	//QPainter painter(this);
-	//painter.begin(this);
 	objectManager.drawAllObjects();
-	//painter.end();
 	//fastSolidTeapot(10, 0.1);
 
 	glPopMatrix();
@@ -319,7 +317,6 @@ void MyGLWidget::recalcModelView(void)
 {
 	glMatrixMode(GL_MODELVIEW);
 
-	glTranslatef(0, 0, -RADIUS);
 	glRotatef(elevation, 1, 0, 0);
 	glRotatef(swing, 0, 1, 0);
 	glTranslatef(0, -0.1, 0);
@@ -329,7 +326,7 @@ void MyGLWidget::setupLighting(void)
 {
 	// set up light 0
 	//GLfloat lightZeroPosition[] = {1.0, 1.0, -1.0, 0.0};
-	GLfloat lightZeroPosition[] = {-100.7, 100.0, -100.2, 0.0};
+	GLfloat lightZeroPosition[] = {-100.7, 0.0, -100.2, 0.0};
 	GLfloat lightZeroColor[] = {1.0, 1.0, 1.0, 1.0}; //0x0066FF -- blue-ish
   
 	glLightfv(GL_LIGHT0, GL_POSITION, lightZeroPosition);
@@ -374,9 +371,7 @@ void MyGLWidget::init(void)
 	// setup the projection type = perspective
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-//	glOrtho(-10,10,-10,10,-10,10);
-	glOrtho(-10,10,-10,10,-900,10000);
-	//glOrtho(-10,680,610,0.0f, 0.0f, 1.0f);
+	glOrtho(-0.15,0.15,-0.15,0.15,-0.5,0.5);
 
 	// setup the camera position
 	glMatrixMode(GL_MODELVIEW);
@@ -391,8 +386,8 @@ void MyGLWidget::init(void)
   	setupLighting();
 
 		  
-  	//zoomfactor = 1.0;
-  	zoomfactor = 51.0;
+  	zoomfactor = 1.0;
+  	//zoomfactor = 51.0;
 	zooming = false;
 	lastX = -1;
 	lastY = -1;
