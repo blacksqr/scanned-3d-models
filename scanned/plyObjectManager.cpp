@@ -20,8 +20,10 @@ RigidScan* PlyObjectManager::addObject(char * filename)
 	crope cropeString (filename);
 	printf("\nNewString[%s]", cropeString.c_str());
 	RigidScan *scan = CreateScanFromFile (cropeString);
+	scan->flipNormals();
 	initRenderParams();
 
+  
 	DisplayableRealMesh *displayableMesh = new DisplayableRealMesh(scan, "SCAN");
 	displayableMeshes.push_back(displayableMesh);
         theScene->addMeshSet(scan, false, scan->get_name().c_str());
@@ -158,9 +160,10 @@ static void initRenderParams()
 #endif
 }
 
+/*
 static void drawMesh(RigidScan *scan)
 {
-  MeshTransport *mesh = scan->mesh();
+  //scan->flipNormals();
 
   glMatrixMode (GL_MODELVIEW);
   glPushMatrix();
@@ -169,8 +172,14 @@ static void drawMesh(RigidScan *scan)
   glPushMatrix();
   scan->gl_xform();
 
+
+  
+
   bool bPointsOnly = (theRenderParams->polyMode == GL_POINT);
-  bPointsOnly = true;
+  bPointsOnly = false;
+
+  MeshTransport *mesh = scan->mesh(true, (bPointsOnly)?true:false, RigidScan::colorNone, 3);
+
   if (theRenderParams->bRenderManipsTinyPoints) 
   {
     glPointSize (1.0);
@@ -187,10 +196,12 @@ static void drawMesh(RigidScan *scan)
   const vector<uchar>* color = NULL;
 
 
+	printf("\nFragSize= %d", frags);
   for (int ifrag = 0; ifrag < frags; ifrag++) {
     vtx = mesh->vtx[ifrag];
     tri = mesh->tri_inds[ifrag];
     int nTris = tri->size() / 3;
+	printf("\nNormalSize= %d", mesh->nrm.size());
 #ifndef SCZ_NORMAL_FORCEFLOAT
     if (ifrag < mesh->nrm.size())
       nrm = mesh->nrm[ifrag];
@@ -200,13 +211,22 @@ static void drawMesh(RigidScan *scan)
 #endif
       nrm = NULL;
     if (nrm && nrm->size() != nTris * 3)
-      nrm = NULL;
+	{
+	  printf("NRM SIZE= %d nTris*3=%d", nrm->size(), nTris*3);
+      //nrm = NULL;
+	}
     if (ifrag < mesh->color.size())
       color = mesh->color[ifrag];
     else
       color = NULL;
     if (color && color->size() != nTris * 4)
       color = NULL;
+
+
+	if(nrm == NULL)
+		printf("NRM IS NULL NOW");
+	else
+		printf("NRM IS NOT NULL NOW");
 
     if (color)
       glEnable (GL_COLOR_MATERIAL);
@@ -239,6 +259,7 @@ static void drawMesh(RigidScan *scan)
   glPopMatrix();
 
 }
+*/
 
 void PlyObjectManager::rotateAllObjectsAroundYAxis()
 {
@@ -283,5 +304,220 @@ void PlyObjectManager::resetAllObjectXForm( void )
 	{
 		displayableMeshes[i]->getMeshData()->resetXform();
 	}
+}
+
+
+static void drawMesh(RigidScan *scan)
+{
+  glMatrixMode (GL_MODELVIEW);
+  glPushMatrix();
+  scan->gl_xform();
+  glMatrixMode (GL_TEXTURE);
+  glPushMatrix();
+  scan->gl_xform();
+
+  bool bPointsOnly = (theRenderParams->polyMode == GL_POINT);
+  bPointsOnly = false;
+  MeshTransport *mesh = scan->mesh(true, (bPointsOnly)?true:false, RigidScan::colorTrue, 3);
+  bool bGeometryOnly = false;
+  //bool bLores = bManipulating && theRenderParams->bRenderManipsLores;
+  //DrawData& cache = bLores ? this->cache[1] : this->cache[0];
+
+    // don't stick the points-only view in a dlist!
+	bool bManipulating = false;
+    if (bManipulating) 
+	{
+      	if (theRenderParams->bRenderManipsPoints) {
+		// draw points-only view for speed
+			bPointsOnly = true;
+
+			if (theRenderParams->bRenderManipsTinyPoints) {
+	  			glPointSize (1.0);
+			} else {
+	  			glPointSize (2.0);
+			}
+      	}
+      
+      	if (theRenderParams->bRenderManipsUnlit) {
+			glDisable (GL_LIGHTING);
+			bGeometryOnly = true;
+      	}
+    }
+
+  // hidden-line back pass doesn't need anything but geometry
+  if (theRenderParams->hiddenLine &&
+      (theRenderParams->polyMode == GL_FILL))
+    bGeometryOnly = true;
+
+  //bool bWantNormals = theRenderParams->light && !bGeometryOnly;
+  bool bWantNormals = true;
+  bool bWantColor = (mesh->color.size() == mesh->vtx.size()
+		     && !bGeometryOnly);
+
+  if (bWantColor)
+    glEnable (GL_COLOR_MATERIAL);
+
+  // set up client vertex-pointer state with relevant pointers
+  //if (g_glVersion >= 1.1) {
+    // vertex arrays -- only supported under OpenGL 1.1 (Irix 6.5)
+    glEnableClientState (GL_VERTEX_ARRAY);
+    if (bWantNormals)
+	{
+      glEnableClientState (GL_NORMAL_ARRAY);
+	}
+
+    for (int imesh = 0; imesh < mesh->vtx.size(); imesh++) {
+
+// STL Update        
+      glVertexPointer (3, GL_FLOAT, 0, &*(mesh->vtx[imesh]->begin()));
+      
+      glMatrixMode (GL_MODELVIEW);
+      glPushMatrix();
+      glMultMatrixf (mesh->xf[imesh]);
+      // we should do this but it overflows the texture matrix stack...
+      // TODO: make our own internalPushMatrix function
+      //glMatrixMode (GL_TEXTURE);
+      //glPushMatrix();
+      //glMultMatrixf (cache.mesh->xf[imesh]);
+      
+      if (bWantNormals)
+		{
+		printf("Normal size= %d", mesh->nrm.size());
+		// STL Update        
+		glNormalPointer (MeshTransport::normal_type, 0, &*(mesh->nrm[imesh]->begin()));
+		}
+
+      // the second test below avoids using color arrays of size 1, even
+      // if there is only 1 vertex -- this tends to hang GL on maglio.
+      // The "color the whole fragment that color without using
+      // glColorPointer" case takes care of it anyway, without hanging.
+      bool bThisWantColor = bWantColor
+	&& (mesh->color[imesh]->size() > 4)
+	&& (mesh->color[imesh]->size()
+	    == 4 * mesh->vtx[imesh]->size());
+
+      if (bThisWantColor) {
+	// only enable vertex-array color if array is expected size.
+	glEnableClientState (GL_COLOR_ARRAY);
+// STL Update        
+	glColorPointer (4, GL_UNSIGNED_BYTE, 0,
+			&*(mesh->color[imesh]->begin()));
+      } else {
+	// don't have a full color array...
+	glDisableClientState (GL_COLOR_ARRAY);
+	// but we might have a per-fragment color for all these vertices.
+	if (bWantColor && mesh->color[imesh]->size() == 4) {
+// STL Update        
+	  glColor4ubv (&*(mesh->color[imesh]->begin()));
+	}
+      }
+	
+	float colorWhite[4] = { 1.0, 1.0, 1.0};
+	float colorGray[4] = { 0.4, 0.4, 0.4};
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, colorWhite);
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, colorGray);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, colorWhite);
+//	glColor4fv(colorWhite);
+
+	float diffuseColor[4] = { 1.0, 1.0, 1.0, 1.0 };
+	float ambientColor[4] = { 0.2, 0.2, 0.2, 1.0 };
+	float backSpecular[4] = {1.0, 1.0, 1.0, 1.0};
+	float backShininess = 100.0;
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuseColor);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, ambientColor);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, backSpecular);
+	glMaterialf(GL_FRONT, GL_SHININESS, backShininess);
+	glColor4fv(colorWhite);
+      
+      if (bPointsOnly) {
+	glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
+#if 1
+	// this is obviously slower than hell for small count.  But maglio
+	// appears to have a bug such that the second form times out and
+	// hangs for a huge vtx list, if lighting is enabled.  Turn off
+	// lighting or glDisableClientState (GL_NORMAL_ARRAY) and it's ok.
+	// And if we render the same data 1 at a time, no prob.
+	// In fact, it works for count = 1M, but not 1.5M. ???
+
+	// one more note on this: a dejanews search for "GL:Wait Rdata"
+	// turns up exactly one pair of hits, in which someone else
+	// complains of a similar situation on an Onyx2 IR irix 6.5.1, and
+	// an sgi rep acknowledges it sounds like an sgi bug.
+
+	// with any significant value for count, this shouldn't be any
+	// slower anyway so I'll leave it enabled.
+
+	// 1M vertices per pass works fine for non-colored renderings
+	// but crashes for color sometimes, so
+	// we'll use 400K.
+
+	// While we're documenting the follies of the IR, when color is
+	// enabled, maglio consistently hits the same GL:Wait Rdata timeout
+	// for vertex arrays of size 1.
+
+
+	int total = mesh->vtx[imesh]->size();
+	int count = 400000;
+	if (bThisWantColor ) {
+	  while ((total % count) == 1)  // to avoid yet another hang
+	    --count;
+	}
+	glDrawArrays (GL_POINTS, 0, total % count);
+	for (int i = total%count; i < total; i += count) {
+	  glDrawArrays (GL_POINTS, i, count);
+	}
+#else
+	glDrawArrays (GL_POINTS, 0, mesh->vtx[imesh]->size());
+#endif
+      //} else if (bStrips) {
+      } else if (false) {
+// STL Update
+	//vector<int>::const_iterator lenEnd = StripInds[imesh].end();
+	vector<int>::const_iterator start = mesh->tri_inds[imesh]->begin();
+
+	//for (vector<int>::const_iterator len = StripInds[imesh].begin();
+	     //len < lenEnd; len++) {             
+	  //glDrawElements (GL_TRIANGLE_STRIP, *len,
+			  //GL_UNSIGNED_INT, &*start);
+        //start += *len + 1;
+	//}
+      } else {
+#if 1
+	int total = mesh->tri_inds[imesh]->size();
+	int count = 600000; // must be divisible by 3
+	glDrawElements (GL_TRIANGLES, total%count,
+			GL_UNSIGNED_INT, &*(mesh->tri_inds[imesh]->begin()));
+	for (int i = total%count; i < total; i += count)
+// STL Update        
+	  glDrawElements (GL_TRIANGLES, count,
+			  GL_UNSIGNED_INT,
+			  &*(mesh->tri_inds[imesh]->begin() + i));
+#else
+	glDrawElements (GL_TRIANGLES, mesh->tri_inds[imesh]->size(),
+			GL_UNSIGNED_INT, &*(mesh->tri_inds[imesh]->begin()));
+#endif
+      }
+
+      //glMatrixMode (GL_TEXTURE);
+      //glPopMatrix();
+      glMatrixMode (GL_MODELVIEW);
+      glPopMatrix();
+
+    }
+
+    glDisableClientState (GL_VERTEX_ARRAY);
+    glDisableClientState (GL_NORMAL_ARRAY);
+    glDisableClientState (GL_COLOR_ARRAY);
+
+  //} else {
+    // OpenGL 1.0 -- no standard vertex arrays
+    // but can use gldrawarraysext, glvertexpointerext, etc. on older IRIX
+    // if anyone needs this, they need to rewrite it
+    //cerr << "OpenGL 1.0 not currently supported.  "
+	 //<< "Have fun doing anything but rendering." << endl;
+  //}
+
+  glDisable (GL_COLOR_MATERIAL);
+  glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
 }
 

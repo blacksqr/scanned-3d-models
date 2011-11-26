@@ -2,6 +2,7 @@
 #define MYGLWIDGET_H
 
 #include "qgl.h"
+#include "qpainter.h"
 #include "qframe.h"
 #include "plyObjectManager.h"
 #include "plyFileManager.h"
