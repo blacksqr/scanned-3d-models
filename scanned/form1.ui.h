@@ -163,6 +163,12 @@ void Form1::View_Mesh_clicked()
         launchScanalyze();
 }
 
+void Form1::alignWithICP_Button_clicked()
+{
+        cout << "\r\n Running ICP ..." << endl;
+        runICP();
+}
+
 
 void Form1::scanAngle_valueChanged( int newAngle)
 {

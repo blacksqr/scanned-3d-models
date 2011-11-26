@@ -3,6 +3,7 @@
 #include "CommonUtils.h"
 #include "plvPlyCmds.h"
 #include "volfill.h"
+#include "plvMeshCmds.h"
 
 /*
 
@@ -24,6 +25,7 @@ GenericScan.cc PlvWritePlyForVripCmd
 
 
 char* dir = "/tmp/vrip-prep";
+char* rootDir = "../";
 
 void prepareVrip(){
     extern Tcl_Interp* interp;
@@ -38,7 +40,7 @@ void prepareVrip(){
 
 void createNewVripVri(){
     char cmd[1000];
-    sprintf(cmd, " cd ../vrip; ./vrip.sh src/vrip/vripnew.tcl %s/bun.vri %s/vrip.conf %s/vrip.conf .001 -show_render", dir, dir, dir );
+    sprintf(cmd, " cd %s/vrip; ./vrip.sh src/vrip/vripnew.tcl %s/bun.vri %s/vrip.conf %s/vrip.conf .001 -show_render", rootDir, dir, dir, dir );
     system(cmd);
 }
 
@@ -56,12 +58,26 @@ void runVolfill(){
 
 void createVripSurf(){
     char cmd[1000];
-    sprintf(cmd, " cd ../vrip; ./vrip.sh src/vrip/vripsurf.tcl %s/filled-bun.vri %s/filled-bun.ply", dir, dir );
+    sprintf(cmd, " cd %s/vrip; ./vrip.sh src/vrip/vripsurf.tcl %s/filled-bun.vri %s/filled-bun.ply", rootDir, dir, dir );
     system(cmd);
 }
 
 void launchScanalyze(void){
     char cmd[1000];
-    sprintf(cmd, " cd ../scanalyze; ./scanalyze.debug %s/filled-bun.ply", dir );
+    sprintf(cmd, " cd %s/scanalyze; ./scanalyze.debug %s/filled-bun.ply", rootDir, dir );
     system(cmd);
 }
+
+
+void runICP(void){
+    extern Tcl_Interp* interp;
+
+    int nArgs = 6;
+    // resolution, save directory
+    char* vArgs[] = {"" , "create", "group1.gp", "bun_0.ply", "bun_1.ply"};
+    // Write translation and xf files
+    //plv_groupscans create [append name ".gp"] $members $dirty
+    PlvGroupScansCmd(NULL, interp, nArgs, vArgs);
+
+}
+
