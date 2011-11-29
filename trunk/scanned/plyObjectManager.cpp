@@ -304,7 +304,7 @@ void PlyObjectManager::translateAllObjectsAlongZAxis( void )
 
 void PlyObjectManager::translateObjectAlongZAxis( RigidScan *scan )
 {
-	float zTrans = (float) scanGroupTranslation / 100.0;
+	float zTrans = (float) scanGroupTranslation / 600.0;
 	scan->translateCorrectly(0.0, 0.0, zTrans, true);
 }
 
