@@ -185,3 +185,10 @@ void Form1::myGLWidget1_destroyed( QObject * )
 {
 
 }
+
+
+void Form1::translationSlider_valueChanged( int newTranslation)
+{
+    translationLabel->setText(QString::number(newTranslation));
+    myGLWidget1->scanGroupTranslationChanged(newTranslation);
+}

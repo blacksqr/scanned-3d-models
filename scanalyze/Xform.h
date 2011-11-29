@@ -103,6 +103,7 @@ public:
   void translate(const double t[3]);    // M <- T*M
   void translate(const float  t[3]);    // M <- T*M
   void translate(T x, T y, T z);        // M <- T*M
+  void translateCorrectly(T x, T y, T z);        // M <- T*M
   void getTranslation(double t[3]) const;
   void getTranslation(float  t[3]) const;
 
@@ -692,6 +693,15 @@ Xform<T>::translate(const float t[3]) // M <- T*M
   for (int i=0; i<4; i++) m[i][0] += t[0]*m[i][3];
   for (i=0; i<4; i++)     m[i][1] += t[1]*m[i][3];
   for (i=0; i<4; i++)     m[i][2] += t[2]*m[i][3];
+}
+
+template <class T> inline void 
+Xform<T>::translateCorrectly(T x, T y, T z) // M <- T*M
+{
+  Xform<float> xform;
+  xform.translate(x, y, z);
+ 
+  *this = (*this) * xform;
 }
 
 template <class T> inline void 

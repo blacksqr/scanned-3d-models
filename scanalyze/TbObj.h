@@ -57,7 +57,11 @@ public:
 
   void    rotate (float q0, float q1, float q2, float q3,
 		  bool undoable = true);
+  void    rotateWithoutTranslation (float q0, float q1, float q2, float q3,
+		  bool undoable = true);
   void    translate (float t0, float t1, float t2,
+		     bool undoable = true);
+  void    translateCorrectly (float t0, float t1, float t2,
 		     bool undoable = true);
 
   void    new_rotation_center (const Pnt3 &wc);

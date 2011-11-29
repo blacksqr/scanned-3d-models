@@ -190,6 +190,15 @@ TbObj::rotate(float q0, float q1, float q2, float q3,
   xf.translate(wc);
 }
 
+void 
+TbObj::rotateWithoutTranslation(float q0, float q1, float q2, float q3,
+	      bool undoable)
+{
+  if (undoable) save_for_undo();
+
+  xf.rotQ(q0, q1, q2, q3);
+}
+
 
 void
 TbObj::translate(float t0, float t1, float t2,
@@ -197,6 +206,14 @@ TbObj::translate(float t0, float t1, float t2,
 {
   if (undoable) save_for_undo();
   xf.translate(t0,t1,t2);
+}
+
+void
+TbObj::translateCorrectly(float t0, float t1, float t2,
+		 bool undoable)
+{
+  if (undoable) save_for_undo();
+  xf.translateCorrectly(t0,t1,t2);
 }
 
 

@@ -76,6 +76,7 @@ void PlyFileManager::initFileManager()
 		RigidScan *scan = objectManager->addObject(filenameString.c_str());
 	}
 	objectManager->rotateAllObjectsAroundYAxis();
+	objectManager->translateAllObjectsAlongZAxis();
 
 	this->filesAreValid = true;
 }

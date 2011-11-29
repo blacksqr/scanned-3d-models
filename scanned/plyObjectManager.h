@@ -16,12 +16,17 @@ public:
 	void removeAllObjects( void );
 	void drawAllObjects( void );
 	void scanGroupAngleChanged(int newValue);
+	void scanGroupTranslationChanged(int newValue);
 	void rotateAllObjectsAroundYAxis( void );
+	void translateAllObjectsAlongZAxis( void );
+	void printAllObjectXForms(void);
 
 private:
 	vector<DisplayableMesh*> displayableMeshes;
     int scanGroupTotalAngle;
+    int scanGroupTranslation;
 	void rotateObjectAroundYAxis(RigidScan* scan, float degrees);
+	void translateObjectAlongZAxis(RigidScan* scan);
 	void resetAllObjectXForm( void );
 };
 
