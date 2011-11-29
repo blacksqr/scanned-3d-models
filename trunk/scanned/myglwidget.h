@@ -36,6 +36,7 @@ class MyGLWidget : public QGLWidget
 		void init(void);
 		void loadPlyDirectory(char *directory);
 		void scanGroupAngleChanged(int value);
+		void scanGroupTranslationChanged(int value);
 		PlyFileManager fileManager;
 
 

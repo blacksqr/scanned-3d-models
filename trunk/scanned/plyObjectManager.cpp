@@ -11,6 +11,7 @@ PlyObjectManager::PlyObjectManager()
 	initRenderParams();
 	Mesh::progress_update = 0xffffffff;
 	scanGroupTotalAngle = 360;
+	scanGroupTranslation = 0;
 }
 
 RigidScan* PlyObjectManager::addObject(char * filename)
@@ -286,8 +287,40 @@ void PlyObjectManager::rotateObjectAroundYAxis(RigidScan* scan, float degrees)
 	q[1]=a[0]; q[2]=a[1]; q[3]=a[2];
 	q[0] = cos(angle_rads/2.0);
 
+
 	// rotate the scan by calculated quaternion
-	scan->rotate(q[0], q[1], q[2], q[3], false);
+	//scan->rotate(q[0], q[1], q[2], q[3], true);
+	scan->rotateWithoutTranslation(q[0], q[1], q[2], q[3], true);
+}
+
+void PlyObjectManager::translateAllObjectsAlongZAxis( void )
+{
+    for(int i = 0; i < displayableMeshes.size(); i++)
+	{
+		RigidScan *scan = displayableMeshes[i]->getMeshData();
+		translateObjectAlongZAxis(scan);
+	}
+}
+
+void PlyObjectManager::translateObjectAlongZAxis( RigidScan *scan )
+{
+	float zTrans = (float) scanGroupTranslation / 100.0;
+	scan->translateCorrectly(0.0, 0.0, zTrans, true);
+}
+
+void PlyObjectManager::printAllObjectXForms(void)
+{
+
+    for(int i = 0; i < displayableMeshes.size(); i++)
+	{
+		RigidScan *scan = displayableMeshes[i]->getMeshData();
+		Xform<float> xf = scan->getXform();
+		printf("\n%f  %f  %f  %f\n%f  %f  %f  %f\n%f  %f  %f  %f\n%f  %f  %f  %f\n\n\n\n",
+			xf(0,0), xf(0,1), xf(0,2), xf(0,3),
+			xf(1,0), xf(1,1), xf(1,2), xf(1,3),
+			xf(2,0), xf(2,1), xf(2,2), xf(2,3),
+			xf(3,0), xf(3,1), xf(3,2), xf(3,3));
+	}
 }
 
 void PlyObjectManager::scanGroupAngleChanged(int newValue)
@@ -296,6 +329,15 @@ void PlyObjectManager::scanGroupAngleChanged(int newValue)
 	this->scanGroupTotalAngle = newValue;
 	resetAllObjectXForm();
 	rotateAllObjectsAroundYAxis();
+	translateAllObjectsAlongZAxis();
+}
+
+void PlyObjectManager::scanGroupTranslationChanged(int newValue)
+{
+	this->scanGroupTranslation = newValue;
+	resetAllObjectXForm();
+	rotateAllObjectsAroundYAxis();
+	translateAllObjectsAlongZAxis();
 }
 
 void PlyObjectManager::resetAllObjectXForm( void )

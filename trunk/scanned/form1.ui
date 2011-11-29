@@ -49,47 +49,12 @@
     </widget>
     <widget class="QPushButton">
         <property name="name">
-            <cstring>Add_Scan_Button</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>25</y>
-                <width>150</width>
-                <height>40</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string>Set Scan Diretory</string>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Click to Add a Range Scan</string>
-        </property>
-    </widget>
-    <widget class="QPushButton">
-        <property name="name">
-            <cstring>Add_Scan_Button_2</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>280</y>
-                <width>150</width>
-                <height>40</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string>1 - VRIP Prepare</string>
-        </property>
-    </widget>
-    <widget class="QPushButton">
-        <property name="name">
             <cstring>Add_Scan_Button_5_2</cstring>
         </property>
         <property name="geometry">
             <rect>
                 <x>20</x>
-                <y>480</y>
+                <y>530</y>
                 <width>150</width>
                 <height>40</height>
             </rect>
@@ -100,66 +65,12 @@
     </widget>
     <widget class="QPushButton">
         <property name="name">
-            <cstring>Add_Scan_Button_3</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>330</y>
-                <width>150</width>
-                <height>40</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string>2 - VRIP Merge</string>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Click to Add a Range Scan</string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>textLabel1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>30</x>
-                <y>256</y>
-                <width>131</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string>&lt;p align="center"&gt;Vrip-Volfill Steps&lt;/p&gt;</string>
-        </property>
-    </widget>
-    <widget class="QPushButton">
-        <property name="name">
-            <cstring>Add_Scan_Button_4</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>380</y>
-                <width>150</width>
-                <height>40</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string>3 - Volfilll</string>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Click to Add a Range Scan</string>
-        </property>
-    </widget>
-    <widget class="QPushButton">
-        <property name="name">
             <cstring>Add_Scan_Button_5</cstring>
         </property>
         <property name="geometry">
             <rect>
                 <x>20</x>
-                <y>430</y>
+                <y>480</y>
                 <width>150</width>
                 <height>40</height>
             </rect>
@@ -173,18 +84,174 @@
     </widget>
     <widget class="QPushButton">
         <property name="name">
+            <cstring>Add_Scan_Button_4</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>430</y>
+                <width>150</width>
+                <height>40</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>3 - Volfilll</string>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Click to Add a Range Scan</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>Add_Scan_Button_3</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>380</y>
+                <width>150</width>
+                <height>40</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>2 - VRIP Merge</string>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Click to Add a Range Scan</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>Add_Scan_Button_2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>330</y>
+                <width>150</width>
+                <height>40</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>1 - VRIP Prepare</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>30</x>
+                <y>300</y>
+                <width>131</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&lt;p align="center"&gt;Vrip-Volfill Steps&lt;/p&gt;</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
             <cstring>Add_Scan_Button_2_2</cstring>
         </property>
         <property name="geometry">
             <rect>
                 <x>20</x>
-                <y>170</y>
+                <y>250</y>
                 <width>150</width>
                 <height>40</height>
             </rect>
         </property>
         <property name="text">
             <string>Align With ICP</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>scanGroupAngleLabel</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>60</x>
+                <y>120</y>
+                <width>71</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>360</string>
+        </property>
+        <property name="alignment">
+            <set>AlignCenter</set>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1_2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>80</y>
+                <width>150</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <pointsize>7</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Total Angle Covered By Scans</string>
+        </property>
+        <property name="alignment">
+            <set>AlignCenter</set>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>Add_Scan_Button</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>25</y>
+                <width>150</width>
+                <height>40</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Set Scan Directory</string>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Click to Add a Range Scan</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>160</y>
+                <width>180</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <pointsize>7</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Translation of Scan Away From Center</string>
+        </property>
+        <property name="alignment">
+            <set>AlignCenter</set>
         </property>
     </widget>
     <widget class="QSlider">
@@ -194,7 +261,7 @@
         <property name="geometry">
             <rect>
                 <x>20</x>
-                <y>70</y>
+                <y>100</y>
                 <width>150</width>
                 <height>24</height>
             </rect>
@@ -218,20 +285,36 @@
             <string>The total angle defined by the scan grouping</string>
         </property>
     </widget>
-    <widget class="QLabel">
+    <widget class="QSlider">
         <property name="name">
-            <cstring>scanGroupAngleLabel</cstring>
+            <cstring>translationSlider</cstring>
         </property>
         <property name="geometry">
             <rect>
-                <x>60</x>
-                <y>90</y>
-                <width>71</width>
+                <x>20</x>
+                <y>180</y>
+                <width>150</width>
+                <height>24</height>
+            </rect>
+        </property>
+        <property name="orientation">
+            <enum>Horizontal</enum>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>translationLabel</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>200</y>
+                <width>150</width>
                 <height>20</height>
             </rect>
         </property>
         <property name="text">
-            <string>360</string>
+            <string>0</string>
         </property>
         <property name="alignment">
             <set>AlignCenter</set>
@@ -663,6 +746,12 @@
         <receiver>Form1</receiver>
         <slot>myGLWidget1_destroyed(QObject*)</slot>
     </connection>
+    <connection>
+        <sender>translationSlider</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>Form1</receiver>
+        <slot>translationSlider_valueChanged(int)</slot>
+    </connection>
 </connections>
 <includes>
     <include location="local" impldecl="in implementation">form1.ui.h</include>
@@ -692,6 +781,7 @@
     <slot>alignWithICP_Button_clicked()</slot>
     <slot>scanAngle_valueChanged( int newAngle )</slot>
     <slot>myGLWidget1_destroyed( QObject * )</slot>
+    <slot>translationSlider_valueChanged( int )</slot>
 </slots>
 <pixmapinproject/>
 <layoutdefaults spacing="6" margin="11"/>

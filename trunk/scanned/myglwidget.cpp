@@ -409,3 +409,9 @@ void MyGLWidget::scanGroupAngleChanged(int value)
 	objectManager.scanGroupAngleChanged(value);
 	updateGL();
 }
+
+void MyGLWidget::scanGroupTranslationChanged(int value)
+{
+	objectManager.scanGroupTranslationChanged(value);
+	updateGL();
+}
