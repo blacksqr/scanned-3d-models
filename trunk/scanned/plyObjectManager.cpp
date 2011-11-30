@@ -20,12 +20,14 @@ RigidScan* PlyObjectManager::addObject(char * filename)
 	printf("\n\nLoading PLY File:  %s\n\n\n", filename);
 	crope cropeString (filename);
 	printf("\nNewString[%s]", cropeString.c_str());
-	RigidScan *scan = CreateScanFromFile (cropeString);
-	scan->flipNormals();
 	initRenderParams();
 
   
+	RigidScan *scan = CreateScanFromFile (cropeString);
 	DisplayableRealMesh *displayableMesh = new DisplayableRealMesh(scan, "SCAN");
+	displayableMesh->invalidateCachedData();
+    scan->select_coarsest();
+	handleFlippingNormals(scan);
 	displayableMeshes.push_back(displayableMesh);
         theScene->addMeshSet(scan, false, scan->get_name().c_str());
 	//theScene->meshSets.push_back(displayableMesh);
@@ -33,6 +35,27 @@ RigidScan* PlyObjectManager::addObject(char * filename)
 	printf("\n\nLoaded PLY File:  %s\n\n\n", filename);
 
 	return scan;
+}
+
+void PlyObjectManager::handleFlippingNormals(RigidScan *scan)
+{
+	scan->flipNormals();
+}
+
+void PlyObjectManager::setHighestScanResolution(void)
+{
+    for(int i = 0; i < displayableMeshes.size(); i++)
+	{
+		displayableMeshes[i]->getMeshData()->select_finest();
+	}
+}
+
+void PlyObjectManager::setLowestScanResolution(void)
+{
+    for(int i = 0; i < displayableMeshes.size(); i++)
+	{
+		displayableMeshes[i]->getMeshData()->select_coarsest();
+	}
 }
 
 void PlyObjectManager::removeAllObjects( void )
@@ -365,6 +388,7 @@ static void drawMesh(RigidScan *scan)
   //bool bLores = bManipulating && theRenderParams->bRenderManipsLores;
   //DrawData& cache = bLores ? this->cache[1] : this->cache[0];
 
+/*    FOR DRAWING POINTS WHEN THE OBJECT IS BEING MOVED
     // don't stick the points-only view in a dlist!
 	bool bManipulating = false;
     if (bManipulating) 
@@ -385,6 +409,7 @@ static void drawMesh(RigidScan *scan)
 			bGeometryOnly = true;
       	}
     }
+*/
 
   // hidden-line back pass doesn't need anything but geometry
   if (theRenderParams->hiddenLine &&
@@ -455,11 +480,6 @@ static void drawMesh(RigidScan *scan)
 	
 	float colorWhite[4] = { 1.0, 1.0, 1.0};
 	float colorGray[4] = { 0.4, 0.4, 0.4};
-//	glMaterialfv(GL_FRONT, GL_DIFFUSE, colorWhite);
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, colorGray);
-//	glMaterialfv(GL_FRONT, GL_SPECULAR, colorWhite);
-//	glColor4fv(colorWhite);
-
 	float diffuseColor[4] = { 0.7, 0.7, 0.7, 1.0 };
 	float ambientColor[4] = { 0.2, 0.2, 0.2, 1.0 };
 	float backSpecular[4] = {1.0, 1.0, 1.0, 1.0};
@@ -523,9 +543,11 @@ static void drawMesh(RigidScan *scan)
         //start += *len + 1;
 	//}
       } else {
-#if 1
+
 	int total = mesh->tri_inds[imesh]->size();
-	int count = 600000; // must be divisible by 3
+	//int count = 600000; // must be divisible by 3
+	int count = 3000; // must be divisible by 3
+	//total[235146]   count[600000]  i[235146]
 	glDrawElements (GL_TRIANGLES, total%count,
 			GL_UNSIGNED_INT, &*(mesh->tri_inds[imesh]->begin()));
 	for (int i = total%count; i < total; i += count)
@@ -533,10 +555,6 @@ static void drawMesh(RigidScan *scan)
 	  glDrawElements (GL_TRIANGLES, count,
 			  GL_UNSIGNED_INT,
 			  &*(mesh->tri_inds[imesh]->begin() + i));
-#else
-	glDrawElements (GL_TRIANGLES, mesh->tri_inds[imesh]->size(),
-			GL_UNSIGNED_INT, &*(mesh->tri_inds[imesh]->begin()));
-#endif
       }
 
       //glMatrixMode (GL_TEXTURE);
