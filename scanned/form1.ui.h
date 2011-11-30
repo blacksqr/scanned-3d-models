@@ -162,8 +162,10 @@ void Form1::Vrip_Surf_clicked()
 
 void Form1::View_Mesh_clicked()
 {
-        cout << "\r\n Launch scanalyze ..." << endl;
-        launchScanalyze();
+	myGLWidget1->displaySingleMesh("/tmp/vrip-prep/filled-bun.ply");
+
+        //cout << "\r\n Launch scanalyze ..." << endl;
+        //launchScanalyze();
 }
 
 void Form1::alignWithICP_Button_clicked()

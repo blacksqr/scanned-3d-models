@@ -401,6 +401,14 @@ void MyGLWidget::init(void)
 void MyGLWidget::loadPlyDirectory(char *directory)
 {
 	fileManager.scanGroupDirectoryChanged(directory);
+	objectManager.setLowestScanResolution();
+	updateGL();
+}
+
+void MyGLWidget::displaySingleMesh(char *filename)
+{
+	objectManager.addObject(filename);
+	objectManager.setHighestScanResolution();
 	updateGL();
 }
 

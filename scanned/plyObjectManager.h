@@ -20,6 +20,8 @@ public:
 	void rotateAllObjectsAroundYAxis( void );
 	void translateAllObjectsAlongZAxis( void );
 	void printAllObjectXForms(void);
+	void setHighestScanResolution(void);
+	void setLowestScanResolution(void);
 
 private:
 	vector<DisplayableMesh*> displayableMeshes;
@@ -28,6 +30,7 @@ private:
 	void rotateObjectAroundYAxis(RigidScan* scan, float degrees);
 	void translateObjectAlongZAxis(RigidScan* scan);
 	void resetAllObjectXForm( void );
+	void handleFlippingNormals(RigidScan *);
 };
 
 #endif
