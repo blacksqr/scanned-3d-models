@@ -20,17 +20,15 @@ RigidScan* PlyObjectManager::addObject(char * filename)
 	printf("\n\nLoading PLY File:  %s\n\n\n", filename);
 	crope cropeString (filename);
 	printf("\nNewString[%s]", cropeString.c_str());
-	initRenderParams();
-
   
 	RigidScan *scan = CreateScanFromFile (cropeString);
 	DisplayableRealMesh *displayableMesh = new DisplayableRealMesh(scan, "SCAN");
 	displayableMesh->invalidateCachedData();
     scan->select_coarsest();
 	handleFlippingNormals(scan);
+
 	displayableMeshes.push_back(displayableMesh);
-        theScene->addMeshSet(scan, false, scan->get_name().c_str());
-	//theScene->meshSets.push_back(displayableMesh);
+    theScene->addMeshSet(scan, false, scan->get_name().c_str());
 
 	printf("\n\nLoaded PLY File:  %s\n\n\n", filename);
 
@@ -39,6 +37,7 @@ RigidScan* PlyObjectManager::addObject(char * filename)
 
 void PlyObjectManager::handleFlippingNormals(RigidScan *scan)
 {
+	printf("FLipping the normals");
 	scan->flipNormals();
 }
 
