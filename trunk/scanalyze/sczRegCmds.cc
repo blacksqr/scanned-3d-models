@@ -1718,6 +1718,72 @@ PlvRegIcpCmd(ClientData clientData, Tcl_Interp *interp,
   return TCL_OK;
 }
 
+int
+PlvRegIcpCmdGetError(ClientData clientData, Tcl_Interp *interp, 
+	  int argc, char *argv[], float & avgError)
+{
+  if (argc != 14) {
+    interp->result = "Usage: plv_icpregister \n"
+      "\t<sampling density [0,1]>\n"
+      "\t<normal-space sampling {0|1}>\n"
+      "\t<number of iterations [1,20]>\n"
+      "\t<culling percentage [0,99]>\n"
+      "\t<no boundary targets {0|1}>\n"
+      "\t<optimization method {point|plane}>\n"
+      "\t<source mesh>\n"
+      "\t<target mesh>\n"
+      "\t<edge threshold kind {abs|rel}>\n"
+      "\t<edge threshold value>\n"
+      "\t<save results for globalreg {0|1}>\n"
+      "\t<save at most n pairs [0,a_big_number]>\n"
+      "\t<quality rating [0..3]>\n";
+    return TCL_ERROR;
+  }
+
+  DisplayableMesh *mdSrc = FindMeshDisplayInfo(argv[7]);
+  DisplayableMesh *mdTrg = FindMeshDisplayInfo(argv[8]);
+  assert(mdSrc && mdTrg);
+
+  RigidScan* mSrc = mdSrc->getMeshData();
+  RigidScan* mTrg = mdTrg->getMeshData();
+  assert(mSrc && mTrg);
+
+  // run the alignment
+  icp.set(mSrc, mTrg);
+  icp.allow_bdry = !atoi(argv[5]);
+  avgError = icp.align(atof(argv[1]), atoi(argv[2]), atoi(argv[3]), atoi(argv[4]),
+			     argv[6][1] == 'o', argv[9][0] == 'a',
+			     atof(argv[10]));
+
+  // if requested, add pairs to globalreg
+  bool bSaveForGlobal = atoi (argv[11]);
+  if (bSaveForGlobal) {
+    assert (theScene->globalReg != NULL);
+    vector<Pnt3> ptSrc, ptTrg, nrmSrc, nrmTrg;
+    icp.get_pairs_for_global (ptSrc, nrmSrc, ptTrg, nrmTrg);
+    
+    if (ptSrc.size() || ptTrg.size()) {
+      cout << "Aligned pairs saved for global registration: "
+	   << mdSrc->getName() << " and " 
+	   << mdTrg->getName() << endl;
+
+      int max_pairs = atoi(argv[12]);
+      int quality = atoi(argv[13]);
+
+      theScene->globalReg->addPair(mSrc, mTrg, ptSrc, nrmSrc,
+				   ptTrg, nrmTrg,
+				   mTrg->getXform().fast_invert() *
+				   mSrc->getXform(),
+				   true, max_pairs, true, quality);
+    }
+  }
+
+  char szError[20];
+  sprintf (szError, "%g", avgError);
+  Tcl_SetResult (interp, szError, TCL_VOLATILE);
+
+  return TCL_OK;
+}
 
 int
 PlvRegIcpMarkQualityCmd(ClientData clientData, Tcl_Interp *interp, 

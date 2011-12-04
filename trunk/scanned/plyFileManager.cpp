@@ -67,7 +67,7 @@ void PlyFileManager::initFileManager()
 			printf("\nMissing scan number [%d]", k);
 	}
 
-        inOrderFilenames = orderedFileNames;
+    inOrderFilenames = orderedFileNames;
 	numberOfFiles = files.size();
 
 	for(int m = 0; m < numberOfFiles; m++)

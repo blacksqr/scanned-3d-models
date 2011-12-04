@@ -76,6 +76,10 @@ PlvRegIcpCmd(ClientData clientData, Tcl_Interp *interp,
 	     int argc, char *argv[]);
 
 int
+PlvRegIcpCmdGetError(ClientData clientData, Tcl_Interp *interp, 
+	     int argc, char *argv[], float &avgError);
+
+int
 PlvRegIcpMarkQualityCmd(ClientData clientData, Tcl_Interp *interp, 
 			int argc, char *argv[]);
 
