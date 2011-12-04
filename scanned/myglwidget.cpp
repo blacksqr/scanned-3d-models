@@ -407,6 +407,7 @@ void MyGLWidget::loadPlyDirectory(char *directory)
 
 void MyGLWidget::displaySingleMesh(char *filename)
 {
+	objectManager.removeAllObjects();
 	objectManager.addObject(filename);
 	objectManager.setHighestScanResolution();
 	updateGL();
