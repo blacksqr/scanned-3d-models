@@ -81,35 +81,47 @@ void runICP(string* scans, int nScans){
 	return;
     } 
 
+	float errorThreshold = 0.007;
+	int maxAttempts = 10;
     int nArgs = 0;
     char buffer[150];
     char baseScan[150];
     char nextScan[150];
     sprintf(baseScan, "%s", scans[0].c_str());
-    printf("Processing[0]=%s\r\n", baseScan);
+    printf("\n\nProcessing[0]=%s\r\n", baseScan);
     for(int i = 1; i < nScans; i++)
     {
-	sprintf(nextScan, "%s", scans[i].c_str());
-        printf("Processing[%i]=%s\r\n", i, nextScan);
+		sprintf(nextScan, "%s", scans[i].c_str());
+        printf("\n\nProcessing[%i]=%s\r\n", i, nextScan);
 
-	// First run ICP
+		// First run ICP
         // Sampling rate, ??, iterations, Cull percentage, ??, 
         // plane?, scan1, scan2, threshold (relative absolute), threshold value, ??, globalreg value, ??
-	nArgs=14;
+		nArgs=14;
         char* vArgs[] = {"" , "0.10", "0", "20", "3", "1", "plane", 
                     baseScan , nextScan, "abs", "5.0", "1", "200", "0"};
-        PlvRegIcpCmd(NULL, interp, nArgs, vArgs);
 
-	// Now group results
-	sprintf(buffer, "auto-group%i", i);
-	nArgs = 6;
+		float error = errorThreshold + 1.0;
+        int attempts = 0;
+	// Steve's attempt at running the algorithm continuously until the error is low
+	//  This doens't seem to work.  I think both scans move when you run the ICP algorithm on two scans
+	//	while (error > errorThreshold && attempts++ < maxAttempts)
+	//	{
+			printf("\n**Running ICP Command");
+        	PlvRegIcpCmdGetError(NULL, interp, nArgs, vArgs, error);
+			printf("\n\tError is %f", error);
+	//	}
+
+		// Now group results
+		sprintf(buffer, "auto-group%i", i);
+		nArgs = 6;
         char* grpArgs[] = {"" , "create", buffer, baseScan, nextScan, "0"};
         //plv_groupscans create [append name ".gp"] $members $dirty
-       // PlvGroupScansCmd(NULL, interp, nArgs, grpArgs);
+       	// PlvGroupScansCmd(NULL, interp, nArgs, grpArgs);
 
-	// set baseScan for next itreration
-	strcpy(baseScan, nextScan); 
-	//strcpy(baseScan, buffer); 
+		// set baseScan for next itreration
+		strcpy(baseScan, nextScan); 
+		//strcpy(baseScan, buffer); 
     }
 
     //int nArgs = 5;
