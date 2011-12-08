@@ -22,6 +22,7 @@ public:
 	void setObjectManager( PlyObjectManager *objectManager);
 	string *getScanNames(void){return inOrderScanNames;}
 	int getNumberFiles(void){return numberOfFiles;}
+	void resetFileManager( void );
 
 private:
 	string *inOrderFilenames;

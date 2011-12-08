@@ -62,6 +62,11 @@ void PlyObjectManager::removeAllObjects( void )
 	theScene->meshSets.clear();
 }
 
+void PlyObjectManager::resetObjectManager( void )
+{
+	removeAllObjects();
+}
+
 void PlyObjectManager::drawAllObjects( void )
 {
 	glColor3f(1.0, 1.0, 1.0);

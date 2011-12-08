@@ -38,6 +38,7 @@ class MyGLWidget : public QGLWidget
 		void scanGroupAngleChanged(int value);
 		void scanGroupTranslationChanged(int value);
 		void displaySingleMesh(char *filename);
+		void resetWidget( void );
 		PlyFileManager fileManager;
 
 

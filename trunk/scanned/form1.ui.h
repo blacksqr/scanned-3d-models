@@ -183,3 +183,17 @@ void Form1::translationSlider_valueChanged( int newTranslation)
     translationLabel->setText(QString::number(newTranslation));
     myGLWidget1->scanGroupTranslationChanged(newTranslation);
 }
+
+
+void Form1::pushButton9_released()
+{
+    scanGroupAngleLabel->setText(QString::number(360));
+    myGLWidget1->scanGroupAngleChanged(360);
+    scanAngle->setValue(360);
+
+    translationLabel->setText(QString::number(0));
+    myGLWidget1->scanGroupTranslationChanged(0);
+    translationSlider->setValue(0);
+
+	myGLWidget1->resetWidget();
+}

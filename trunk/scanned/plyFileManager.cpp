@@ -123,3 +123,13 @@ void PlyFileManager::reinitializeFileManager(void)
 	objectManager->removeAllObjects();
 	initFileManager();
 }
+
+void PlyFileManager::resetFileManager( void )
+{
+	this->directory = NULL;
+//	*inOrderFilenames = NULL;
+//	*inOrderScanNames = NULL;
+	numberOfFiles = 0;;
+    filesAreValid = false;
+//   *scanGroupDirectory = NULL;
+}
