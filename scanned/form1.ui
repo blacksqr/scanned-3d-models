@@ -34,19 +34,6 @@
             <string>Click to Add a Range Scan</string>
         </property>
     </widget>
-    <widget class="MyGLWidget">
-        <property name="name">
-            <cstring>myGLWidget1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>210</x>
-                <y>21</y>
-                <width>700</width>
-                <height>620</height>
-            </rect>
-        </property>
-    </widget>
     <widget class="QPushButton">
         <property name="name">
             <cstring>Add_Scan_Button_5_2</cstring>
@@ -318,6 +305,35 @@
         </property>
         <property name="alignment">
             <set>AlignCenter</set>
+        </property>
+    </widget>
+    <widget class="MyGLWidget">
+        <property name="name">
+            <cstring>myGLWidget1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>210</x>
+                <y>40</y>
+                <width>700</width>
+                <height>620</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>pushButton9</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>480</x>
+                <y>10</y>
+                <width>113</width>
+                <height>26</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Reset </string>
         </property>
     </widget>
 </widget>
@@ -752,6 +768,12 @@
         <receiver>Form1</receiver>
         <slot>translationSlider_valueChanged(int)</slot>
     </connection>
+    <connection>
+        <sender>pushButton9</sender>
+        <signal>released()</signal>
+        <receiver>Form1</receiver>
+        <slot>pushButton9_released()</slot>
+    </connection>
 </connections>
 <includes>
     <include location="local" impldecl="in implementation">form1.ui.h</include>
@@ -781,7 +803,8 @@
     <slot>alignWithICP_Button_clicked()</slot>
     <slot>scanAngle_valueChanged( int newAngle )</slot>
     <slot>myGLWidget1_destroyed( QObject * )</slot>
-    <slot>translationSlider_valueChanged( int )</slot>
+    <slot>translationSlider_valueChanged( int newTranslation )</slot>
+    <slot>pushButton9_released()</slot>
 </slots>
 <pixmapinproject/>
 <layoutdefaults spacing="6" margin="11"/>

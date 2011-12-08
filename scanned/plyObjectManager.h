@@ -22,6 +22,7 @@ public:
 	void printAllObjectXForms(void);
 	void setHighestScanResolution(void);
 	void setLowestScanResolution(void);
+	void resetObjectManager( void );
 
 private:
 	vector<DisplayableMesh*> displayableMeshes;

@@ -214,6 +214,13 @@ void MyGLWidget::init(void)
 
 }
 
+void MyGLWidget::resetWidget()
+{
+	fileManager.resetFileManager();
+	objectManager.resetObjectManager();
+	updateGL();
+}
+
 void MyGLWidget::loadPlyDirectory(char *directory)
 {
 	fileManager.scanGroupDirectoryChanged(directory);
