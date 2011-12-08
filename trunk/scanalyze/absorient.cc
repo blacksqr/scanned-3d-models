@@ -673,8 +673,8 @@ chen_medioni(Pnt3 *ctr,     // control points (source)
     sum += Pi*Pi;
   }
 
-  cout << "Sqrt of average squared error before transform " 
-       << sqrtf(sum/n) << endl;
+  //cout << "Sqrt of average squared error before transform " 
+  //     << sqrtf(sum/n) << endl;
   
   // solve Ax=b using Cholesky decomposition
   double d[6];

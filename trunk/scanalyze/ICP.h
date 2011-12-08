@@ -126,7 +126,7 @@ private:
       pP.clear(); pQ.clear(); nP.clear(); nQ.clear();
       int n = ssP.size() + ssQ.size();
 
-      cout << "Finding ~" << n << " points there... " << flush;
+      //cout << "Finding ~" << n << " points there... " << flush;
 
       pP.reserve(n); pQ.reserve(n); nP.reserve(n); nQ.reserve(n);
       // for each selected point, find the closest point
@@ -149,7 +149,7 @@ private:
 	}
       }
 
-      cout << "(" << pP.size() << "), and back... " << flush;
+      //cout << "(" << pP.size() << "), and back... " << flush;
 
       firstend = pP.size();
       // then, from Q to P
@@ -170,7 +170,7 @@ private:
 	}
       }
 
-      cout << "(" << pP.size() - firstend << "): done." << endl;
+      //cout << "(" << pP.size() - firstend << "): done." << endl;
     }
 
 
@@ -321,7 +321,7 @@ public:
 
 	if (method) avgError = Horn_align();
 	else        avgError = CM_align();
-	cout << avgError << endl;
+	//cout << avgError << endl;
       }
       P->setXform(xfP);
       

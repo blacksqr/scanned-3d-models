@@ -980,14 +980,14 @@ CorrespRegAllToAll (AlignmentOverviewInfo* aoi)
 	gr.addPair(msFrom, msTo,
 		   pntFrom, vector<Pnt3>(),
 		   pntTo,   vector<Pnt3>());
-	cout << pntFrom.size();
+	//cout << pntFrom.size();
       } else {
 	cout << "no";
       }
 
-      cout << " correspondences between "
-	   << mdFrom->getName() << " and " << mdTo->getName()
-	   << endl;
+      //cout << " correspondences between "
+//	   << mdFrom->getName() << " and " << mdTo->getName()
+//	   << endl;
     }
   }
   
@@ -1262,7 +1262,7 @@ calculateNormals (vector<Pnt3>& normals, SceneBuf* sceneBuf,
       Pnt3 ray2 = rays[(ray+1)%rays.size()];
 
       Pnt3 tn = (cross (ray1, ray2)).normalize();
-      cout << "SubNormal " << ray << ":";
+      //cout << "SubNormal " << ray << ":";
       SHOW (tn);
 
       norm += (cross (ray1, ray2)).normalize();
@@ -1696,9 +1696,9 @@ PlvRegIcpCmd(ClientData clientData, Tcl_Interp *interp,
     icp.get_pairs_for_global (ptSrc, nrmSrc, ptTrg, nrmTrg);
     
     if (ptSrc.size() || ptTrg.size()) {
-      cout << "Aligned pairs saved for global registration: "
-	   << mdSrc->getName() << " and " 
-	   << mdTrg->getName() << endl;
+    //  cout << "Aligned pairs saved for global registration: "
+//	   << mdSrc->getName() << " and " 
+//	   << mdTrg->getName() << endl;
 
       int max_pairs = atoi(argv[12]);
       int quality = atoi(argv[13]);
@@ -1763,9 +1763,9 @@ PlvRegIcpCmdGetError(ClientData clientData, Tcl_Interp *interp,
     icp.get_pairs_for_global (ptSrc, nrmSrc, ptTrg, nrmTrg);
     
     if (ptSrc.size() || ptTrg.size()) {
-      cout << "Aligned pairs saved for global registration: "
-	   << mdSrc->getName() << " and " 
-	   << mdTrg->getName() << endl;
+      //cout << "Aligned pairs saved for global registration: "
+//	   << mdSrc->getName() << " and " 
+//	   << mdTrg->getName() << endl;
 
       int max_pairs = atoi(argv[12]);
       int quality = atoi(argv[13]);
@@ -1877,7 +1877,7 @@ SczAutoRegisterCmd(ClientData clientData, Tcl_Interp *interp,
 
   vector<DisplayableMesh*>& scans = theScene->meshSets;
 
-  cout << "Calculating pairs:" << endl << endl;
+  //cout << "Calculating pairs:" << endl << endl;
 
   DisplayableMesh *currMesh = FindMeshDisplayInfo (argv[3]);
   if (!currMesh) {
@@ -1979,13 +1979,13 @@ SczAutoRegisterCmd(ClientData clientData, Tcl_Interp *interp,
 	}
 	
 	// ok, try to align
-	cout << "Trying " << (*first)->getName() << " and " 
-	     << (*second)->getName() << endl;
+	//cout << "Trying " << (*first)->getName() << " and " 
+	 //    << (*second)->getName() << endl;
 	
 	// normal-space sample: bNormSSample
 	if (auto_align.add_pair (rs1, rs2, nTargetPairs, bNormSSample)) {
-	  cout << "Paired " << (*first)->getName()
-	       << " and " << (*second)->getName() << endl;
+	  //cout << "Paired " << (*first)->getName()
+	  //     << " and " << (*second)->getName() << endl;
 	}
       }
     }
