@@ -1,4 +1,5 @@
 
+
 #include <qfiledialog.h>
 #include <qstring.h>
 #include <stdio.h>
@@ -196,4 +197,74 @@ void Form1::pushButton9_released()
     translationSlider->setValue(0);
 
 	myGLWidget1->resetWidget();
+}
+
+void Form1::mergeScans()
+{
+	// STEP 1
+    icpButton->setPaletteBackgroundColor(QColor( 228, 85, 3 ));
+	icpButton->repaint();
+	myGLWidget1->updateGL();
+
+    runICP(myGLWidget1->fileManager.getScanNames(),myGLWidget1->fileManager.getNumberFiles() );
+	myGLWidget1->updateGL();
+
+    icpButton->setPaletteBackgroundColor(QColor( 221, 223, 228));
+	icpButton->repaint();
+	myGLWidget1->updateGL();
+
+	// STEP 2
+    vripPrepareButton->setPaletteBackgroundColor( QColor( 228, 85, 3));
+	vripPrepareButton->repaint();
+	myGLWidget1->updateGL();
+
+    prepareVrip();
+
+    vripPrepareButton->setPaletteBackgroundColor( QColor( 221, 223, 228));
+	vripPrepareButton->repaint();
+	myGLWidget1->updateGL();
+
+	// STEP 3
+    vripMergeButton->setPaletteBackgroundColor( QColor(228, 85, 3));
+	vripMergeButton->repaint();
+	myGLWidget1->updateGL();
+
+    createNewVripVri();
+
+    vripMergeButton->setPaletteBackgroundColor( QColor(221, 223, 228));
+	vripMergeButton->repaint();
+	myGLWidget1->updateGL();
+
+	// STEP 4
+    volfillButton->setPaletteBackgroundColor( QColor(228, 85, 3));
+	volfillButton->repaint();
+	myGLWidget1->updateGL();
+
+    runVolfill();
+
+    volfillButton->setPaletteBackgroundColor( QColor(221, 223, 228));
+	volfillButton->repaint();
+	myGLWidget1->updateGL();
+
+	// STEP 5
+    vripSurfaceButton->setPaletteBackgroundColor( QColor(228, 85, 3));
+	vripSurfaceButton->repaint();
+	myGLWidget1->updateGL();
+
+    createVripSurf();
+
+    vripSurfaceButton->setPaletteBackgroundColor( QColor(221, 223, 228));
+	vripSurfaceButton->repaint();
+	myGLWidget1->updateGL();
+
+	// STEP 6
+    viewNewMeshButton->setPaletteBackgroundColor( QColor(228, 85, 3));
+	viewNewMeshButton->repaint();
+	myGLWidget1->updateGL();
+
+	myGLWidget1->displaySingleMesh("/tmp/vrip-prep/filled-bun.ply");
+
+    viewNewMeshButton->setPaletteBackgroundColor( QColor(221, 223, 228));
+	viewNewMeshButton->repaint();
+	myGLWidget1->updateGL();
 }
