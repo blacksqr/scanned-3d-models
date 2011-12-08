@@ -510,13 +510,13 @@ GlobalReg::mapEntry::export_to_file(const std::string &gr_dir)
     cerr << "Couldn't create file " << path.c_str() << endl;
     return;
   } else {
-    SHOW(path.c_str());
+    //SHOW(path.c_str());
   }
   
   // fill the file with useful stuff
 
-  cout << "Writing correspondences between " << name1
-       << " and " << name2 << " ... ";
+  //cout << "Writing correspondences between " << name1
+   //    << " and " << name2 << " ... ";
   
   out.write(GRVersionCurrent, 4); // magic number
 
@@ -544,7 +544,7 @@ GlobalReg::mapEntry::export_to_file(const std::string &gr_dir)
   out.write((char *)&manually_aligned, 1 /*sizeof(bool) */);
   
   if (out.fail()) return;
-  cout << "success." << endl;
+  //cout << "success." << endl;
 
   // currently saving:
   // pairwiserms errors
@@ -607,7 +607,9 @@ GlobalReg::mapEntry::export_cyber_raw(const char *fname)
   
   if (g_verbose) {
     if (out.fail()) cout << "failure." << endl;
-    else            cout << "success." << endl;
+    else {
+	//cout << "success." << endl;
+    }
   }
 }
 
