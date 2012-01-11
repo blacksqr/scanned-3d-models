@@ -5,6 +5,7 @@
 #include "volfill.h"
 #include "plvMeshCmds.h"
 #include "sczRegCmds.h"
+#include "fileutils.h"
 using std::string;
 
 
@@ -29,6 +30,11 @@ GenericScan.cc PlvWritePlyForVripCmd
 
 char* dir = "/tmp/vrip-prep";
 char* rootDir = "../";
+
+void removeVripPrepDir()
+{
+	removeDirectoryRecursively(dir);
+}
 
 void prepareVrip(){
     extern Tcl_Interp* interp;
