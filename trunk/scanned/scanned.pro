@@ -12,7 +12,8 @@ HEADERS	+= myglwidget.h \
 	plyFileManager.h \
 	PolygonUtils.h \
 	VectorUtils.h \
-	CommonUtils.h
+	CommonUtils.h \
+	fileutils.h
 
 SOURCES	+= mainApplication.cpp \
 	myglwidget.cpp \
@@ -20,7 +21,8 @@ SOURCES	+= mainApplication.cpp \
 	plyFileManager.cpp \
 	PolygonUtils.cpp \
 	VectorUtils.cpp \
-	CommonUtils.cpp
+	CommonUtils.cpp \
+	fileutils.cpp
 
 FORMS	= form1.ui
 

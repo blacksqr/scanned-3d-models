@@ -197,6 +197,7 @@ void Form1::pushButton9_released()
     translationSlider->setValue(0);
 
 	myGLWidget1->resetWidget();
+	removeVripPrepDir();
 }
 
 void Form1::mergeScans()

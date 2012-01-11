@@ -5,6 +5,7 @@
 using std::string;
 
 
+void removeVripPrepDir(void);
 void prepareVrip(void);
 void createNewVripVri(void);
 void createVripSurf(void);
