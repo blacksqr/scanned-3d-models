@@ -240,15 +240,18 @@ void Form1::mergeScans()
 	myGLWidget1->updateGL();
 
 	// STEP 4
-    volfillButton->setPaletteBackgroundColor( QColor(228, 85, 3));
-	volfillButton->repaint();
-	myGLWidget1->updateGL();
+	if(enableVolfillButton->isChecked() == true)
+	{
+    	volfillButton->setPaletteBackgroundColor( QColor(228, 85, 3));
+		volfillButton->repaint();
+		myGLWidget1->updateGL();
 
-    runVolfill();
+    	runVolfill();
 
-    volfillButton->setPaletteBackgroundColor( QColor(221, 223, 228));
-	volfillButton->repaint();
-	myGLWidget1->updateGL();
+    	volfillButton->setPaletteBackgroundColor( QColor(221, 223, 228));
+		volfillButton->repaint();
+		myGLWidget1->updateGL();
+    }
 
 	// STEP 5
     vripSurfaceButton->setPaletteBackgroundColor( QColor(228, 85, 3));
@@ -271,4 +274,10 @@ void Form1::mergeScans()
     viewNewMeshButton->setPaletteBackgroundColor( QColor(221, 223, 228));
 	viewNewMeshButton->repaint();
 	myGLWidget1->updateGL();
+}
+
+
+void Form1::enableVolfillButton_toggled( bool enabled)
+{
+	volfillButton->setEnabled(enabled);
 }
