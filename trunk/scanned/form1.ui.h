@@ -30,8 +30,11 @@ void Form1::fileNew()
 
 void Form1::fileOpen()
 {
-    QString directory = QFileDialog::getExistingDirectory(tr("../samples/range-scan"), NULL, "Add RangScan Grouping", tr(""));
+    QString directory = QFileDialog::getExistingDirectory(tr("../samples/range-scan"), NULL, "Add RangScan Grouping", tr(""));	
+    if ( directory.isNull() == false )
+    {
 	myGLWidget1->loadPlyDirectory(directory.latin1());
+    }
 }
 
 
