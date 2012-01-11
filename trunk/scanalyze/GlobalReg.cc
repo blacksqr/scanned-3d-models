@@ -1280,6 +1280,7 @@ unlink_gr_file(std::string path,
 void
 GlobalReg::unlink_gr_files(TbObj *a, TbObj *b, bool only_auto)
 {
+  printf("GLOBALREG::UNLINK_GR_FILES   %s    %s", GetTbObjName(a), GetTbObjName(b));
   std::string name1, name2;
   name1 = GetTbObjName(a);
   name2 = GetTbObjName(b);
