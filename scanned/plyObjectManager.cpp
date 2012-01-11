@@ -59,7 +59,7 @@ void PlyObjectManager::setLowestScanResolution(void)
 void PlyObjectManager::removeAllObjects( void )
 {
 	displayableMeshes.clear();
-	theScene->meshSets.clear();
+	//theScene->meshSets.clear();
 }
 
 void PlyObjectManager::resetObjectManager( void )
