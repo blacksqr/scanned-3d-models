@@ -25,12 +25,10 @@ scan::
 	# remove plvMain.o
 	cd ${scanned_dir}; perl -ni -e 'print unless /Main/' ${scanned_dir}/Makefile
 	cd ${scanned_dir}; make
-	cd ${root_dir}; cp ${scanned_dir}/scanned ./scanner
 clean_scz::
 	cd ${scanalyze_dir}; make clean
 clean_scan::
 	cd ${scanned_dir}; rm -rf .obj .ui .moc scanned Makefile
-	rm -f ${root_dir}/scanner
 clean_vrip::
 	cd ${vrip_dir}; make clean
 clean_volfill::
