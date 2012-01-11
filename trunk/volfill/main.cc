@@ -13,7 +13,7 @@
 #include "volfill.h"
 
 FrameBuffer fb;
-ActVoxelGrid actGrid;
+ActVoxelGrid *actGrid;
 OccGridRLE *ogSrc;
 int sweep = 73; //147; //236; //43; //236; //65;
 int sweepMax;
@@ -45,7 +45,7 @@ void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	
-	actGrid.draw(&fb, sweep, drawType, 10, 20);
+	actGrid->draw(&fb, sweep, drawType, 10, 20);
 	fb.Draw();
 
 	glutSwapBuffers();
@@ -78,7 +78,7 @@ void Keyboard( unsigned char key, int x, int y )
 	case 'm':
 		fp = fopen("movie.list", "wt");
 		for (i=0; i<nIterations; i++) {
-			actGrid.blur(d1limit, d2limit);
+			actGrid->blur(d1limit, d2limit);
 			display();
 			sprintf(buffer, "blur.%d.ppm", i+1);
 			fb.Write(buffer);
@@ -90,7 +90,7 @@ void Keyboard( unsigned char key, int x, int y )
 		break;
 	case 'l':
 		for (i=0; i<nIterations; i++) { 
-			actGrid.blur(d1limit, d2limit);
+			actGrid->blur(d1limit, d2limit);
 			PrintResourceUsage("After an Iteration");
 		}
 
@@ -98,7 +98,7 @@ void Keyboard( unsigned char key, int x, int y )
 		break;
 	case 'b':
 		PrintResourceUsage("Before an Iteration");
-		actGrid.blur(d1limit, d2limit);
+		actGrid->blur(d1limit, d2limit);
 		PrintResourceUsage("After an Iteration");
 		display();
 		break;
@@ -114,7 +114,7 @@ void Keyboard( unsigned char key, int x, int y )
 		ogDst->origin[2] = ogSrc->origin[2];
 		ogDst->resolution = ogSrc->resolution;
 		
-		actGrid.saveToOccGridRLE(ogSrc, ogDst);
+		actGrid->saveToOccGridRLE(ogSrc, ogDst);
 		ogDst->write(outfile);			 
 		
 		delete ogSrc;
@@ -199,7 +199,8 @@ int volfill(int argc, char *argv[]) {
 	PrintResourceUsage("After loading grid");
 	
 	// load in the grid
-	actGrid.loadFromOccGridRLE(ogSrc, d2limit);
+	actGrid = new ActVoxelGrid();
+	actGrid->loadFromOccGridRLE(ogSrc, d2limit);
 
 	winInfo.width = ogSrc->xdim; 
 	winInfo.height = ogSrc->ydim;
@@ -211,7 +212,7 @@ int volfill(int argc, char *argv[]) {
 	delete ogSrc;
 
 	// initialize distance information based on the OccGridRLE
-	actGrid.initDistances(d2limit, propD2);
+	actGrid->initDistances(d2limit, propD2);
 
 	PrintResourceUsage("After loading in OccGrid");
 
@@ -241,7 +242,7 @@ int volfill(int argc, char *argv[]) {
 		// non graphical version
 		for (int i=0; i<nIterations; i++) {
 			std::cout << i+1 << ":";
-			actGrid.blur(d1limit, d2limit);
+			actGrid->blur(d1limit, d2limit);
 			PrintResourceUsage("After an Iteration");
 		}
 		
@@ -256,7 +257,7 @@ int volfill(int argc, char *argv[]) {
 		ogDst->origin[2] = ogSrc->origin[2];
 		ogDst->resolution = ogSrc->resolution;
 		
-		actGrid.saveToOccGridRLE(ogSrc, ogDst);
+		actGrid->saveToOccGridRLE(ogSrc, ogDst);
 		ogDst->write(outfile);			 
 		
 		delete ogSrc;
@@ -264,6 +265,7 @@ int volfill(int argc, char *argv[]) {
 
 		std::cerr << "Done" << std::endl;
 	}
+	delete actGrid;
 
 	return 0;
 }
