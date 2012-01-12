@@ -12,6 +12,7 @@ void createVripSurf(void);
 void runVolfill(void);
 void launchScanalyze(void);
 void runICP(string* scans, int nScans);
+extern bool skipVolfill;
 
 #endif
 

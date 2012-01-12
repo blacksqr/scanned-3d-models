@@ -30,6 +30,9 @@ GenericScan.cc PlvWritePlyForVripCmd
 
 char* dir = "/tmp/vrip-prep";
 char* rootDir = "../";
+char* newVri = "vrip.vri";
+char* filledVri = "filled-vrip.vri";
+char* finalPly = "final.ply";
 
 void removeVripPrepDir()
 {
@@ -38,6 +41,9 @@ void removeVripPrepDir()
 
 void prepareVrip(){
     extern Tcl_Interp* interp;
+
+    // We should always clear out the temp dir before running this.
+    removeVripPrepDir();
 
     int nArgs = 3;
     // resolution, save directory
@@ -49,7 +55,8 @@ void prepareVrip(){
 
 void createNewVripVri(){
     char cmd[1000];
-    sprintf(cmd, " cd %s/vrip; ./vrip.sh src/vrip/vripnew.tcl %s/bun.vri %s/vrip.conf %s/vrip.conf .001 -show_render", rootDir, dir, dir, dir );
+    sprintf(cmd, " cd %s/vrip; ./vrip.sh src/vrip/vripnew.tcl %s/%s %s/vrip.conf %s/vrip.conf .001 -show_render", 
+			rootDir, dir, newVri, dir, dir );
     system(cmd);
 }
 
@@ -57,8 +64,8 @@ void runVolfill(){
     int nArgs = 3;
     char source[200];
     char dest[200];
-    sprintf(source, "%s/bun.vri", dir);
-    sprintf(dest, "%s/filled-bun.vri", dir);
+    sprintf(source, "%s/%s", dir, newVri);
+    sprintf(dest, "%s/%s", dir, filledVri);
     // source.vri, dest.vri
     char* vArgs[] = {"" , source, dest};
     // fill the holes
@@ -67,13 +74,18 @@ void runVolfill(){
 
 void createVripSurf(){
     char cmd[1000];
-    sprintf(cmd, " cd %s/vrip; ./vrip.sh src/vrip/vripsurf.tcl %s/filled-bun.vri %s/filled-bun.ply", rootDir, dir, dir );
+    // Need to check if we ran Vri so we have the right file to input to vrip march
+    char* vriFile = filledVri;
+    if(skipVolfill){
+	vriFile = newVri;
+    } 
+    sprintf(cmd, " cd %s/vrip; ./vrip.sh src/vrip/vripsurf.tcl %s/%s %s/%s", rootDir, dir, vriFile, dir, finalPly );
     system(cmd);
 }
 
 void launchScanalyze(void){
     char cmd[1000];
-    sprintf(cmd, " cd %s/scanalyze; ./scanalyze.debug %s/filled-bun.ply", rootDir, dir );
+    sprintf(cmd, " cd %s/scanalyze; ./scanalyze.debug %s/%s", rootDir, dir, finalPly );
     system(cmd);
 }
 

@@ -21,6 +21,8 @@
 ** destructor.
 *****************************************************************************/
 
+bool skipVolfill = false;
+char* finalPlyFile = "/tmp/vrip-prep/final.ply";
 
 void Form1::fileNew()
 {
@@ -149,13 +151,14 @@ void Form1::Vrip_Merge_clicked()
 void Form1::Vrip_Surf_clicked()
 {
         cout << "\r\nRunning vripsurf..." << endl;
+	skipVolfill = !enableVolfillButton->isChecked();
         createVripSurf();
 }
 
 
 void Form1::View_Mesh_clicked()
 {
-	myGLWidget1->displaySingleMesh("/tmp/vrip-prep/filled-bun.ply");
+	myGLWidget1->displaySingleMesh(finalPlyFile);
 
         //cout << "\r\n Launch scanalyze ..." << endl;
         //launchScanalyze();
@@ -206,72 +209,74 @@ void Form1::pushButton9_released()
 void Form1::mergeScans()
 {
 	// STEP 1
-    icpButton->setPaletteBackgroundColor(QColor( 228, 85, 3 ));
+    	icpButton->setPaletteBackgroundColor(QColor( 228, 85, 3 ));
 	icpButton->repaint();
 	myGLWidget1->updateGL();
 
-    runICP(myGLWidget1->fileManager.getScanNames(),myGLWidget1->fileManager.getNumberFiles() );
+    	runICP(myGLWidget1->fileManager.getScanNames(),myGLWidget1->fileManager.getNumberFiles() );
 	myGLWidget1->updateGL();
 
-    icpButton->setPaletteBackgroundColor(QColor( 221, 223, 228));
+    	icpButton->setPaletteBackgroundColor(QColor( 221, 223, 228));
 	icpButton->repaint();
 	myGLWidget1->updateGL();
 
 	// STEP 2
-    vripPrepareButton->setPaletteBackgroundColor( QColor( 228, 85, 3));
+    	vripPrepareButton->setPaletteBackgroundColor( QColor( 228, 85, 3));
 	vripPrepareButton->repaint();
 	myGLWidget1->updateGL();
 
-    prepareVrip();
+    	prepareVrip();
 
-    vripPrepareButton->setPaletteBackgroundColor( QColor( 221, 223, 228));
+    	vripPrepareButton->setPaletteBackgroundColor( QColor( 221, 223, 228));
 	vripPrepareButton->repaint();
 	myGLWidget1->updateGL();
 
 	// STEP 3
-    vripMergeButton->setPaletteBackgroundColor( QColor(228, 85, 3));
+    	vripMergeButton->setPaletteBackgroundColor( QColor(228, 85, 3));
 	vripMergeButton->repaint();
 	myGLWidget1->updateGL();
 
-    createNewVripVri();
+    	createNewVripVri();
 
-    vripMergeButton->setPaletteBackgroundColor( QColor(221, 223, 228));
+   	vripMergeButton->setPaletteBackgroundColor( QColor(221, 223, 228));
 	vripMergeButton->repaint();
 	myGLWidget1->updateGL();
 
 	// STEP 4
 	if(enableVolfillButton->isChecked() == true)
 	{
-    	volfillButton->setPaletteBackgroundColor( QColor(228, 85, 3));
+    		volfillButton->setPaletteBackgroundColor( QColor(228, 85, 3));
 		volfillButton->repaint();
 		myGLWidget1->updateGL();
 
-    	runVolfill();
+    		runVolfill();
 
-    	volfillButton->setPaletteBackgroundColor( QColor(221, 223, 228));
+    		volfillButton->setPaletteBackgroundColor( QColor(221, 223, 228));
 		volfillButton->repaint();
 		myGLWidget1->updateGL();
-    }
+        } else {
+		skipVolfill = true;
+	}
 
 	// STEP 5
-    vripSurfaceButton->setPaletteBackgroundColor( QColor(228, 85, 3));
+    	vripSurfaceButton->setPaletteBackgroundColor( QColor(228, 85, 3));
 	vripSurfaceButton->repaint();
 	myGLWidget1->updateGL();
 
-    createVripSurf();
+    	createVripSurf();
 
-    vripSurfaceButton->setPaletteBackgroundColor( QColor(221, 223, 228));
+    	vripSurfaceButton->setPaletteBackgroundColor( QColor(221, 223, 228));
 	vripSurfaceButton->repaint();
 	myGLWidget1->updateGL();
 
 	// STEP 6
-    viewNewMeshButton->setPaletteBackgroundColor( QColor(228, 85, 3));
+    	viewNewMeshButton->setPaletteBackgroundColor( QColor(228, 85, 3));
 	viewNewMeshButton->repaint();
 	myGLWidget1->updateGL();
 
-	myGLWidget1->displaySingleMesh("/tmp/vrip-prep/filled-bun.ply");
+	myGLWidget1->displaySingleMesh(finalPlyFile);
 
-    viewNewMeshButton->setPaletteBackgroundColor( QColor(221, 223, 228));
+    	viewNewMeshButton->setPaletteBackgroundColor( QColor(221, 223, 228));
 	viewNewMeshButton->repaint();
 	myGLWidget1->updateGL();
 }
